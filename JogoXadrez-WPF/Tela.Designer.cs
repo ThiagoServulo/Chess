@@ -32,7 +32,6 @@ namespace JogoXadrez_WPF
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tela));
             this.pictureBoxA1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA4 = new System.Windows.Forms.PictureBox();
@@ -97,6 +96,12 @@ namespace JogoXadrez_WPF
             this.pictureBoxG3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxG2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxG1 = new System.Windows.Forms.PictureBox();
+            this.labelTurno = new System.Windows.Forms.Label();
+            this.groupBoxBranco = new System.Windows.Forms.GroupBox();
+            this.labelPecasCapturadasBranco = new System.Windows.Forms.Label();
+            this.groupBoxPreto = new System.Windows.Forms.GroupBox();
+            this.labelPecasCapturadasPreto = new System.Windows.Forms.Label();
+            this.labelJogadorAtual = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA4)).BeginInit();
@@ -161,13 +166,14 @@ namespace JogoXadrez_WPF
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG1)).BeginInit();
+            this.groupBoxBranco.SuspendLayout();
+            this.groupBoxPreto.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxA1
             // 
             this.pictureBoxA1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxA1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA1.Image")));
-            this.pictureBoxA1.Location = new System.Drawing.Point(27, 752);
+            this.pictureBoxA1.Location = new System.Drawing.Point(21, 842);
             this.pictureBoxA1.Name = "pictureBoxA1";
             this.pictureBoxA1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA1.TabIndex = 0;
@@ -176,8 +182,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA2
             // 
             this.pictureBoxA2.BackColor = System.Drawing.Color.White;
-            this.pictureBoxA2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA2.Image")));
-            this.pictureBoxA2.Location = new System.Drawing.Point(127, 752);
+            this.pictureBoxA2.Location = new System.Drawing.Point(121, 842);
             this.pictureBoxA2.Name = "pictureBoxA2";
             this.pictureBoxA2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA2.TabIndex = 1;
@@ -186,8 +191,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA4
             // 
             this.pictureBoxA4.BackColor = System.Drawing.Color.White;
-            this.pictureBoxA4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA4.Image")));
-            this.pictureBoxA4.Location = new System.Drawing.Point(327, 752);
+            this.pictureBoxA4.Location = new System.Drawing.Point(321, 842);
             this.pictureBoxA4.Name = "pictureBoxA4";
             this.pictureBoxA4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA4.TabIndex = 3;
@@ -196,8 +200,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA3
             // 
             this.pictureBoxA3.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxA3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA3.Image")));
-            this.pictureBoxA3.Location = new System.Drawing.Point(227, 752);
+            this.pictureBoxA3.Location = new System.Drawing.Point(221, 842);
             this.pictureBoxA3.Name = "pictureBoxA3";
             this.pictureBoxA3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA3.TabIndex = 2;
@@ -206,8 +209,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA8
             // 
             this.pictureBoxA8.BackColor = System.Drawing.Color.White;
-            this.pictureBoxA8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA8.Image")));
-            this.pictureBoxA8.Location = new System.Drawing.Point(727, 752);
+            this.pictureBoxA8.Location = new System.Drawing.Point(721, 842);
             this.pictureBoxA8.Name = "pictureBoxA8";
             this.pictureBoxA8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA8.TabIndex = 7;
@@ -216,8 +218,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA7
             // 
             this.pictureBoxA7.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxA7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA7.Image")));
-            this.pictureBoxA7.Location = new System.Drawing.Point(627, 752);
+            this.pictureBoxA7.Location = new System.Drawing.Point(621, 842);
             this.pictureBoxA7.Name = "pictureBoxA7";
             this.pictureBoxA7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA7.TabIndex = 6;
@@ -226,8 +227,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA6
             // 
             this.pictureBoxA6.BackColor = System.Drawing.Color.White;
-            this.pictureBoxA6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA6.Image")));
-            this.pictureBoxA6.Location = new System.Drawing.Point(527, 752);
+            this.pictureBoxA6.Location = new System.Drawing.Point(521, 842);
             this.pictureBoxA6.Name = "pictureBoxA6";
             this.pictureBoxA6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA6.TabIndex = 5;
@@ -236,8 +236,7 @@ namespace JogoXadrez_WPF
             // pictureBoxA5
             // 
             this.pictureBoxA5.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxA5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxA5.Image")));
-            this.pictureBoxA5.Location = new System.Drawing.Point(427, 752);
+            this.pictureBoxA5.Location = new System.Drawing.Point(421, 842);
             this.pictureBoxA5.Name = "pictureBoxA5";
             this.pictureBoxA5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA5.TabIndex = 4;
@@ -246,8 +245,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB8
             // 
             this.pictureBoxB8.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxB8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB8.Image")));
-            this.pictureBoxB8.Location = new System.Drawing.Point(727, 652);
+            this.pictureBoxB8.Location = new System.Drawing.Point(721, 742);
             this.pictureBoxB8.Name = "pictureBoxB8";
             this.pictureBoxB8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB8.TabIndex = 15;
@@ -256,8 +254,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB7
             // 
             this.pictureBoxB7.BackColor = System.Drawing.Color.White;
-            this.pictureBoxB7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB7.Image")));
-            this.pictureBoxB7.Location = new System.Drawing.Point(627, 652);
+            this.pictureBoxB7.Location = new System.Drawing.Point(621, 742);
             this.pictureBoxB7.Name = "pictureBoxB7";
             this.pictureBoxB7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB7.TabIndex = 14;
@@ -266,8 +263,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB6
             // 
             this.pictureBoxB6.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxB6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB6.Image")));
-            this.pictureBoxB6.Location = new System.Drawing.Point(527, 652);
+            this.pictureBoxB6.Location = new System.Drawing.Point(521, 742);
             this.pictureBoxB6.Name = "pictureBoxB6";
             this.pictureBoxB6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB6.TabIndex = 13;
@@ -276,8 +272,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB5
             // 
             this.pictureBoxB5.BackColor = System.Drawing.Color.White;
-            this.pictureBoxB5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB5.Image")));
-            this.pictureBoxB5.Location = new System.Drawing.Point(427, 652);
+            this.pictureBoxB5.Location = new System.Drawing.Point(421, 742);
             this.pictureBoxB5.Name = "pictureBoxB5";
             this.pictureBoxB5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB5.TabIndex = 12;
@@ -286,8 +281,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB4
             // 
             this.pictureBoxB4.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxB4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB4.Image")));
-            this.pictureBoxB4.Location = new System.Drawing.Point(327, 652);
+            this.pictureBoxB4.Location = new System.Drawing.Point(321, 742);
             this.pictureBoxB4.Name = "pictureBoxB4";
             this.pictureBoxB4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB4.TabIndex = 11;
@@ -296,8 +290,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB3
             // 
             this.pictureBoxB3.BackColor = System.Drawing.Color.White;
-            this.pictureBoxB3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB3.Image")));
-            this.pictureBoxB3.Location = new System.Drawing.Point(227, 652);
+            this.pictureBoxB3.Location = new System.Drawing.Point(221, 742);
             this.pictureBoxB3.Name = "pictureBoxB3";
             this.pictureBoxB3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB3.TabIndex = 10;
@@ -306,8 +299,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB2
             // 
             this.pictureBoxB2.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxB2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB2.Image")));
-            this.pictureBoxB2.Location = new System.Drawing.Point(127, 652);
+            this.pictureBoxB2.Location = new System.Drawing.Point(121, 742);
             this.pictureBoxB2.Name = "pictureBoxB2";
             this.pictureBoxB2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB2.TabIndex = 9;
@@ -316,8 +308,7 @@ namespace JogoXadrez_WPF
             // pictureBoxB1
             // 
             this.pictureBoxB1.BackColor = System.Drawing.Color.White;
-            this.pictureBoxB1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB1.Image")));
-            this.pictureBoxB1.Location = new System.Drawing.Point(27, 652);
+            this.pictureBoxB1.Location = new System.Drawing.Point(21, 742);
             this.pictureBoxB1.Name = "pictureBoxB1";
             this.pictureBoxB1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxB1.TabIndex = 8;
@@ -326,7 +317,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD8
             // 
             this.pictureBoxD8.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxD8.Location = new System.Drawing.Point(727, 452);
+            this.pictureBoxD8.Location = new System.Drawing.Point(721, 542);
             this.pictureBoxD8.Name = "pictureBoxD8";
             this.pictureBoxD8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD8.TabIndex = 31;
@@ -335,7 +326,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD7
             // 
             this.pictureBoxD7.BackColor = System.Drawing.Color.White;
-            this.pictureBoxD7.Location = new System.Drawing.Point(627, 452);
+            this.pictureBoxD7.Location = new System.Drawing.Point(621, 542);
             this.pictureBoxD7.Name = "pictureBoxD7";
             this.pictureBoxD7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD7.TabIndex = 30;
@@ -344,7 +335,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD6
             // 
             this.pictureBoxD6.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxD6.Location = new System.Drawing.Point(527, 452);
+            this.pictureBoxD6.Location = new System.Drawing.Point(521, 542);
             this.pictureBoxD6.Name = "pictureBoxD6";
             this.pictureBoxD6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD6.TabIndex = 29;
@@ -353,7 +344,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD5
             // 
             this.pictureBoxD5.BackColor = System.Drawing.Color.White;
-            this.pictureBoxD5.Location = new System.Drawing.Point(427, 452);
+            this.pictureBoxD5.Location = new System.Drawing.Point(421, 542);
             this.pictureBoxD5.Name = "pictureBoxD5";
             this.pictureBoxD5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD5.TabIndex = 28;
@@ -362,7 +353,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD4
             // 
             this.pictureBoxD4.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxD4.Location = new System.Drawing.Point(327, 452);
+            this.pictureBoxD4.Location = new System.Drawing.Point(321, 542);
             this.pictureBoxD4.Name = "pictureBoxD4";
             this.pictureBoxD4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD4.TabIndex = 27;
@@ -371,7 +362,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD3
             // 
             this.pictureBoxD3.BackColor = System.Drawing.Color.White;
-            this.pictureBoxD3.Location = new System.Drawing.Point(227, 452);
+            this.pictureBoxD3.Location = new System.Drawing.Point(221, 542);
             this.pictureBoxD3.Name = "pictureBoxD3";
             this.pictureBoxD3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD3.TabIndex = 26;
@@ -380,7 +371,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD2
             // 
             this.pictureBoxD2.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxD2.Location = new System.Drawing.Point(127, 452);
+            this.pictureBoxD2.Location = new System.Drawing.Point(121, 542);
             this.pictureBoxD2.Name = "pictureBoxD2";
             this.pictureBoxD2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD2.TabIndex = 25;
@@ -389,7 +380,7 @@ namespace JogoXadrez_WPF
             // pictureBoxD1
             // 
             this.pictureBoxD1.BackColor = System.Drawing.Color.White;
-            this.pictureBoxD1.Location = new System.Drawing.Point(27, 452);
+            this.pictureBoxD1.Location = new System.Drawing.Point(21, 542);
             this.pictureBoxD1.Name = "pictureBoxD1";
             this.pictureBoxD1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxD1.TabIndex = 24;
@@ -398,7 +389,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC8
             // 
             this.pictureBoxC8.BackColor = System.Drawing.Color.White;
-            this.pictureBoxC8.Location = new System.Drawing.Point(727, 552);
+            this.pictureBoxC8.Location = new System.Drawing.Point(721, 642);
             this.pictureBoxC8.Name = "pictureBoxC8";
             this.pictureBoxC8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC8.TabIndex = 23;
@@ -407,7 +398,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC7
             // 
             this.pictureBoxC7.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxC7.Location = new System.Drawing.Point(627, 552);
+            this.pictureBoxC7.Location = new System.Drawing.Point(621, 642);
             this.pictureBoxC7.Name = "pictureBoxC7";
             this.pictureBoxC7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC7.TabIndex = 22;
@@ -416,7 +407,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC6
             // 
             this.pictureBoxC6.BackColor = System.Drawing.Color.White;
-            this.pictureBoxC6.Location = new System.Drawing.Point(527, 552);
+            this.pictureBoxC6.Location = new System.Drawing.Point(521, 642);
             this.pictureBoxC6.Name = "pictureBoxC6";
             this.pictureBoxC6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC6.TabIndex = 21;
@@ -425,7 +416,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC5
             // 
             this.pictureBoxC5.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxC5.Location = new System.Drawing.Point(427, 552);
+            this.pictureBoxC5.Location = new System.Drawing.Point(421, 642);
             this.pictureBoxC5.Name = "pictureBoxC5";
             this.pictureBoxC5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC5.TabIndex = 20;
@@ -434,7 +425,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC4
             // 
             this.pictureBoxC4.BackColor = System.Drawing.Color.White;
-            this.pictureBoxC4.Location = new System.Drawing.Point(327, 552);
+            this.pictureBoxC4.Location = new System.Drawing.Point(321, 642);
             this.pictureBoxC4.Name = "pictureBoxC4";
             this.pictureBoxC4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC4.TabIndex = 19;
@@ -443,7 +434,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC3
             // 
             this.pictureBoxC3.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxC3.Location = new System.Drawing.Point(227, 552);
+            this.pictureBoxC3.Location = new System.Drawing.Point(221, 642);
             this.pictureBoxC3.Name = "pictureBoxC3";
             this.pictureBoxC3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC3.TabIndex = 18;
@@ -452,7 +443,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC2
             // 
             this.pictureBoxC2.BackColor = System.Drawing.Color.White;
-            this.pictureBoxC2.Location = new System.Drawing.Point(127, 552);
+            this.pictureBoxC2.Location = new System.Drawing.Point(121, 642);
             this.pictureBoxC2.Name = "pictureBoxC2";
             this.pictureBoxC2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC2.TabIndex = 17;
@@ -461,7 +452,7 @@ namespace JogoXadrez_WPF
             // pictureBoxC1
             // 
             this.pictureBoxC1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxC1.Location = new System.Drawing.Point(27, 552);
+            this.pictureBoxC1.Location = new System.Drawing.Point(21, 642);
             this.pictureBoxC1.Name = "pictureBoxC1";
             this.pictureBoxC1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxC1.TabIndex = 16;
@@ -470,7 +461,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF8
             // 
             this.pictureBoxF8.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxF8.Location = new System.Drawing.Point(727, 252);
+            this.pictureBoxF8.Location = new System.Drawing.Point(721, 342);
             this.pictureBoxF8.Name = "pictureBoxF8";
             this.pictureBoxF8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF8.TabIndex = 47;
@@ -479,7 +470,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF7
             // 
             this.pictureBoxF7.BackColor = System.Drawing.Color.White;
-            this.pictureBoxF7.Location = new System.Drawing.Point(627, 252);
+            this.pictureBoxF7.Location = new System.Drawing.Point(621, 342);
             this.pictureBoxF7.Name = "pictureBoxF7";
             this.pictureBoxF7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF7.TabIndex = 46;
@@ -488,7 +479,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF6
             // 
             this.pictureBoxF6.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxF6.Location = new System.Drawing.Point(527, 252);
+            this.pictureBoxF6.Location = new System.Drawing.Point(521, 342);
             this.pictureBoxF6.Name = "pictureBoxF6";
             this.pictureBoxF6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF6.TabIndex = 45;
@@ -497,7 +488,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF5
             // 
             this.pictureBoxF5.BackColor = System.Drawing.Color.White;
-            this.pictureBoxF5.Location = new System.Drawing.Point(427, 252);
+            this.pictureBoxF5.Location = new System.Drawing.Point(421, 342);
             this.pictureBoxF5.Name = "pictureBoxF5";
             this.pictureBoxF5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF5.TabIndex = 44;
@@ -506,7 +497,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF4
             // 
             this.pictureBoxF4.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxF4.Location = new System.Drawing.Point(327, 252);
+            this.pictureBoxF4.Location = new System.Drawing.Point(321, 342);
             this.pictureBoxF4.Name = "pictureBoxF4";
             this.pictureBoxF4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF4.TabIndex = 43;
@@ -515,7 +506,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF3
             // 
             this.pictureBoxF3.BackColor = System.Drawing.Color.White;
-            this.pictureBoxF3.Location = new System.Drawing.Point(227, 252);
+            this.pictureBoxF3.Location = new System.Drawing.Point(221, 342);
             this.pictureBoxF3.Name = "pictureBoxF3";
             this.pictureBoxF3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF3.TabIndex = 42;
@@ -524,7 +515,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF2
             // 
             this.pictureBoxF2.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxF2.Location = new System.Drawing.Point(127, 252);
+            this.pictureBoxF2.Location = new System.Drawing.Point(121, 342);
             this.pictureBoxF2.Name = "pictureBoxF2";
             this.pictureBoxF2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF2.TabIndex = 41;
@@ -533,7 +524,7 @@ namespace JogoXadrez_WPF
             // pictureBoxF1
             // 
             this.pictureBoxF1.BackColor = System.Drawing.Color.White;
-            this.pictureBoxF1.Location = new System.Drawing.Point(27, 252);
+            this.pictureBoxF1.Location = new System.Drawing.Point(21, 342);
             this.pictureBoxF1.Name = "pictureBoxF1";
             this.pictureBoxF1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxF1.TabIndex = 40;
@@ -542,7 +533,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE8
             // 
             this.pictureBoxE8.BackColor = System.Drawing.Color.White;
-            this.pictureBoxE8.Location = new System.Drawing.Point(727, 352);
+            this.pictureBoxE8.Location = new System.Drawing.Point(721, 442);
             this.pictureBoxE8.Name = "pictureBoxE8";
             this.pictureBoxE8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE8.TabIndex = 39;
@@ -551,7 +542,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE7
             // 
             this.pictureBoxE7.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxE7.Location = new System.Drawing.Point(627, 352);
+            this.pictureBoxE7.Location = new System.Drawing.Point(621, 442);
             this.pictureBoxE7.Name = "pictureBoxE7";
             this.pictureBoxE7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE7.TabIndex = 38;
@@ -560,7 +551,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE6
             // 
             this.pictureBoxE6.BackColor = System.Drawing.Color.White;
-            this.pictureBoxE6.Location = new System.Drawing.Point(527, 352);
+            this.pictureBoxE6.Location = new System.Drawing.Point(521, 442);
             this.pictureBoxE6.Name = "pictureBoxE6";
             this.pictureBoxE6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE6.TabIndex = 37;
@@ -569,7 +560,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE5
             // 
             this.pictureBoxE5.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxE5.Location = new System.Drawing.Point(427, 352);
+            this.pictureBoxE5.Location = new System.Drawing.Point(421, 442);
             this.pictureBoxE5.Name = "pictureBoxE5";
             this.pictureBoxE5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE5.TabIndex = 36;
@@ -578,7 +569,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE4
             // 
             this.pictureBoxE4.BackColor = System.Drawing.Color.White;
-            this.pictureBoxE4.Location = new System.Drawing.Point(327, 352);
+            this.pictureBoxE4.Location = new System.Drawing.Point(321, 442);
             this.pictureBoxE4.Name = "pictureBoxE4";
             this.pictureBoxE4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE4.TabIndex = 35;
@@ -587,7 +578,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE3
             // 
             this.pictureBoxE3.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxE3.Location = new System.Drawing.Point(227, 352);
+            this.pictureBoxE3.Location = new System.Drawing.Point(221, 442);
             this.pictureBoxE3.Name = "pictureBoxE3";
             this.pictureBoxE3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE3.TabIndex = 34;
@@ -596,7 +587,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE2
             // 
             this.pictureBoxE2.BackColor = System.Drawing.Color.White;
-            this.pictureBoxE2.Location = new System.Drawing.Point(127, 352);
+            this.pictureBoxE2.Location = new System.Drawing.Point(121, 442);
             this.pictureBoxE2.Name = "pictureBoxE2";
             this.pictureBoxE2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE2.TabIndex = 33;
@@ -605,7 +596,7 @@ namespace JogoXadrez_WPF
             // pictureBoxE1
             // 
             this.pictureBoxE1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxE1.Location = new System.Drawing.Point(27, 352);
+            this.pictureBoxE1.Location = new System.Drawing.Point(21, 442);
             this.pictureBoxE1.Name = "pictureBoxE1";
             this.pictureBoxE1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxE1.TabIndex = 32;
@@ -614,8 +605,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH8
             // 
             this.pictureBoxH8.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxH8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH8.Image")));
-            this.pictureBoxH8.Location = new System.Drawing.Point(727, 52);
+            this.pictureBoxH8.Location = new System.Drawing.Point(721, 142);
             this.pictureBoxH8.Name = "pictureBoxH8";
             this.pictureBoxH8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH8.TabIndex = 63;
@@ -624,8 +614,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH7
             // 
             this.pictureBoxH7.BackColor = System.Drawing.Color.White;
-            this.pictureBoxH7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH7.Image")));
-            this.pictureBoxH7.Location = new System.Drawing.Point(627, 52);
+            this.pictureBoxH7.Location = new System.Drawing.Point(621, 142);
             this.pictureBoxH7.Name = "pictureBoxH7";
             this.pictureBoxH7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH7.TabIndex = 62;
@@ -634,8 +623,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH6
             // 
             this.pictureBoxH6.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxH6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH6.Image")));
-            this.pictureBoxH6.Location = new System.Drawing.Point(527, 52);
+            this.pictureBoxH6.Location = new System.Drawing.Point(521, 142);
             this.pictureBoxH6.Name = "pictureBoxH6";
             this.pictureBoxH6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH6.TabIndex = 61;
@@ -644,8 +632,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH5
             // 
             this.pictureBoxH5.BackColor = System.Drawing.Color.White;
-            this.pictureBoxH5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH5.Image")));
-            this.pictureBoxH5.Location = new System.Drawing.Point(427, 52);
+            this.pictureBoxH5.Location = new System.Drawing.Point(421, 142);
             this.pictureBoxH5.Name = "pictureBoxH5";
             this.pictureBoxH5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH5.TabIndex = 60;
@@ -654,8 +641,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH4
             // 
             this.pictureBoxH4.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxH4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH4.Image")));
-            this.pictureBoxH4.Location = new System.Drawing.Point(327, 52);
+            this.pictureBoxH4.Location = new System.Drawing.Point(321, 142);
             this.pictureBoxH4.Name = "pictureBoxH4";
             this.pictureBoxH4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH4.TabIndex = 59;
@@ -664,8 +650,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH3
             // 
             this.pictureBoxH3.BackColor = System.Drawing.Color.White;
-            this.pictureBoxH3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH3.Image")));
-            this.pictureBoxH3.Location = new System.Drawing.Point(227, 52);
+            this.pictureBoxH3.Location = new System.Drawing.Point(221, 142);
             this.pictureBoxH3.Name = "pictureBoxH3";
             this.pictureBoxH3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH3.TabIndex = 58;
@@ -674,8 +659,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH2
             // 
             this.pictureBoxH2.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxH2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH2.Image")));
-            this.pictureBoxH2.Location = new System.Drawing.Point(127, 52);
+            this.pictureBoxH2.Location = new System.Drawing.Point(121, 142);
             this.pictureBoxH2.Name = "pictureBoxH2";
             this.pictureBoxH2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH2.TabIndex = 57;
@@ -684,8 +668,7 @@ namespace JogoXadrez_WPF
             // pictureBoxH1
             // 
             this.pictureBoxH1.BackColor = System.Drawing.Color.White;
-            this.pictureBoxH1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxH1.Image")));
-            this.pictureBoxH1.Location = new System.Drawing.Point(27, 52);
+            this.pictureBoxH1.Location = new System.Drawing.Point(21, 142);
             this.pictureBoxH1.Name = "pictureBoxH1";
             this.pictureBoxH1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxH1.TabIndex = 56;
@@ -694,8 +677,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG8
             // 
             this.pictureBoxG8.BackColor = System.Drawing.Color.White;
-            this.pictureBoxG8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG8.Image")));
-            this.pictureBoxG8.Location = new System.Drawing.Point(727, 152);
+            this.pictureBoxG8.Location = new System.Drawing.Point(721, 242);
             this.pictureBoxG8.Name = "pictureBoxG8";
             this.pictureBoxG8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG8.TabIndex = 55;
@@ -704,8 +686,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG7
             // 
             this.pictureBoxG7.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxG7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG7.Image")));
-            this.pictureBoxG7.Location = new System.Drawing.Point(627, 152);
+            this.pictureBoxG7.Location = new System.Drawing.Point(621, 242);
             this.pictureBoxG7.Name = "pictureBoxG7";
             this.pictureBoxG7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG7.TabIndex = 54;
@@ -714,8 +695,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG6
             // 
             this.pictureBoxG6.BackColor = System.Drawing.Color.White;
-            this.pictureBoxG6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG6.Image")));
-            this.pictureBoxG6.Location = new System.Drawing.Point(527, 152);
+            this.pictureBoxG6.Location = new System.Drawing.Point(521, 242);
             this.pictureBoxG6.Name = "pictureBoxG6";
             this.pictureBoxG6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG6.TabIndex = 53;
@@ -724,8 +704,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG5
             // 
             this.pictureBoxG5.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxG5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG5.Image")));
-            this.pictureBoxG5.Location = new System.Drawing.Point(427, 152);
+            this.pictureBoxG5.Location = new System.Drawing.Point(421, 242);
             this.pictureBoxG5.Name = "pictureBoxG5";
             this.pictureBoxG5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG5.TabIndex = 52;
@@ -734,8 +713,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG4
             // 
             this.pictureBoxG4.BackColor = System.Drawing.Color.White;
-            this.pictureBoxG4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG4.Image")));
-            this.pictureBoxG4.Location = new System.Drawing.Point(327, 152);
+            this.pictureBoxG4.Location = new System.Drawing.Point(321, 242);
             this.pictureBoxG4.Name = "pictureBoxG4";
             this.pictureBoxG4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG4.TabIndex = 51;
@@ -744,8 +722,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG3
             // 
             this.pictureBoxG3.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxG3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG3.Image")));
-            this.pictureBoxG3.Location = new System.Drawing.Point(227, 152);
+            this.pictureBoxG3.Location = new System.Drawing.Point(221, 242);
             this.pictureBoxG3.Name = "pictureBoxG3";
             this.pictureBoxG3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG3.TabIndex = 50;
@@ -754,8 +731,7 @@ namespace JogoXadrez_WPF
             // pictureBoxG2
             // 
             this.pictureBoxG2.BackColor = System.Drawing.Color.White;
-            this.pictureBoxG2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG2.Image")));
-            this.pictureBoxG2.Location = new System.Drawing.Point(127, 152);
+            this.pictureBoxG2.Location = new System.Drawing.Point(121, 242);
             this.pictureBoxG2.Name = "pictureBoxG2";
             this.pictureBoxG2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG2.TabIndex = 49;
@@ -764,18 +740,81 @@ namespace JogoXadrez_WPF
             // pictureBoxG1
             // 
             this.pictureBoxG1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxG1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxG1.Image")));
-            this.pictureBoxG1.Location = new System.Drawing.Point(27, 152);
+            this.pictureBoxG1.Location = new System.Drawing.Point(21, 242);
             this.pictureBoxG1.Name = "pictureBoxG1";
             this.pictureBoxG1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxG1.TabIndex = 48;
             this.pictureBoxG1.TabStop = false;
             // 
-            // LayoutTabuleiro
+            // labelTurno
+            // 
+            this.labelTurno.AutoSize = true;
+            this.labelTurno.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTurno.Location = new System.Drawing.Point(372, 26);
+            this.labelTurno.Name = "labelTurno";
+            this.labelTurno.Size = new System.Drawing.Size(88, 28);
+            this.labelTurno.TabIndex = 64;
+            this.labelTurno.Text = "Turno:  1";
+            // 
+            // groupBoxBranco
+            // 
+            this.groupBoxBranco.Controls.Add(this.labelPecasCapturadasBranco);
+            this.groupBoxBranco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxBranco.Location = new System.Drawing.Point(21, 26);
+            this.groupBoxBranco.Name = "groupBoxBranco";
+            this.groupBoxBranco.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxBranco.TabIndex = 65;
+            this.groupBoxBranco.TabStop = false;
+            this.groupBoxBranco.Text = "Jogador 1: Branco";
+            // 
+            // labelPecasCapturadasBranco
+            // 
+            this.labelPecasCapturadasBranco.AutoSize = true;
+            this.labelPecasCapturadasBranco.Location = new System.Drawing.Point(24, 41);
+            this.labelPecasCapturadasBranco.Name = "labelPecasCapturadasBranco";
+            this.labelPecasCapturadasBranco.Size = new System.Drawing.Size(144, 21);
+            this.labelPecasCapturadasBranco.TabIndex = 66;
+            this.labelPecasCapturadasBranco.Text = "Peças capturadas: 0";
+            // 
+            // groupBoxPreto
+            // 
+            this.groupBoxPreto.Controls.Add(this.labelPecasCapturadasPreto);
+            this.groupBoxPreto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxPreto.Location = new System.Drawing.Point(621, 26);
+            this.groupBoxPreto.Name = "groupBoxPreto";
+            this.groupBoxPreto.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxPreto.TabIndex = 67;
+            this.groupBoxPreto.TabStop = false;
+            this.groupBoxPreto.Text = "Jogador 2: Preto";
+            // 
+            // labelPecasCapturadasPreto
+            // 
+            this.labelPecasCapturadasPreto.AutoSize = true;
+            this.labelPecasCapturadasPreto.Location = new System.Drawing.Point(24, 41);
+            this.labelPecasCapturadasPreto.Name = "labelPecasCapturadasPreto";
+            this.labelPecasCapturadasPreto.Size = new System.Drawing.Size(144, 21);
+            this.labelPecasCapturadasPreto.TabIndex = 66;
+            this.labelPecasCapturadasPreto.Text = "Peças capturadas: 0";
+            // 
+            // labelJogadorAtual
+            // 
+            this.labelJogadorAtual.AutoSize = true;
+            this.labelJogadorAtual.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelJogadorAtual.Location = new System.Drawing.Point(317, 67);
+            this.labelJogadorAtual.Name = "labelJogadorAtual";
+            this.labelJogadorAtual.Size = new System.Drawing.Size(204, 28);
+            this.labelJogadorAtual.TabIndex = 68;
+            this.labelJogadorAtual.Text = "Jogador Atual: Branco";
+            // 
+            // Tela
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1262, 892);
+            this.ClientSize = new System.Drawing.Size(839, 962);
+            this.Controls.Add(this.labelJogadorAtual);
+            this.Controls.Add(this.groupBoxPreto);
+            this.Controls.Add(this.groupBoxBranco);
+            this.Controls.Add(this.labelTurno);
             this.Controls.Add(this.pictureBoxH8);
             this.Controls.Add(this.pictureBoxH7);
             this.Controls.Add(this.pictureBoxH6);
@@ -840,7 +879,7 @@ namespace JogoXadrez_WPF
             this.Controls.Add(this.pictureBoxA3);
             this.Controls.Add(this.pictureBoxA2);
             this.Controls.Add(this.pictureBoxA1);
-            this.Name = "LayoutTabuleiro";
+            this.Name = "Tela";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).EndInit();
@@ -906,18 +945,12 @@ namespace JogoXadrez_WPF
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG1)).EndInit();
+            this.groupBoxBranco.ResumeLayout(false);
+            this.groupBoxBranco.PerformLayout();
+            this.groupBoxPreto.ResumeLayout(false);
+            this.groupBoxPreto.PerformLayout();
             this.ResumeLayout(false);
-            /*
-            PictureBoxes = new PictureBox[8, 8] {
-                { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
-                { pictureBoxB1, pictureBoxB2, pictureBoxB3, pictureBoxB4, pictureBoxB5, pictureBoxB6, pictureBoxB7, pictureBoxB8 },
-                { pictureBoxC1, pictureBoxC2, pictureBoxC3, pictureBoxC4, pictureBoxC5, pictureBoxC6, pictureBoxC7, pictureBoxC8 },
-                { pictureBoxD1, pictureBoxD2, pictureBoxD3, pictureBoxD4, pictureBoxD5, pictureBoxD6, pictureBoxD7, pictureBoxD8 },
-                { pictureBoxE1, pictureBoxE2, pictureBoxE3, pictureBoxE4, pictureBoxE5, pictureBoxE6, pictureBoxE7, pictureBoxE8 },
-                { pictureBoxF1, pictureBoxF2, pictureBoxF3, pictureBoxF4, pictureBoxF5, pictureBoxF6, pictureBoxF7, pictureBoxF8 },
-                { pictureBoxG1, pictureBoxG2, pictureBoxG3, pictureBoxG4, pictureBoxG5, pictureBoxG6, pictureBoxG7, pictureBoxG8 },
-                { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
-            };*/
+            this.PerformLayout();
 
         }
 
@@ -987,6 +1020,12 @@ namespace JogoXadrez_WPF
         public System.Windows.Forms.PictureBox pictureBoxG3;
         public System.Windows.Forms.PictureBox pictureBoxG2;
         public System.Windows.Forms.PictureBox pictureBoxG1;
+        private Label labelTurno;
+        private GroupBox groupBoxBranco;
+        private Label labelPecasCapturadasBranco;
+        private GroupBox groupBoxPreto;
+        private Label labelPecasCapturadasPreto;
+        private Label labelJogadorAtual;
     }
 }
 

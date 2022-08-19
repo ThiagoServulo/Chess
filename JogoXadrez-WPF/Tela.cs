@@ -16,6 +16,5 @@ namespace JogoXadrez_WPF
         {
             InitializeComponent();
         }
-
     }
 }
