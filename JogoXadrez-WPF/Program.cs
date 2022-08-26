@@ -17,7 +17,7 @@ namespace JogoXadrez_WPF
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Tela());
+            Application.Run(new Tabuleiro());
         }
     }
 }

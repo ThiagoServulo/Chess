@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace JogoXadrez_WPF
 {
-    partial class Tela
+    partial class Tabuleiro
     {
         /// <summary>
         ///  Required designer variable.
