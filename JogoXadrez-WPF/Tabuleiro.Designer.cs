@@ -178,6 +178,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA1.TabIndex = 0;
             this.pictureBoxA1.TabStop = false;
+            this.pictureBoxA1.Click += new System.EventHandler(this.PictureBoxA1Click);
             // 
             // pictureBoxA2
             // 
@@ -187,6 +188,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA2.TabIndex = 1;
             this.pictureBoxA2.TabStop = false;
+            this.pictureBoxA2.Click += new System.EventHandler(this.PictureBoxA2Click);
             // 
             // pictureBoxA4
             // 
@@ -196,6 +198,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA4.TabIndex = 3;
             this.pictureBoxA4.TabStop = false;
+            this.pictureBoxA4.Click += new System.EventHandler(this.PictureBoxA4Click);
             // 
             // pictureBoxA3
             // 
@@ -205,6 +208,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA3.TabIndex = 2;
             this.pictureBoxA3.TabStop = false;
+            this.pictureBoxA3.Click += new System.EventHandler(this.PictureBoxA3Click);
             // 
             // pictureBoxA8
             // 
@@ -214,6 +218,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA8.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA8.TabIndex = 7;
             this.pictureBoxA8.TabStop = false;
+            this.pictureBoxA8.Click += new System.EventHandler(this.PictureBoxA8Click);
             // 
             // pictureBoxA7
             // 
@@ -223,6 +228,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA7.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA7.TabIndex = 6;
             this.pictureBoxA7.TabStop = false;
+            this.pictureBoxA7.Click += new System.EventHandler(this.PictureBoxA7Click);
             // 
             // pictureBoxA6
             // 
@@ -232,6 +238,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA6.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA6.TabIndex = 5;
             this.pictureBoxA6.TabStop = false;
+            this.pictureBoxA6.Click += new System.EventHandler(this.PictureBoxA6Click);
             // 
             // pictureBoxA5
             // 
@@ -241,6 +248,7 @@ namespace JogoXadrez_WPF
             this.pictureBoxA5.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxA5.TabIndex = 4;
             this.pictureBoxA5.TabStop = false;
+            this.pictureBoxA5.Click += new System.EventHandler(this.PictureBoxA5Click);
             // 
             // pictureBoxB8
             // 
@@ -806,7 +814,7 @@ namespace JogoXadrez_WPF
             this.labelJogadorAtual.TabIndex = 68;
             this.labelJogadorAtual.Text = "Jogador Atual: Branco";
             // 
-            // Tela
+            // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -879,7 +887,7 @@ namespace JogoXadrez_WPF
             this.Controls.Add(this.pictureBoxA3);
             this.Controls.Add(this.pictureBoxA2);
             this.Controls.Add(this.pictureBoxA1);
-            this.Name = "Tela";
+            this.Name = "Tabuleiro";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).EndInit();
