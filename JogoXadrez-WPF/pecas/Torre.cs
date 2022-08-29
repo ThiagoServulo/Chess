@@ -9,7 +9,7 @@ namespace JogoXadrez_WPF
 
         public Torre(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = Image.FromFile((corDaPeca == Cor.Branco) ? "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_branco.png" : "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_preto.png");
+            Imagem = Image.FromFile(corDaPeca == Cor.Branco ? "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_branco.png" : "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_preto.png");
         }
 
         public override string ToString()

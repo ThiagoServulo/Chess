@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
-using System.IO;
+using System.Collections.Generic;
 
 namespace JogoXadrez_WPF
 {
@@ -10,11 +10,13 @@ namespace JogoXadrez_WPF
         public int Colunas = 8;
         private Peca[,] _pecasEmJogo;
         private PictureBox[,] _pictureBoxes;
+        private HashSet<Peca> _pecasCapturadas;
         private Posicao _origem;
         private Cor _jogadorAtual;
 
         public Tabuleiro()
         {
+            _pecasCapturadas = new HashSet<Peca>();
             _jogadorAtual = Cor.Branco;
             _origem = null;
             InitializeComponent();
@@ -30,6 +32,11 @@ namespace JogoXadrez_WPF
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             } ;
             InicializaTabuleiro();
+        }
+
+        private void MudaJogador()
+        {
+            _jogadorAtual = _jogadorAtual == Cor.Branco ? Cor.Preto : Cor.Branco;
         }
 
         public Peca AcessarPeca(int linha, int coluna)
@@ -52,8 +59,8 @@ namespace JogoXadrez_WPF
         private void InicializaTabuleiro()
         {
             MostrarTabuleiro();
-            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(0, 0));
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 1));
+            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 0));
+            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(0, 1));
         }
 
         private void MostrarTabuleiro()
@@ -104,6 +111,14 @@ namespace JogoXadrez_WPF
 
         private void ProcessaPictureBoxClick(Posicao posicao)
         {
+            bool mover = false;
+            if (_origem != null && _origem.CompareTo(posicao) == 0)
+            {
+                MostrarTabuleiro();
+                _origem = null;
+                return;
+            }
+
             if (ExistePeca(posicao))
             {
                 Peca peca = AcessarPeca(posicao);
@@ -115,23 +130,40 @@ namespace JogoXadrez_WPF
                 }
                 else if(_origem != null)
                 {
-                    MessageBox.Show("comeu");
-                    _origem = null;
-                    MostrarTabuleiro();
+                    mover = true;
                 }
             }
             else
             {
-                MessageBox.Show("sssss");
                 if ((_pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightBlue ||
                     _pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightCyan) &&
                     _origem != null)
                 {
-                    MessageBox.Show("moveu");
+                    mover = true;
                 }
-                _origem = null;
-                MostrarTabuleiro();
             }
+
+            if(mover)
+            {
+                MostrarTabuleiro();
+                ExecutaMovimento(_origem, posicao);
+                MudaJogador();
+                _origem = null;
+            }
+        }
+
+        public Peca ExecutaMovimento(Posicao origem, Posicao destino)
+        {
+            Peca peca = RetirarPeca(origem);
+            peca.IncrementarQuantidadeDeMovimentos();
+            Peca pecaCapturada = RetirarPeca(destino);
+            ColocarPeca(peca, destino);
+            if (pecaCapturada != null)
+            {
+                _pecasCapturadas.Add(pecaCapturada);
+            }
+            _pictureBoxes[origem.Linha, origem.Coluna].Image = null;
+            return pecaCapturada;
         }
 
         private void PictureBoxA1Click(object sender, System.EventArgs e)
@@ -156,7 +188,7 @@ namespace JogoXadrez_WPF
 
         private void PictureBoxA5Click(object sender, System.EventArgs e)
         {
-            ProcessaPictureBoxClick(new Posicao(0, 5));
+            ProcessaPictureBoxClick(new Posicao(0, 4));
         }
 
         private void PictureBoxA6Click(object sender, System.EventArgs e)
@@ -172,6 +204,46 @@ namespace JogoXadrez_WPF
         private void PictureBoxA8Click(object sender, System.EventArgs e)
         {
             ProcessaPictureBoxClick(new Posicao(0, 7));
+        }
+
+        private void PictureBoxB1Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 0));
+        }
+
+        private void PictureBoxB2Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 1));
+        }
+
+        private void PictureBoxB3Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 2));
+        }
+
+        private void PictureBoxB4Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 3));
+        }
+
+        private void PictureBoxB5Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 4));
+        }
+
+        private void PictureBoxB6Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 5));
+        }
+
+        private void PictureBoxB7Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 6));
+        }
+
+        private void PictureBoxB8Click(object sender, System.EventArgs e)
+        {
+            ProcessaPictureBoxClick(new Posicao(1, 7));
         }
     }
 }

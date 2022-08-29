@@ -1,6 +1,6 @@
 ﻿namespace JogoXadrez_WPF
 {
-    class Posicao
+    class Posicao: System.IComparable
     {
         public int Linha { get; set; }
         public int Coluna { get; set; }
@@ -20,5 +20,12 @@
         {
             return $"[{Linha},{Coluna}]";
         }
+        
+        public int CompareTo(object obj)
+        {
+            Posicao other = obj as Posicao;
+            return other.Linha == Linha && other.Coluna == Coluna ? 0 : 1;
+        }
+
     }
 }
