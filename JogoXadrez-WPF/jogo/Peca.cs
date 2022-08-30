@@ -4,6 +4,7 @@ namespace JogoXadrez_WPF
 {
     abstract class Peca
     {
+        public Image Imagem;
         public Posicao PosicaoAtual { get; set; }
         public Cor CorDaPeca { get; protected set; }
         public int QuantidadeDeMovimentos { get; protected set; }
@@ -15,6 +16,11 @@ namespace JogoXadrez_WPF
             TabuleiroXadrez = tabuleiro;
             CorDaPeca = cor;
             QuantidadeDeMovimentos = 0;
+        }
+
+        public Image MostrarImagem()
+        {
+            return Imagem;
         }
 
         public void IncrementarQuantidadeDeMovimentos()
@@ -41,8 +47,6 @@ namespace JogoXadrez_WPF
             }
             return false;
         }
-        
-        public abstract Image MostrarImagem();
 
         public bool ExisteMovimentosPossiveis()
         {

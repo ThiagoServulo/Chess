@@ -1,20 +1,12 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 
 namespace JogoXadrez_WPF
 {
     class Torre : Peca
     {
-        public Image Imagem;
-
         public Torre(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = Image.FromFile(corDaPeca == Cor.Branco ? "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_branco.png" : "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/torre_preto.png");
-        }
-
-        public override string ToString()
-        {
-            return "T";
         }
 
         public override bool[,] MovimentosPossiveis()
@@ -74,9 +66,5 @@ namespace JogoXadrez_WPF
             return matriz;
         }
 
-        public override Image MostrarImagem()
-        {
-            return Imagem;
-        }
     }
 }
