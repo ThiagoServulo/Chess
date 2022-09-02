@@ -13,9 +13,11 @@ namespace JogoXadrez_WPF
         private HashSet<Peca> _pecasCapturadas;
         private Posicao _origem;
         private Cor _jogadorAtual;
+        private int _turno;
 
         public Tabuleiro()
         {
+            _turno = 1;
             _pecasCapturadas = new HashSet<Peca>();
             _jogadorAtual = Cor.Branco;
             _origem = null;
@@ -31,12 +33,15 @@ namespace JogoXadrez_WPF
                 { pictureBoxG1, pictureBoxG2, pictureBoxG3, pictureBoxG4, pictureBoxG5, pictureBoxG6, pictureBoxG7, pictureBoxG8 },
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             } ;
+            AtualizaLabelJogador();
+            AtualizaLabelTurno();
             InicializaTabuleiro();
         }
 
         private void MudaJogador()
         {
             _jogadorAtual = _jogadorAtual == Cor.Branco ? Cor.Preto : Cor.Branco;
+            AtualizaLabelJogador();
         }
 
         public Peca AcessarPeca(int linha, int coluna)
@@ -64,6 +69,22 @@ namespace JogoXadrez_WPF
             ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 1));
             //ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
             //ColocarPeca(new Peao(this, Cor.Preto), new Posicao(7, 0));
+        }
+
+        private void AtualizaLabelJogador()
+        {
+            labelJogadorAtual.Text = "Jogador atual: " + (_jogadorAtual == Cor.Branco ? "Branco" : "Preto");
+        }
+
+        private void AtualizaLabelTurno()
+        {
+            labelTurno.Text = $"Turno: {_turno}";
+        }
+
+        private void IncrementaTurno()
+        {
+            _turno++;
+            AtualizaLabelTurno();
         }
 
         private void MostrarTabuleiro()
@@ -166,6 +187,7 @@ namespace JogoXadrez_WPF
                 _pecasCapturadas.Add(pecaCapturada);
             }
             _pictureBoxes[origem.Linha, origem.Coluna].Image = null;
+            IncrementaTurno();
             return pecaCapturada;
         }
 
