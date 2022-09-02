@@ -50,7 +50,7 @@ namespace JogoXadrez_WPF
             QuantidadeDeMovimentos--;
         }
         
-        private bool PosicaoValida(Posicao posicao)
+        public bool PosicaoValida(Posicao posicao)
         {
             return posicao.Linha <= 7 && posicao.Linha >= 0 && posicao.Coluna <= 7 && posicao.Coluna >= 0;
         }

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace JogoXadrez_WPF
+﻿namespace JogoXadrez_WPF
 {
     class Torre : Peca
     {

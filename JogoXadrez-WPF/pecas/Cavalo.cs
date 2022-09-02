@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.IO;
-
-namespace JogoXadrez_WPF
+﻿namespace JogoXadrez_WPF
 {
     class Cavalo : Peca
     {

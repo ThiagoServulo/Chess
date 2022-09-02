@@ -60,9 +60,10 @@ namespace JogoXadrez_WPF
         {
             MostrarTabuleiro();
             ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 0));
-            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(0, 1));
-            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
-            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(7, 0));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(0, 1));
+            //ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
+            //ColocarPeca(new Peao(this, Cor.Preto), new Posicao(7, 0));
         }
 
         private void MostrarTabuleiro()
@@ -130,7 +131,7 @@ namespace JogoXadrez_WPF
                     bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
                     MostrarTabuleiro(posicoesPossiveis);
                 }
-                else if(_origem != null)
+                else if(_origem != null && !(AcessarPeca(_origem) is Peao))
                 {
                     mover = true;
                 }
