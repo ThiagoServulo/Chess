@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace JogoXadrez_WPF
 {
@@ -9,9 +11,11 @@ namespace JogoXadrez_WPF
         public Cor CorDaPeca { get; protected set; }
         public int QuantidadeDeMovimentos { get; protected set; }
         public Tabuleiro TabuleiroXadrez { get; protected set; }
+        public string FileImagesPath;
 
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
+            FileImagesPath = Path.GetFullPath("./imagens");
             PosicaoAtual = null;
             TabuleiroXadrez = tabuleiro;
             CorDaPeca = cor;
@@ -21,6 +25,19 @@ namespace JogoXadrez_WPF
         public Image MostrarImagem()
         {
             return Imagem;
+        }
+
+        public Image BuscarImagem(string ImagemPeca)
+        {
+            try
+            {
+                return Image.FromFile($"{FileImagesPath}/{ImagemPeca}");
+            }
+            catch
+            {
+                // TODO: criar a exceção personalizada
+                return null; 
+            }
         }
 
         public void IncrementarQuantidadeDeMovimentos()

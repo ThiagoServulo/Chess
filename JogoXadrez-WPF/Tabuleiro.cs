@@ -61,8 +61,8 @@ namespace JogoXadrez_WPF
             MostrarTabuleiro();
             ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 0));
             ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(0, 1));
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(6, 0));
-            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(7, 0));
+            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
+            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(7, 0));
         }
 
         private void MostrarTabuleiro()

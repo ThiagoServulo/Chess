@@ -7,7 +7,7 @@ namespace JogoXadrez_WPF
         public Bispo(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             // TODO: Arrumar a imagem do bispo preto em relação ao branco
-            Imagem = Image.FromFile(corDaPeca == Cor.Branco ? "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/bispo_branco.png" : "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/bispo_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "bispo_branco.png" : "bispo_preto.png");
         }
 
         public override bool[,] MovimentosPossiveis()

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.IO;
 
 namespace JogoXadrez_WPF
 {
@@ -6,7 +7,7 @@ namespace JogoXadrez_WPF
     {
         public Cavalo(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = Image.FromFile(corDaPeca == Cor.Branco ? "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/cavalo_branco.png" : "D:/Projetos/JogoXadrez-WPF/JogoXadrez-WPF/pecas/imagens/cavalo_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "cavalo_branco.png" : "cavalo_preto.png");
         }
 
         public override bool[,] MovimentosPossiveis()
