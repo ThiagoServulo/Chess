@@ -41,7 +41,12 @@ namespace JogoXadrez_WPF
 
         private void MudaJogador()
         {
-            _jogadorAtual = _jogadorAtual == Cor.Branco ? Cor.Preto : Cor.Branco;
+            _jogadorAtual = CorAdversaria(_jogadorAtual);
+        }
+
+        private Cor CorAdversaria(Cor cor)
+        {
+            return cor == Cor.Branco ? Cor.Preto : Cor.Branco;
         }
 
         public Peca AcessarPeca(int linha, int coluna)
@@ -64,7 +69,8 @@ namespace JogoXadrez_WPF
         private void InicializaTabuleiro()
         {
             MostrarTabuleiro();
-            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 0));
+            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 0));
+            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7 , 7));
             ColocarPeca(new Rainha(this, Cor.Branco), new Posicao(6, 1));
             ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 1));
             //ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
@@ -160,7 +166,7 @@ namespace JogoXadrez_WPF
                 if(peca.CorDaPeca == _jogadorAtual)
                 {
                     _origem = posicao;
-                    bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
+                    bool[,] posicoesPossiveis = ChecarMovimentosPossiveis(peca);
                     MostrarTabuleiro(posicoesPossiveis);
                 }
                 else if(_origem != null && !(AcessarPeca(_origem) is Peao))
@@ -205,9 +211,88 @@ namespace JogoXadrez_WPF
                 {
                     _quantidadePretasCapturadas++;
                 }
+                PecasEmJogo(Cor.Branco);
+                PecasEmJogo(Cor.Preto);
             }
             _pictureBoxes[origem.Linha, origem.Coluna].Image = null;
             return pecaCapturada;
         }
+
+        public HashSet<Peca> PecasEmJogo(Cor cor)
+        {
+            HashSet<Peca> aux = new HashSet<Peca>();
+            foreach (Peca peca in _pecasEmJogo)
+            {
+                if (peca != null && peca.CorDaPeca == cor)
+                {
+                    aux.Add(peca);
+                }
+            }
+            return aux;
+        }
+
+        
+        private Posicao PegarPosicaoRei(Cor cor)
+        {
+            for (int coluna = 0; coluna < Colunas; coluna++)
+            {
+                for (int linha = 0; linha < Linhas; linha++)
+                {
+                    if(_pecasEmJogo[linha, coluna] != null && _pecasEmJogo[linha, coluna] is Rei && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
+                    {
+                        return new Posicao(linha, coluna);
+                    }
+                }
+            }
+            return null;
+        }
+        
+        public bool VerificaXeque(Cor cor)
+        {
+            Posicao posicaoRei = PegarPosicaoRei(cor);
+
+            //MessageBox.Show($"Posição rei da cor {rei.CorDaPeca} - {rei.PosicaoAtual}");
+
+            if (posicaoRei == null)
+            {
+                throw new System.Exception($"Não tem rei da cor: {cor} no tabuleiro");
+            }
+
+            foreach (Peca peca in PecasEmJogo(CorAdversaria(cor)))
+            {
+                bool[,] matriz = peca.MovimentosPossiveis();
+                if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool[,] ChecarMovimentosPossiveis(Peca peca)
+        {
+            bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
+            for(int coluna = 0; coluna < Colunas; coluna++)
+            {
+                for (int linha = 0; linha < Linhas; linha++)
+                {
+                    if (posicoesPossiveis[linha, coluna])
+                    {
+                        _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = null;
+                        Peca pecaCapturada = AcessarPeca(linha, coluna);
+                        _pecasEmJogo[linha, coluna] = peca;
+                        if(VerificaXeque(peca.CorDaPeca))
+                        {
+                            posicoesPossiveis[linha, coluna] = false;
+                        }
+                        _pecasEmJogo[linha, coluna] = pecaCapturada;
+                        _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = peca;
+                    }
+                }
+            }
+            return posicoesPossiveis;
+        }
+
     }
 }
