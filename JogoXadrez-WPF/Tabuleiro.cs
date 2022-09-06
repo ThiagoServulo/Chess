@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JogoXadrez_WPF
 {
@@ -73,8 +74,8 @@ namespace JogoXadrez_WPF
             ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7 , 7));
             ColocarPeca(new Rainha(this, Cor.Branco), new Posicao(6, 1));
             ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 1));
-            //ColocarPeca(new Rei(this, Cor.Branco), new Posicao(6, 0));
-            //ColocarPeca(new Peao(this, Cor.Preto), new Posicao(7, 0));
+            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 4));
+            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 5));
         }
 
         private void AtualizaLabelJogador()
@@ -192,6 +193,7 @@ namespace JogoXadrez_WPF
                 IncrementaTurno();
                 AtualizaLabels();
                 _origem = null;
+                VerificaXequeMate(_jogadorAtual);
             }
         }
 
@@ -251,8 +253,6 @@ namespace JogoXadrez_WPF
         {
             Posicao posicaoRei = PegarPosicaoRei(cor);
 
-            //MessageBox.Show($"Posição rei da cor {rei.CorDaPeca} - {rei.PosicaoAtual}");
-
             if (posicaoRei == null)
             {
                 throw new System.Exception($"Não tem rei da cor: {cor} no tabuleiro");
@@ -294,5 +294,27 @@ namespace JogoXadrez_WPF
             return posicoesPossiveis;
         }
 
+        public bool VerificaXequeMate(Cor cor)
+        {
+            foreach (Peca peca in PecasEmJogo(cor))
+            {
+                bool[,] matriz = ChecarMovimentosPossiveis(peca);
+                for(int i = 0; i < Linhas; i++)
+                {
+                    for (int j = 0; j < Colunas; j++)
+                    {
+                        if(matriz[i, j])
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            string mensagem = VerificaXeque(cor) ? "Xeque Mate" : "Empate";
+            MessageBox.Show(mensagem);
+            
+            return true;
+        }
     }
 }
