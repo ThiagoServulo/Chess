@@ -50,23 +50,31 @@
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                /*
                 // #jogadaespecial en passant
                 if (PosicaoAtual.Linha == 3)
                 {
                     Posicao esquerda = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-                    if (Tab.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && (Tab.AcessarPeca(esquerda) == partida.VulneravelEnPassant))
+                    if (PosicaoValida(esquerda) && ExisteInimigo(esquerda))
                     {
-                        matriz[esquerda.Linha - 1, esquerda.Coluna] = true;
+                        Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
+                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        {
+                            matriz[esquerda.Linha - 1, esquerda.Coluna] = true;
+                        }
                     }
 
                     Posicao direita = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-                    if (Tab.PosicaoValida(direita) && ExisteInimigo(direita) && (Tab.AcessarPeca(direita) == partida.VulneravelEnPassant))
+                    if (PosicaoValida(direita) && ExisteInimigo(direita))
                     {
-                        matriz[direita.Linha - 1, direita.Coluna] = true;
+                        Peca peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
+                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        {
+                            matriz[direita.Linha - 1, direita.Coluna] = true;
+                        }
                     }
                 }
-                */
             }
             else
             {
@@ -94,23 +102,31 @@
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                /*
                 // #jogadaespecial en passant
                 if (PosicaoAtual.Linha == 4)
                 {
                     Posicao esquerda = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-                    if (Tab.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && (Tab.AcessarPeca(esquerda) == partida.VulneravelEnPassant))
+                    if (PosicaoValida(esquerda) && ExisteInimigo(esquerda))
                     {
-                        matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
+                        Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Posicao destino = new Posicao(esquerda.Linha + 1, esquerda.Coluna);
+                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        {
+                            matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
+                        }
                     }
 
                     Posicao direita = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-                    if (Tab.PosicaoValida(direita) && ExisteInimigo(direita) && (Tab.AcessarPeca(direita) == partida.VulneravelEnPassant))
+                    if (PosicaoValida(direita) && ExisteInimigo(direita))
                     {
-                        matriz[direita.Linha + 1, direita.Coluna] = true;
+                        Peca peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Posicao destino = new Posicao(direita.Linha + 1, direita.Coluna);
+                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        {
+                            matriz[direita.Linha + 1, direita.Coluna] = true;
+                        }
                     }
                 }
-                */
             }
 
             return matriz;

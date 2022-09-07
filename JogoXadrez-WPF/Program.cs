@@ -12,6 +12,8 @@ namespace JogoXadrez_WPF
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
+
+
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
@@ -19,5 +21,6 @@ namespace JogoXadrez_WPF
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Tabuleiro());
         }
+
     }
 }

@@ -72,7 +72,8 @@ namespace JogoXadrez_WPF
             MostrarTabuleiro();
             ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 0));
             ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7 , 7));
-            ColocarPeca(new Rainha(this, Cor.Branco), new Posicao(6, 1));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 2));
             ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 1));
             ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 4));
             ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 5));
@@ -191,9 +192,9 @@ namespace JogoXadrez_WPF
                 ExecutaMovimento(_origem, posicao);
                 MudaJogador();
                 IncrementaTurno();
-                AtualizaLabels();
                 _origem = null;
                 VerificaXequeMate(_jogadorAtual);
+                AtualizaLabels();
             }
         }
 
@@ -203,6 +204,15 @@ namespace JogoXadrez_WPF
             peca.IncrementarQuantidadeDeMovimentos();
             Peca pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
+
+            // #jogadaespecial en passant
+            if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
+            {
+                Posicao posicaoPeao = new Posicao(peca.CorDaPeca == Cor.Branco ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
+                pecaCapturada = RetirarPeca(posicaoPeao);
+                _pictureBoxes[posicaoPeao.Linha, posicaoPeao.Coluna].Image = null;
+            }
+
             if (pecaCapturada != null)
             {
                 if(pecaCapturada.CorDaPeca == Cor.Branco)
@@ -217,6 +227,7 @@ namespace JogoXadrez_WPF
                 PecasEmJogo(Cor.Preto);
             }
             _pictureBoxes[origem.Linha, origem.Coluna].Image = null;
+
             return pecaCapturada;
         }
 
@@ -240,7 +251,9 @@ namespace JogoXadrez_WPF
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
-                    if(_pecasEmJogo[linha, coluna] != null && _pecasEmJogo[linha, coluna] is Rei && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
+                    if(_pecasEmJogo[linha, coluna] != null && 
+                       _pecasEmJogo[linha, coluna] is Rei &&
+                       _pecasEmJogo[linha, coluna].CorDaPeca == cor)
                     {
                         return new Posicao(linha, coluna);
                     }
@@ -311,10 +324,21 @@ namespace JogoXadrez_WPF
                 }
             }
 
-            string mensagem = VerificaXeque(cor) ? "Xeque Mate" : "Empate";
+            string mensagem = VerificaXeque(cor) ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
             MessageBox.Show(mensagem);
-            
+
+            if(MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                // TODO: Reiniciar aplicação
+            }
+            else
+            {
+                // Fechar a aplicação caso o usuário não queira dispultar uma nova partida
+                Application.Exit();
+            }
+
             return true;
         }
+
     }
 }

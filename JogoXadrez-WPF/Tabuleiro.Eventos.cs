@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JogoXadrez_WPF
+﻿namespace JogoXadrez_WPF
 {
     partial class Tabuleiro
     {

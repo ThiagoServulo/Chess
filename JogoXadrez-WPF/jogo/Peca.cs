@@ -36,7 +36,6 @@ namespace JogoXadrez_WPF
             catch
             {
                 MessageBox.Show("Erro ao buscar imagens das peças");
-                // TODO: Fechar a aplicação se isso acontecer
                 return null; 
             }
         }
