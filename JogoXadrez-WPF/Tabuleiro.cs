@@ -154,7 +154,6 @@ namespace JogoXadrez_WPF
 
         private void ProcessaPictureBoxClick(Posicao posicao)
         {
-            bool mover = false;
             if (_origem != null && _origem.CompareTo(posicao) == 0)
             {
                 MostrarTabuleiro();
@@ -165,28 +164,18 @@ namespace JogoXadrez_WPF
             if (ExistePeca(posicao))
             {
                 Peca peca = AcessarPeca(posicao);
-                if(peca.CorDaPeca == _jogadorAtual)
+                if (peca.CorDaPeca == _jogadorAtual)
                 {
                     _origem = posicao;
                     bool[,] posicoesPossiveis = ChecarMovimentosPossiveis(peca);
                     MostrarTabuleiro(posicoesPossiveis);
-                }
-                else if(_origem != null && !(AcessarPeca(_origem) is Peao))
-                {
-                    mover = true;
-                }
-            }
-            else
-            {
-                if ((_pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightBlue ||
-                    _pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightCyan) &&
-                    _origem != null)
-                {
-                    mover = true;
+                    return;
                 }
             }
 
-            if(mover)
+            if ((_pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightBlue ||
+                _pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightCyan) &&
+                _origem != null)
             {
                 MostrarTabuleiro();
                 ExecutaMovimento(_origem, posicao);
@@ -204,7 +193,7 @@ namespace JogoXadrez_WPF
             peca.IncrementarQuantidadeDeMovimentos();
             Peca pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
-
+            
             // #jogadaespecial en passant
             if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
@@ -212,7 +201,7 @@ namespace JogoXadrez_WPF
                 pecaCapturada = RetirarPeca(posicaoPeao);
                 _pictureBoxes[posicaoPeao.Linha, posicaoPeao.Coluna].Image = null;
             }
-
+            
             if (pecaCapturada != null)
             {
                 if(pecaCapturada.CorDaPeca == Cor.Branco)
@@ -246,7 +235,7 @@ namespace JogoXadrez_WPF
 
         
         private Posicao PegarPosicaoRei(Cor cor)
-        {
+        {           
             for (int coluna = 0; coluna < Colunas; coluna++)
             {
                 for (int linha = 0; linha < Linhas; linha++)

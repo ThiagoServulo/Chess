@@ -49,7 +49,7 @@
                 {
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
-
+                
                 // #jogadaespecial en passant
                 if (PosicaoAtual.Linha == 3)
                 {
