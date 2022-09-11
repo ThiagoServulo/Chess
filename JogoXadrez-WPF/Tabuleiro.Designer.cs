@@ -102,6 +102,7 @@ namespace JogoXadrez_WPF
             this.groupBoxPreto = new System.Windows.Forms.GroupBox();
             this.labelPecasCapturadasPreto = new System.Windows.Forms.Label();
             this.labelJogadorAtual = new System.Windows.Forms.Label();
+            this.labelXeque = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA4)).BeginInit();
@@ -814,7 +815,7 @@ namespace JogoXadrez_WPF
             // 
             this.labelTurno.AutoSize = true;
             this.labelTurno.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTurno.Location = new System.Drawing.Point(372, 26);
+            this.labelTurno.Location = new System.Drawing.Point(372, 14);
             this.labelTurno.Name = "labelTurno";
             this.labelTurno.Size = new System.Drawing.Size(88, 28);
             this.labelTurno.TabIndex = 64;
@@ -864,17 +865,28 @@ namespace JogoXadrez_WPF
             // 
             this.labelJogadorAtual.AutoSize = true;
             this.labelJogadorAtual.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelJogadorAtual.Location = new System.Drawing.Point(317, 67);
+            this.labelJogadorAtual.Location = new System.Drawing.Point(317, 55);
             this.labelJogadorAtual.Name = "labelJogadorAtual";
             this.labelJogadorAtual.Size = new System.Drawing.Size(204, 28);
             this.labelJogadorAtual.TabIndex = 68;
             this.labelJogadorAtual.Text = "Jogador Atual: Branco";
+            // 
+            // labelXeque
+            // 
+            this.labelXeque.AutoSize = true;
+            this.labelXeque.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelXeque.Location = new System.Drawing.Point(324, 99);
+            this.labelXeque.Name = "labelXeque";
+            this.labelXeque.Size = new System.Drawing.Size(183, 28);
+            this.labelXeque.TabIndex = 69;
+            this.labelXeque.Text = "Você está em xeque";
             // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 962);
+            this.Controls.Add(this.labelXeque);
             this.Controls.Add(this.labelJogadorAtual);
             this.Controls.Add(this.groupBoxPreto);
             this.Controls.Add(this.groupBoxBranco);
@@ -1090,6 +1102,7 @@ namespace JogoXadrez_WPF
         private GroupBox groupBoxPreto;
         private Label labelPecasCapturadasPreto;
         private Label labelJogadorAtual;
+        private Label labelXeque;
     }
 }
 

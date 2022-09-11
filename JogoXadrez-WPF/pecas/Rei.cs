@@ -7,13 +7,11 @@
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rei_branco.png" : "rei_preto.png");
         }
 
-        /*
-        private bool TesteTorreParaRoque(Posicao posicao)
+        private bool VerificaTorreDisponivelParaRoque(Posicao posicao)
         {
-            Peca peca = Tab.AcessarPeca(posicao);
-            return ((peca != null) && (peca is Torre) && (peca.CorDaPeca == CorDaPeca) && (peca.QteDeMovimentos == 0));
+            Peca peca = TabuleiroXadrez.AcessarPeca(posicao);
+            return peca is Torre && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
         }
-        */
 
         public override bool[,] MovimentosPossiveis()
         {
@@ -77,36 +75,39 @@
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            /*
             // #jogadaespecial roque
-            if ((QteDeMovimentos == 0) && (!partida.Xeque))
+            if (QuantidadeDeMovimentos == 0 && !TabuleiroXadrez.Xeque)
             {
                 // #jogadaespecial roque pequeno
-                Posicao posTorre1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
-                if (TesteTorreParaRoque(posTorre1))
+                Posicao posicaoTorre1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
+                if (VerificaTorreDisponivelParaRoque(posicaoTorre1))
                 {
+                    // Verifica se as posições entre o Rei e a Torre estão vazias
                     Posicao posicao1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
                     Posicao posicao2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 2);
-                    if ((Tab.AcessarPeca(posicao1) == null) && ((Tab.AcessarPeca(posicao2) == null)))
+                    if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
+                        TabuleiroXadrez.AcessarPeca(posicao2) == null)
                     {
                         matriz[PosicaoAtual.Linha, PosicaoAtual.Coluna + 2] = true;
                     }
                 }
 
                 // #jogadaespecial roque grande
-                Posicao posTorre2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 4);
-                if (TesteTorreParaRoque(posTorre2))
+                Posicao posicaoTorre2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 4);
+                if (VerificaTorreDisponivelParaRoque(posicaoTorre2))
                 {
+                    // Verifica se as posições entre o Rei e a Torre estão vazias
                     Posicao posicao1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
                     Posicao posicao2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 2);
                     Posicao posicao3 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 3);
-                    if ((Tab.AcessarPeca(posicao1) == null) && (Tab.AcessarPeca(posicao2) == null) && (Tab.AcessarPeca(posicao3) == null))
+                    if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
+                        TabuleiroXadrez.AcessarPeca(posicao2) == null &&
+                        TabuleiroXadrez.AcessarPeca(posicao3) == null)
                     {
                         matriz[PosicaoAtual.Linha, PosicaoAtual.Coluna - 2] = true;
                     }
                 }
             }
-            */
 
             return matriz;
         }

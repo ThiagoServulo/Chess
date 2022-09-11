@@ -16,9 +16,11 @@ namespace JogoXadrez_WPF
         private int _turno;
         private int _quantidadeBrancasCapturadas;
         private int _quantidadePretasCapturadas;
+        public bool Xeque;
 
         public Tabuleiro()
         {
+            Xeque = false;
             _quantidadeBrancasCapturadas = 0;
             _quantidadePretasCapturadas = 0;
             _turno = 1;
@@ -35,7 +37,7 @@ namespace JogoXadrez_WPF
                 { pictureBoxF1, pictureBoxF2, pictureBoxF3, pictureBoxF4, pictureBoxF5, pictureBoxF6, pictureBoxF7, pictureBoxF8 },
                 { pictureBoxG1, pictureBoxG2, pictureBoxG3, pictureBoxG4, pictureBoxG5, pictureBoxG6, pictureBoxG7, pictureBoxG8 },
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
-            } ;
+            };
             AtualizaLabels();
             InicializaTabuleiro();
         }
@@ -70,13 +72,18 @@ namespace JogoXadrez_WPF
         private void InicializaTabuleiro()
         {
             MostrarTabuleiro();
-            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 0));
-            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7 , 7));
+            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 4));
+            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7, 4));
             ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
             ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 2));
-            ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 1));
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 4));
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(0, 5));
+            ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(3, 1));
+            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 0));
+            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 7));
+        }
+
+        private void AtualizaLabelXeque()
+        {
+            labelXeque.Text = Xeque ? "Você está em Xeque" : " ";
         }
 
         private void AtualizaLabelJogador()
@@ -100,6 +107,7 @@ namespace JogoXadrez_WPF
             AtualizaLabelJogador();
             AtualizaLabelTurno();
             AtualizaLabelsPecasCapturadas();
+            AtualizaLabelXeque();
         }
         private void IncrementaTurno()
         {
@@ -128,7 +136,7 @@ namespace JogoXadrez_WPF
                 color = (linha % 2 == 0) ? Color.Gray : Color.White;
                 for (int coluna = 0; coluna < Colunas; coluna++)
                 {
-                    _pictureBoxes[linha, coluna].BackColor = posicoesPossiveis[linha, coluna] ? 
+                    _pictureBoxes[linha, coluna].BackColor = posicoesPossiveis[linha, coluna] ?
                         (_pictureBoxes[linha, coluna].BackColor == Color.White ? Color.LightCyan : Color.LightBlue) : color;
                     color = color == Color.White ? Color.Gray : Color.White;
                 }
@@ -182,7 +190,10 @@ namespace JogoXadrez_WPF
                 MudaJogador();
                 IncrementaTurno();
                 _origem = null;
-                VerificaXequeMate(_jogadorAtual);
+                if (Xeque = VerificaXeque(_jogadorAtual))
+                {
+                    VerificaXequeMate(_jogadorAtual);
+                }
                 AtualizaLabels();
             }
         }
@@ -193,7 +204,7 @@ namespace JogoXadrez_WPF
             peca.IncrementarQuantidadeDeMovimentos();
             Peca pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
-            
+
             // #jogadaespecial en passant
             if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
@@ -201,17 +212,10 @@ namespace JogoXadrez_WPF
                 pecaCapturada = RetirarPeca(posicaoPeao);
                 _pictureBoxes[posicaoPeao.Linha, posicaoPeao.Coluna].Image = null;
             }
-            
+
             if (pecaCapturada != null)
             {
-                if(pecaCapturada.CorDaPeca == Cor.Branco)
-                {
-                    _quantidadeBrancasCapturadas++;
-                }
-                else
-                {
-                    _quantidadePretasCapturadas++;
-                }
+                _ = pecaCapturada.CorDaPeca == Cor.Branco ? _quantidadeBrancasCapturadas++ : _quantidadePretasCapturadas++;
                 PecasEmJogo(Cor.Branco);
                 PecasEmJogo(Cor.Preto);
             }
@@ -233,14 +237,13 @@ namespace JogoXadrez_WPF
             return aux;
         }
 
-        
         private Posicao PegarPosicaoRei(Cor cor)
-        {           
+        {
             for (int coluna = 0; coluna < Colunas; coluna++)
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
-                    if(_pecasEmJogo[linha, coluna] != null && 
+                    if (_pecasEmJogo[linha, coluna] != null &&
                        _pecasEmJogo[linha, coluna] is Rei &&
                        _pecasEmJogo[linha, coluna].CorDaPeca == cor)
                     {
@@ -250,7 +253,7 @@ namespace JogoXadrez_WPF
             }
             return null;
         }
-        
+
         public bool VerificaXeque(Cor cor)
         {
             Posicao posicaoRei = PegarPosicaoRei(cor);
@@ -275,7 +278,7 @@ namespace JogoXadrez_WPF
         public bool[,] ChecarMovimentosPossiveis(Peca peca)
         {
             bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
-            for(int coluna = 0; coluna < Colunas; coluna++)
+            for (int coluna = 0; coluna < Colunas; coluna++)
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
@@ -284,7 +287,7 @@ namespace JogoXadrez_WPF
                         _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = null;
                         Peca pecaCapturada = AcessarPeca(linha, coluna);
                         _pecasEmJogo[linha, coluna] = peca;
-                        if(VerificaXeque(peca.CorDaPeca))
+                        if (VerificaXeque(peca.CorDaPeca))
                         {
                             posicoesPossiveis[linha, coluna] = false;
                         }
@@ -301,11 +304,11 @@ namespace JogoXadrez_WPF
             foreach (Peca peca in PecasEmJogo(cor))
             {
                 bool[,] matriz = ChecarMovimentosPossiveis(peca);
-                for(int i = 0; i < Linhas; i++)
+                for (int i = 0; i < Linhas; i++)
                 {
                     for (int j = 0; j < Colunas; j++)
                     {
-                        if(matriz[i, j])
+                        if (matriz[i, j])
                         {
                             return false;
                         }
@@ -313,10 +316,10 @@ namespace JogoXadrez_WPF
                 }
             }
 
-            string mensagem = VerificaXeque(cor) ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
+            string mensagem = Xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
             MessageBox.Show(mensagem);
 
-            if(MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 // TODO: Reiniciar aplicação
             }
