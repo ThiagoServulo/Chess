@@ -71,14 +71,44 @@ namespace JogoXadrez_WPF
 
         private void InicializaTabuleiro()
         {
+            // Inicializa layout tabuleiro
             MostrarTabuleiro();
-            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 4));
-            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7, 4));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 2));
-            ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(3, 1));
+
+            // Coloca as peças brancas
             ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 0));
+            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(7, 1));
+            ColocarPeca(new Bispo(this, Cor.Branco), new Posicao(7, 2));
+            ColocarPeca(new Rainha(this, Cor.Branco), new Posicao(7, 3));
+            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7, 4));
+            ColocarPeca(new Bispo(this, Cor.Branco), new Posicao(7, 5));
+            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(7, 6));
             ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 7));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 7));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 6));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 5));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 4));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 3));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 2));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
+            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 0));
+
+            // Coloca as peças pretas
+            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(0, 0));
+            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 1));
+            ColocarPeca(new Bispo(this, Cor.Preto), new Posicao(0, 2));
+            ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 3));
+            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 4));
+            ColocarPeca(new Bispo(this, Cor.Preto), new Posicao(0, 5));
+            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 6));
+            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(0, 7));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 7));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 6));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 5));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 4));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 3));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 2));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 1));
+            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 0));
         }
 
         private void AtualizaLabelXeque()
@@ -152,6 +182,7 @@ namespace JogoXadrez_WPF
             Peca aux = AcessarPeca(posicao);
             aux.PosicaoAtual = null;
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = null;
+            _pictureBoxes[posicao.Linha, posicao.Coluna].Image = null;
             return aux;
         }
 
@@ -205,12 +236,27 @@ namespace JogoXadrez_WPF
             Peca pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
 
+            // #jogadaespecial roque pequeno
+            if ((peca is Rei) && (destino.Coluna == origem.Coluna + 2))
+            {
+                Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna + 3));
+                torre.IncrementarQuantidadeDeMovimentos();
+                ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna + 1));
+            }
+
+            // #jogadaespecial roque grande
+            if ((peca is Rei) && (destino.Coluna == origem.Coluna - 2))
+            {
+                Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna - 4));
+                torre.IncrementarQuantidadeDeMovimentos();
+                ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna - 1));
+            }
+
             // #jogadaespecial en passant
             if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
                 Posicao posicaoPeao = new Posicao(peca.CorDaPeca == Cor.Branco ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
                 pecaCapturada = RetirarPeca(posicaoPeao);
-                _pictureBoxes[posicaoPeao.Linha, posicaoPeao.Coluna].Image = null;
             }
 
             if (pecaCapturada != null)
@@ -219,7 +265,6 @@ namespace JogoXadrez_WPF
                 PecasEmJogo(Cor.Branco);
                 PecasEmJogo(Cor.Preto);
             }
-            _pictureBoxes[origem.Linha, origem.Coluna].Image = null;
 
             return pecaCapturada;
         }
