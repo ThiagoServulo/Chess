@@ -5,6 +5,7 @@
         public Rei(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rei_branco.png" : "rei_preto.png");
+            //TODO : Não permitir o rei fazer roque caso ja tenha recebido xeque
         }
 
         private bool VerificaTorreDisponivelParaRoque(Posicao posicao)

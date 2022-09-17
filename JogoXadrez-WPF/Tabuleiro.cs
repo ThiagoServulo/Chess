@@ -161,6 +161,11 @@ namespace JogoXadrez_WPF
         private void MostrarTabuleiro(bool[,] posicoesPossiveis)
         {
             Color color;
+
+            // Imprimir o tabuleiro nas cores originais
+            MostrarTabuleiro();
+
+            // Imprimir tabuleiro destacando as possíveis jogadas
             for (int linha = 0; linha < Linhas; linha++)
             {
                 color = (linha % 2 == 0) ? Color.Gray : Color.White;
@@ -231,39 +236,48 @@ namespace JogoXadrez_WPF
 
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
+            // Movimenta a peça da origem para o destino, armazenando a peça capturada
             Peca peca = RetirarPeca(origem);
             peca.IncrementarQuantidadeDeMovimentos();
             Peca pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
 
-            // #jogadaespecial roque pequeno
-            if ((peca is Rei) && (destino.Coluna == origem.Coluna + 2))
+            // Implementação da jogada especial de Promoção
+            if (peca is Peao &&
+                (peca.CorDaPeca == Cor.Branco && destino.Linha == 0) ||
+                (peca.CorDaPeca == Cor.Preto && destino.Linha == 7))
+            {
+                RetirarPeca(destino);
+                ColocarPeca(new Rainha(this, peca.CorDaPeca), destino);
+            }
+            
+            // Implementação da jogada especial Roque Pequeno
+            if (peca is Rei && destino.Coluna == origem.Coluna + 2)
             {
                 Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna + 3));
                 torre.IncrementarQuantidadeDeMovimentos();
                 ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna + 1));
             }
 
-            // #jogadaespecial roque grande
-            if ((peca is Rei) && (destino.Coluna == origem.Coluna - 2))
+            // Implementação da jogada especial Roque Grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
             {
                 Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna - 4));
                 torre.IncrementarQuantidadeDeMovimentos();
                 ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna - 1));
             }
 
-            // #jogadaespecial en passant
+            // Implementação da jogada especial En Passant
             if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
                 Posicao posicaoPeao = new Posicao(peca.CorDaPeca == Cor.Branco ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
                 pecaCapturada = RetirarPeca(posicaoPeao);
             }
 
+            // Incrementa contador de peças capturadas
             if (pecaCapturada != null)
             {
                 _ = pecaCapturada.CorDaPeca == Cor.Branco ? _quantidadeBrancasCapturadas++ : _quantidadePretasCapturadas++;
-                PecasEmJogo(Cor.Branco);
-                PecasEmJogo(Cor.Preto);
             }
 
             return pecaCapturada;
@@ -288,9 +302,7 @@ namespace JogoXadrez_WPF
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
-                    if (_pecasEmJogo[linha, coluna] != null &&
-                       _pecasEmJogo[linha, coluna] is Rei &&
-                       _pecasEmJogo[linha, coluna].CorDaPeca == cor)
+                    if (_pecasEmJogo[linha, coluna] is Rei && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
                     {
                         return new Posicao(linha, coluna);
                     }

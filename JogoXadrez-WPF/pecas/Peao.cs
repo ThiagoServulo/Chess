@@ -33,7 +33,8 @@
                 }
 
                 posicao.DefinirPosicao(PosicaoAtual.Linha - 2, PosicaoAtual.Coluna);
-                if (PosicaoValida(posicao) && Livre(posicao) && QuantidadeDeMovimentos == 0)
+                if (PosicaoValida(posicao) && Livre(posicao) && QuantidadeDeMovimentos == 0 &&
+                    Livre(new Posicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna)))
                 {
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
@@ -85,7 +86,8 @@
                 }
 
                 posicao.DefinirPosicao(PosicaoAtual.Linha + 2, PosicaoAtual.Coluna);
-                if (PosicaoValida(posicao) && Livre(posicao) && QuantidadeDeMovimentos == 0)
+                if (PosicaoValida(posicao) && Livre(posicao) && QuantidadeDeMovimentos == 0 &&
+                    Livre(new Posicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna)))
                 {
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
