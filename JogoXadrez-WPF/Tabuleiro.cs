@@ -147,6 +147,8 @@ namespace JogoXadrez_WPF
         private void MostrarTabuleiro()
         {
             Color color;
+
+            // Imprime o tabuleiro com as cores iniciais
             for (int linha = 0; linha < Linhas; linha++)
             {
                 color = (linha % 2 == 0) ? Color.Gray : Color.White;
@@ -162,7 +164,7 @@ namespace JogoXadrez_WPF
         {
             Color color;
 
-            // Imprimir o tabuleiro nas cores originais
+            // Imprimir o tabuleiro nas cores iniciais
             MostrarTabuleiro();
 
             // Imprimir tabuleiro destacando as possíveis jogadas
@@ -180,14 +182,21 @@ namespace JogoXadrez_WPF
 
         public Peca RetirarPeca(Posicao posicao)
         {
+            // Verifica se existe peça na posição informada
             if (!ExistePeca(posicao))
             {
                 return null;
             }
+
+            // Retira a peça da posição informada
             Peca aux = AcessarPeca(posicao);
             aux.PosicaoAtual = null;
+
+            // Limpa as informações referentes ao campo localizado nesta posição
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = null;
             _pictureBoxes[posicao.Linha, posicao.Coluna].Image = null;
+
+            // Retorna a peça retirada
             return aux;
         }
 
@@ -325,6 +334,7 @@ namespace JogoXadrez_WPF
                 bool[,] matriz = peca.MovimentosPossiveis();
                 if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
                 {
+                    ((Rei)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
                     return true;
                 }
             }

@@ -2,10 +2,12 @@
 {
     class Rei : Peca
     {
+        public bool RecebeuXeque;
+
         public Rei(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rei_branco.png" : "rei_preto.png");
-            //TODO : Não permitir o rei fazer roque caso ja tenha recebido xeque
+            RecebeuXeque = false;
         }
 
         private bool VerificaTorreDisponivelParaRoque(Posicao posicao)
@@ -77,7 +79,7 @@
             }
 
             // #jogadaespecial roque
-            if (QuantidadeDeMovimentos == 0 && !TabuleiroXadrez.Xeque)
+            if (QuantidadeDeMovimentos == 0 && !RecebeuXeque)
             {
                 // #jogadaespecial roque pequeno
                 Posicao posicaoTorre1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
