@@ -5,27 +5,49 @@ using System.Linq;
 
 namespace JogoXadrez_WPF
 {
+    /** ************************************************************************
+    * \brief Informações sobre o tabuleiro.
+    * \details A classe Tabuleiro armazena as informações referentes ao tabuleiro 
+    * do jogo, ou seja, onde as peças serão colocadas.
+    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
+    * \date 20/09/2022
+    * \version v1.0.0
+    ***************************************************************************/
+
     partial class Tabuleiro : Form
     {
+        /// \brief Quantidade de linhas existentes no tabuleiro.
         public int Linhas = 8;
+
+        /// \brief Quantidade de colunas existentes no tabuleiro.
         public int Colunas = 8;
+
+        /// \brief Indica se a partida está em xeque.
+        public bool _xeque;
+
+        /// \brief Matriz contendo todas as peças que estão em jogo.
         private Peca[,] _pecasEmJogo;
+
+        /// \brief Matriz contendo todas os campos do tabuleiro.
         private PictureBox[,] _pictureBoxes;
+
+        /// \brief Posição de origem da jogada atual.
         private Posicao _origem;
+
+        /// \brief Cor do jogador atual.
         private Cor _jogadorAtual;
+
+        /// \brief Número do turno atual.
         private int _turno;
+
+        /// \brief Quantidade de peças brancas capturadas.
         private int _quantidadeBrancasCapturadas;
+
+        /// \brief Quantidade de peças pretas capturadas.
         private int _quantidadePretasCapturadas;
-        public bool Xeque;
 
         public Tabuleiro()
         {
-            Xeque = false;
-            _quantidadeBrancasCapturadas = 0;
-            _quantidadePretasCapturadas = 0;
-            _turno = 1;
-            _jogadorAtual = Cor.Branco;
-            _origem = null;
             InitializeComponent();
             _pecasEmJogo = new Peca[Linhas, Colunas];
             _pictureBoxes = new PictureBox[8, 8] {
@@ -38,12 +60,25 @@ namespace JogoXadrez_WPF
                 { pictureBoxG1, pictureBoxG2, pictureBoxG3, pictureBoxG4, pictureBoxG5, pictureBoxG6, pictureBoxG7, pictureBoxG8 },
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             };
+
+            InicializarNovoJogo();
+        }
+
+        private void InicializarNovoJogo()
+        {
+            _xeque = false;
+            _quantidadeBrancasCapturadas = 0;
+            _quantidadePretasCapturadas = 0;
+            _turno = 1;
+            _jogadorAtual = Cor.Branco;
+            _origem = null;
             AtualizaLabels();
             InicializaTabuleiro();
         }
 
         private void MudaJogador()
         {
+            // Muda o jogador atual
             _jogadorAtual = CorAdversaria(_jogadorAtual);
         }
 
@@ -73,6 +108,16 @@ namespace JogoXadrez_WPF
         {
             // Inicializa layout tabuleiro
             MostrarTabuleiro();
+
+            // Resetando a imagem de todos os Picture Boxes
+            for (int linha = 0; linha < Linhas; linha++)
+            {
+                for (int coluna = 0; coluna < Colunas; coluna++)
+                {
+                    _pecasEmJogo[linha, coluna] = null;
+                    _pictureBoxes[linha, coluna].Image = null;
+                }
+            }
 
             // Coloca as peças brancas
             ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 0));
@@ -113,7 +158,7 @@ namespace JogoXadrez_WPF
 
         private void AtualizaLabelXeque()
         {
-            labelXeque.Text = Xeque ? "Você está em Xeque" : " ";
+            labelXeque.Text = _xeque ? "Você está em Xeque" : " ";
         }
 
         private void AtualizaLabelJogador()
@@ -235,7 +280,7 @@ namespace JogoXadrez_WPF
                 MudaJogador();
                 IncrementaTurno();
                 _origem = null;
-                if (Xeque = VerificaXeque(_jogadorAtual))
+                if (_xeque = VerificaXeque(_jogadorAtual))
                 {
                     VerificaXequeMate(_jogadorAtual);
                 }
@@ -253,8 +298,8 @@ namespace JogoXadrez_WPF
 
             // Implementação da jogada especial de Promoção
             if (peca is Peao &&
-                (peca.CorDaPeca == Cor.Branco && destino.Linha == 0) ||
-                (peca.CorDaPeca == Cor.Preto && destino.Linha == 7))
+                ((peca.CorDaPeca == Cor.Branco && destino.Linha == 0) ||
+                (peca.CorDaPeca == Cor.Preto && destino.Linha == 7)))
             {
                 RetirarPeca(destino);
                 ColocarPeca(new Rainha(this, peca.CorDaPeca), destino);
@@ -383,12 +428,12 @@ namespace JogoXadrez_WPF
                 }
             }
 
-            string mensagem = Xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
+            string mensagem = _xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
             MessageBox.Show(mensagem);
 
             if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                // TODO: Reiniciar aplicação
+                InicializarNovoJogo();
             }
             else
             {
