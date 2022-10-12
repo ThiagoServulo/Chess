@@ -12,7 +12,6 @@ namespace JogoXadrez_WPF
     * \date 20/09/2022
     * \version v1.0.0
     ***************************************************************************/
-
     partial class Tabuleiro : Form
     {
         /// \brief Quantidade de linhas existentes no tabuleiro.
