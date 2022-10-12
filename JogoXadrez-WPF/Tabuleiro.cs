@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace JogoXadrez_WPF
 {
@@ -46,9 +45,16 @@ namespace JogoXadrez_WPF
         /// \brief Quantidade de peças pretas capturadas.
         private int _quantidadePretasCapturadas;
 
+        /** ************************************************************************
+        * \brief Construtor.
+        * \details Construtor da classe Tabuleiro.
+        ***************************************************************************/
         public Tabuleiro()
         {
+            // Inicializa os componentes
             InitializeComponent();
+
+            // Inicializa a matriz de peças do tabuleiro
             _pecasEmJogo = new Peca[Linhas, Colunas];
             _pictureBoxes = new PictureBox[8, 8] {
                 { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
@@ -61,9 +67,15 @@ namespace JogoXadrez_WPF
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             };
 
+            // Inicializa as variáveis e o layout do tabuleiro
             InicializarNovoJogo();
         }
 
+        /** ************************************************************************
+        * \brief Inicializa um novo jogo.
+        * \details Função responsável por inicializar as variáveis e o layout do
+        * tabuleiro para um novo jogo.
+        ***************************************************************************/
         private void InicializarNovoJogo()
         {
             _xeque = false;
@@ -76,27 +88,59 @@ namespace JogoXadrez_WPF
             InicializaTabuleiro();
         }
 
+        /** ************************************************************************
+        * \brief Muda jogador.
+        * \details Função responsável por mudar o jogador atual.
+        ***************************************************************************/
         private void MudaJogador()
         {
-            // Muda o jogador atual
             _jogadorAtual = CorAdversaria(_jogadorAtual);
         }
 
+        /** ************************************************************************
+        * \brief Busca cor adversária.
+        * \details Função responsável por retornar a cor adversária de um determinado
+        * jogador.
+        * \param cor Cor do jogador em que se deseja descobrir o adversário.
+        * \return Cor do jogador adversário.
+        ***************************************************************************/
         private Cor CorAdversaria(Cor cor)
         {
             return cor == Cor.Branco ? Cor.Preto : Cor.Branco;
         }
 
+        /** ************************************************************************
+        * \brief Acessa peça.
+        * \details Função responsável por acessar uma peça que se encontra na posição
+        * informada.
+        * \param linha Linha em que a peça se encontra.
+        * \param coluna Coluna em que a peça se encontra.
+        * \return Peça que está na posição informada.
+        ***************************************************************************/
         public Peca AcessarPeca(int linha, int coluna)
         {
             return _pecasEmJogo[linha, coluna];
         }
 
+        /** ************************************************************************
+        * \brief Acessa peça.
+        * \details Função responsável por acessar uma peça que se encontra na posição
+        * informada.
+        * \param posicao Posição em que a queremos acessar.
+        * \return Peça que está na posição informada.
+        ***************************************************************************/
         public Peca AcessarPeca(Posicao posicao)
         {
             return _pecasEmJogo[posicao.Linha, posicao.Coluna];
         }
 
+        /** ************************************************************************
+        * \brief Colocar peça.
+        * \details Função responsável por colocar uma peça em uma determinada 
+        * posição.
+        * \param peca Peça a ser colocada.
+        * \param posicao Posição onde a peça será colocada.
+        ***************************************************************************/
         public void ColocarPeca(Peca peca, Posicao posicao)
         {
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = peca;
@@ -104,6 +148,11 @@ namespace JogoXadrez_WPF
             _pictureBoxes[posicao.Linha, posicao.Coluna].Image = peca.MostrarImagem();
         }
 
+        /** ************************************************************************
+        * \brief Inicializa tabuleiro.
+        * \details Função responsável por inicializar o tabuleiro, colocando as peças
+        * pretas e brancas em suas posições iniciais.
+        ***************************************************************************/
         private void InicializaTabuleiro()
         {
             // Inicializa layout tabuleiro
@@ -156,27 +205,51 @@ namespace JogoXadrez_WPF
             ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 0));
         }
 
+        /** ************************************************************************
+        * \brief Atualiza o label de xeque.
+        * \details Função responsável por atualizar o label de xeque, indicando se o 
+        * jogador atual está ou não em xeque.
+        ***************************************************************************/
         private void AtualizaLabelXeque()
         {
             labelXeque.Text = _xeque ? "Você está em Xeque" : " ";
         }
 
+        /** ************************************************************************
+        * \brief Atualiza o label do jogador.
+        * \details Função responsável por atualizar o label do jogador, indicando a
+        * cor do jogador atual.
+        ***************************************************************************/
         private void AtualizaLabelJogador()
         {
             labelJogadorAtual.Text = "Jogador atual: " + (_jogadorAtual == Cor.Branco ? "Branco" : "Preto");
         }
 
+        /** ************************************************************************
+        * \brief Atualiza o label de turno.
+        * \details Função responsável por atualizar o label de turno, indicando o 
+        * número do turno atual.
+        ***************************************************************************/
         private void AtualizaLabelTurno()
         {
             labelTurno.Text = $"Turno: {_turno}";
         }
 
+        /** ************************************************************************
+        * \brief Atualiza o label de peças capturadas.
+        * \details Função responsável por atualizar o label de peças capturadas, 
+        * indicando o número de peças capturadas por cada jogador.
+        ***************************************************************************/
         private void AtualizaLabelsPecasCapturadas()
         {
             labelPecasCapturadasBranco.Text = $"Peças capturadas: {_quantidadePretasCapturadas}";
             labelPecasCapturadasPreto.Text = $"Peças capturadas: {_quantidadeBrancasCapturadas}";
         }
 
+        /** ************************************************************************
+        * \brief Atualiza o labels.
+        * \details Função responsável por atualizar todos os labels do tabuleiro.
+        ***************************************************************************/
         private void AtualizaLabels()
         {
             AtualizaLabelJogador();
@@ -184,11 +257,21 @@ namespace JogoXadrez_WPF
             AtualizaLabelsPecasCapturadas();
             AtualizaLabelXeque();
         }
+
+        /** ************************************************************************
+        * \brief Incrementa turno.
+        * \details Função responsável por incrementar o número do turno atual.
+        ***************************************************************************/
         private void IncrementaTurno()
         {
             _turno++;
         }
 
+
+        /** ************************************************************************
+        * \brief Mostra tabuleiro.
+        * \details Função responsável por imprimir o tabuleiro de jogo.
+        ***************************************************************************/
         private void MostrarTabuleiro()
         {
             Color color;
@@ -205,6 +288,13 @@ namespace JogoXadrez_WPF
             }
         }
 
+        /** ************************************************************************
+        * \brief Mostra tabuleiro.
+        * \details Função responsável por imprimir o tabuleiro de jogo, destacando
+        * as posíveis movimentações de uma peça.
+        * \param posicoesPossiveis Posições possíveis que a peça pode assumir e, 
+        * portanto, serão destacadas.
+        ***************************************************************************/
         private void MostrarTabuleiro(bool[,] posicoesPossiveis)
         {
             Color color;
@@ -225,6 +315,12 @@ namespace JogoXadrez_WPF
             }
         }
 
+        /** ************************************************************************
+        * \brief Retira peça.
+        * \details Função responsável por retirar uma peça de uma determinada posição.
+        * \param posicao Posição na qual a peça será retirada.
+        * \return Peça retirada da posição informada.
+        ***************************************************************************/
         public Peca RetirarPeca(Posicao posicao)
         {
             // Verifica se existe peça na posição informada
@@ -245,13 +341,28 @@ namespace JogoXadrez_WPF
             return aux;
         }
 
+        /** ************************************************************************
+        * \brief Veridica se existe peça.
+        * \details Função responsável por verificar se existe peça em uma determinada
+        * posição.
+        * \param posicao Posição na qual será verificado se existe uma peça.
+        * \return 'true' caso exista uma peça na posição informada ou 'false' caso 
+        * não exista.
+        ***************************************************************************/
         public bool ExistePeca(Posicao posicao)
         {
             return AcessarPeca(posicao) != null;
         }
 
+        /** ************************************************************************
+        * \brief Processa o click sobre um campo.
+        * \details Função responsável por processar um click sobre um determinado
+        * 'PictureBox'.
+        * \param posicao Posição do 'PictureBox' que foi clicado.
+        ***************************************************************************/
         private void ProcessaPictureBoxClick(Posicao posicao)
         {
+            // Checa se a origem não é nula e a posição de destino é igual a de origem
             if (_origem != null && _origem.CompareTo(posicao) == 0)
             {
                 MostrarTabuleiro();
@@ -259,18 +370,21 @@ namespace JogoXadrez_WPF
                 return;
             }
 
+            // Verifica se existe peça na posição informada
             if (ExistePeca(posicao))
             {
                 Peca peca = AcessarPeca(posicao);
+
+                // Se a peça for do jogado atual, essa será a origem da jogada
                 if (peca.CorDaPeca == _jogadorAtual)
                 {
                     _origem = posicao;
-                    bool[,] posicoesPossiveis = ChecarMovimentosPossiveis(peca);
-                    MostrarTabuleiro(posicoesPossiveis);
+                    MostrarTabuleiro(ChecarMovimentosPossiveis(peca));
                     return;
                 }
             }
 
+            // Se o campo for uma posição posível de uma peça e a origem não for nula, a jogada pode ser realizada
             if ((_pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightBlue ||
                 _pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == Color.LightCyan) &&
                 _origem != null)
@@ -288,6 +402,14 @@ namespace JogoXadrez_WPF
             }
         }
 
+        /** ************************************************************************
+        * \brief Executa o movimento da peça.
+        * \details Função responsável por executar a movimentação de uma peça.
+        * \param origem Posição de origem da peça.
+        * \param destino Posição de destino da peça.
+        * \return Peça que se encontrava na posição de destino, que foi capturada
+        * pelo jogador.
+        ***************************************************************************/
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             // Movimenta a peça da origem para o destino, armazenando a peça capturada
@@ -337,6 +459,13 @@ namespace JogoXadrez_WPF
             return pecaCapturada;
         }
 
+        /** ************************************************************************
+        * \brief Lista as peças que estão em jogo.
+        * \details Função responsável por informar quais são as peças em jogo de um
+        * determinado jogador.
+        * \param cor Cor do jogador em que se deseja saber as peças que estão em jogo.
+        * \return Um conjunto de peças do jogador informado.
+        ***************************************************************************/
         public HashSet<Peca> PecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
@@ -350,6 +479,13 @@ namespace JogoXadrez_WPF
             return aux;
         }
 
+        /** ************************************************************************
+        * \brief Pega a posição do rei.
+        * \details Função responsável por informar qual a posição do rei de uma 
+        * determinada cor.
+        * \param cor Cor do jogador no qual se deseja saber em que posição está o rei.
+        * \return Posição do rei do jogador informado.
+        ***************************************************************************/
         private Posicao PegarPosicaoRei(Cor cor)
         {
             for (int coluna = 0; coluna < Colunas; coluna++)
@@ -362,9 +498,17 @@ namespace JogoXadrez_WPF
                     }
                 }
             }
-            return null;
+            return null; // Nunca deve acontecer
         }
 
+        /** ************************************************************************
+        * \brief Verifica se o jogador está em xeque.
+        * \details Função responsável por verificar se o jogador de uma determinada 
+        * cor está em xeque.
+        * \param cor Cor do jogador no qual se deseja saber se está em xeque.
+        * \return 'true' se o jogador estiver em xeque, 'false' se não estiver.
+        * \exception System.Exception Lançada quando o rei não estiver no tabuleiro.
+        ***************************************************************************/
         public bool VerificaXeque(Cor cor)
         {
             Posicao posicaoRei = PegarPosicaoRei(cor);
@@ -387,6 +531,13 @@ namespace JogoXadrez_WPF
             return false;
         }
 
+        /** ************************************************************************
+        * \brief Checa as posíveis movimentações de uma peça.
+        * \details Função responsável por checar e listar as posíveis movimentações
+        * de uma determinada peça.
+        * \param peca Peça a ser analisada.
+        * \return Matriz de booleanos indicando quais posições uma peça pode assumir.
+        ***************************************************************************/
         public bool[,] ChecarMovimentosPossiveis(Peca peca)
         {
             bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
@@ -411,23 +562,31 @@ namespace JogoXadrez_WPF
             return posicoesPossiveis;
         }
 
+        /** ************************************************************************
+        * \brief Verifica xeque mate.
+        * \details Função responsável por verificar se um determinado jogador está 
+        * em xeque mate.
+        * \param cor Cor do jogador a ser verificado.
+        * \return 'true' se o jogador estiver em xeque mate, 'false' se não estiver.
+        ***************************************************************************/
         public bool VerificaXequeMate(Cor cor)
         {
             foreach (Peca peca in PecasEmJogo(cor))
             {
                 bool[,] matriz = ChecarMovimentosPossiveis(peca);
-                for (int i = 0; i < Linhas; i++)
+                for (int linha = 0; linha < Linhas; linha++)
                 {
-                    for (int j = 0; j < Colunas; j++)
+                    for (int coluna = 0; coluna < Colunas; coluna++)
                     {
-                        if (matriz[i, j])
+                        if (matriz[linha, coluna])
                         {
                             return false;
                         }
                     }
                 }
             }
-
+            
+            // Mostra o vencedor
             string mensagem = _xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
             MessageBox.Show(mensagem);
 
