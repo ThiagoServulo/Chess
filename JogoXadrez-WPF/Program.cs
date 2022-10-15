@@ -1,19 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JogoXadrez_WPF
 {
     static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
 
-
+        /** ************************************************************************
+        * \brief Função Main.
+        * \details Entry point da aplicação.
+        ***************************************************************************/
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

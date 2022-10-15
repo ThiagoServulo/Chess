@@ -1,19 +1,17 @@
 ﻿using System.Windows.Forms;
-using System.Drawing;
 
 namespace JogoXadrez_WPF
 {
     partial class Tabuleiro
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
+        /// \brief Variável de componentes.
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /** ************************************************************************
+        * \brief Dispose.
+        * \details Função de dispose.
+        * \param disposing Indicador para habilitar o disposing.
+        ***************************************************************************/
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
