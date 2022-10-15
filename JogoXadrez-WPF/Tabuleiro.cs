@@ -393,12 +393,35 @@ namespace JogoXadrez_WPF
                 MudaJogador();
                 IncrementaTurno();
                 _origem = null;
-                if (_xeque = VerificaXeque(_jogadorAtual))
-                {
-                    VerificaXequeMate(_jogadorAtual);
-                }
+                VerificaFimDeJogo();
                 AtualizaLabels();
             }
+        }
+
+        /** ************************************************************************
+        * \brief Verifica fim de jogo.
+        * \details Função responsável por verificar se ocorreu algum evento de fim
+        * de jogo.
+        * \return 'true' se o jogo estiver terminado, 'false' se não.
+        ***************************************************************************/
+        public bool VerificaFimDeJogo()
+        {
+            bool ret;
+
+            // Verifica xeque mate
+            _xeque = VerificaXeque(_jogadorAtual);
+            ret = _xeque ? VerificaXequeMate(_jogadorAtual) : false;
+
+            // Se o jogador tem onde mover
+            ret = ret ? true : !ret && !CorTemOndeMover();
+
+            // Chama a função de fim de jogo caso nescessário
+            if(ret)
+            {
+                FimDoJogo();
+            }
+
+            return ret;
         }
 
         /** ************************************************************************
@@ -584,12 +607,24 @@ namespace JogoXadrez_WPF
                     }
                 }
             }
-            
+
+            return true;
+        }
+
+        /** ************************************************************************
+        * \brief Fim de jogo.
+        * \details Função responsável por processar o fim de jogo, apresentando o 
+        * vencedor ou o empate, além de perguntar se o jogador deseja iniciar um
+        * novo jogo.
+        ***************************************************************************/
+        public void FimDoJogo()
+        {
             // Mostra o vencedor
             string mensagem = _xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
             MessageBox.Show(mensagem);
 
-            if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) 
+                == DialogResult.Yes)
             {
                 InicializarNovoJogo();
             }
@@ -598,9 +633,28 @@ namespace JogoXadrez_WPF
                 // Fechar a aplicação caso o usuário não queira dispultar uma nova partida
                 Application.Exit();
             }
-
-            return true;
         }
 
+        /** ************************************************************************
+        * \brief Verifica se um jogador tem onde mover.
+        * \details Função responsável por verificar se um jogador tem algum movimento
+        * possível.
+        * \return 'true' se o jogador possuir movimentos possíveis, 'false' se não
+        * possuir.
+        ***************************************************************************/
+        public bool CorTemOndeMover()
+        {
+            foreach(Peca peca in PecasEmJogo(_jogadorAtual))
+            {
+                foreach (bool posicao in ChecarMovimentosPossiveis(peca))
+                {
+                    if(posicao)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
