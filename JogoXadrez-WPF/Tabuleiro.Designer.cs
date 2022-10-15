@@ -880,8 +880,7 @@ namespace JogoXadrez_WPF
             // 
             // Tabuleiro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(839, 962);
             this.Controls.Add(this.labelXeque);
             this.Controls.Add(this.labelJogadorAtual);
@@ -952,8 +951,12 @@ namespace JogoXadrez_WPF
             this.Controls.Add(this.pictureBoxA3);
             this.Controls.Add(this.pictureBoxA2);
             this.Controls.Add(this.pictureBoxA1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(855, 1001);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(855, 1001);
             this.Name = "Tabuleiro";
-            this.Text = "Form1";
+            this.Text = "Xadrez";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA4)).EndInit();
