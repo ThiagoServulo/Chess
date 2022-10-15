@@ -9,7 +9,6 @@ namespace JogoXadrez_WPF
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        //public PictureBox[,] PictureBoxes;
 
         /// <summary>
         ///  Clean up any resources being used.
