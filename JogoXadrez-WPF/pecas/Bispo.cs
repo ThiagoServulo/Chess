@@ -21,9 +21,9 @@
 
         /** ************************************************************************
         * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis de
-        * uma peça.
-        * \return Matriz de booleanos indicando as possíveis posições que a peça 
+        * \details Função abstrata responsável por listar os movimentos posíveis do
+        * bispo.
+        * \return Matriz de booleanos indicando as possíveis posições que o bispo 
         * pode assumir após a sua movimentação.
         ***************************************************************************/
         public override bool[,] MovimentosPossiveis()

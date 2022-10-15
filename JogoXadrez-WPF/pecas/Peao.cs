@@ -1,18 +1,16 @@
 ﻿namespace JogoXadrez_WPF
 {
     /** ************************************************************************
-    * \brief Informações sobre o Peão.
-    * \details A classe Peao armazena as informações referentes ao peão, que é 
-    * uma das peças do jogo.
+    * \brief Informações sobre o peão.
+    * \details A classe Peao armazena as informações referentes ao peão.
     * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 20/09/2022
+    * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
     class Peao : Peca
     {
         /** ************************************************************************
-        * \brief Construtor.
-        * \details Construtor da classe Peao.
+        * \brief Construtor da classe Peao.
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
@@ -48,11 +46,11 @@
         }
 
         /** ************************************************************************
-        * \brief Movimentos possíveis.
-        * \details Função responsável por informar as possíveis movimentações que o
-        * peão pode assumir.
-        * \return Matriz de possibilidades com posições que um peão pode assumir em 
-        * uma jogada.
+        * \brief Lista movimentos possíveis.
+        * \details Função abstrata responsável por listar os movimentos posíveis do
+        * peão.
+        * \return Matriz de booleanos indicando as possíveis posições que o peão 
+        * pode assumir após a sua movimentação.
         ***************************************************************************/
         public override bool[,] MovimentosPossiveis()
         {

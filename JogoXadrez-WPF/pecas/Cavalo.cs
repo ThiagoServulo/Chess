@@ -1,12 +1,31 @@
 ﻿namespace JogoXadrez_WPF
 {
+    /** ************************************************************************
+    * \brief Informações sobre o cavalo.
+    * \details A classe Cavalo armazena as informações referentes ao cavalo.
+    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
+    * \date 19/07/2022
+    * \version v1.0.0
+    ***************************************************************************/
     class Cavalo : Peca
     {
+        /** ************************************************************************
+        * \brief Construtor da classe Cavalo.
+        * \param tabuleiro Tabuleiro do jogo.
+        * \param cor Cor da peça.
+        ***************************************************************************/
         public Cavalo(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "cavalo_branco.png" : "cavalo_preto.png");
         }
 
+        /** ************************************************************************
+        * \brief Lista movimentos possíveis.
+        * \details Função abstrata responsável por listar os movimentos posíveis do
+        * cavalo.
+        * \return Matriz de booleanos indicando as possíveis posições que o cavalo 
+        * pode assumir após a sua movimentação.
+        ***************************************************************************/
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
