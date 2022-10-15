@@ -31,7 +31,6 @@ namespace JogoXadrez_WPF
         /// \brief Caminho para a imagem da peça.
         public string FileImagesPath;
 
-
         /** ************************************************************************
         * \brief Construtor da classe Peca.
         * \param tabuleiro Tabuleiro do jogo.
