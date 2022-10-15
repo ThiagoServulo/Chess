@@ -1,8 +1,8 @@
 ﻿namespace JogoXadrez_WPF
 {
     /** ************************************************************************
-    * \brief Informações sobre o rainha.
-    * \details A classe Rainha armazena as informações referentes ao rainha.
+    * \brief Informações sobre a rainha.
+    * \details A classe Rainha armazena as informações referentes a rainha.
     * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
     * \date 19/07/2022
     * \version v1.0.0
