@@ -412,7 +412,7 @@ namespace JogoXadrez_WPF
             _xeque = VerificaXeque(_jogadorAtual);
             ret = _xeque ? VerificaXequeMate(_jogadorAtual) : false;
 
-            // Se o jogador tem onde mover
+            // Verifica empate
             ret = ret ? true : !ret && !CorTemOndeMover();
 
             // Chama a função de fim de jogo caso nescessário
