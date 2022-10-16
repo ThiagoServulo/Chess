@@ -413,7 +413,7 @@ namespace JogoXadrez_WPF
             ret = _xeque ? VerificaXequeMate(_jogadorAtual) : false;
 
             // Verifica empate
-            ret = ret ? true : !ret && !CorTemOndeMover();
+            ret = ret ? true : !ret && (!CorTemOndeMover() || (QuantidadeDePecasEmJogo() <= 2));
 
             // Chama a função de fim de jogo caso nescessário
             if(ret)
@@ -499,6 +499,16 @@ namespace JogoXadrez_WPF
                 }
             }
             return aux;
+        }
+
+        /** ************************************************************************
+        * \brief Informa a quantidade de peças em jogo.
+        * \details Função responsável por informar a quantidade de peças em jogo.
+        * \return Quantidade de peças em jogo.
+        ***************************************************************************/
+        public int QuantidadeDePecasEmJogo()
+        {
+            return PecasEmJogo(Cor.Branco).Count + PecasEmJogo(Cor.Preto).Count;
         }
 
         /** ************************************************************************
