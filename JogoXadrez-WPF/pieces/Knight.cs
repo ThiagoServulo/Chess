@@ -26,56 +26,56 @@
         * \return Matriz de booleanos indicando as possíveis posições que o cavalo 
         * pode assumir após a sua movimentação.
         ***************************************************************************/
-        public override bool[,] MovimentosPossiveis()
+        public override bool[,] PossibleMoves()
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
 
             Position posicao = new Position(0, 0);
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna - 2);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 2);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 2, PosicaoAtual.Coluna - 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 2, CurrentPosition.Coluna - 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 2, PosicaoAtual.Coluna + 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 2, CurrentPosition.Coluna + 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna + 2);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 2);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna + 2);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 2);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 2, PosicaoAtual.Coluna + 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 2, CurrentPosition.Coluna + 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 2, PosicaoAtual.Coluna - 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 2, CurrentPosition.Coluna - 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna - 2);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 2);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }

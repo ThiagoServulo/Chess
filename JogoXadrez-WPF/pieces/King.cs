@@ -34,7 +34,7 @@
         private bool VerificaTorreDisponivelParaRoque(Position posicao)
         {
             Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
-            return peca is Rook && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
+            return peca is Rook && peca.PieceColor == PieceColor && peca.NumberOfMoves == 0;
         }
 
         /** ************************************************************************
@@ -44,98 +44,98 @@
         * \return Matriz de booleanos indicando as possíveis posições que o rei 
         * pode assumir após a sua movimentação.
         ***************************************************************************/
-        public override bool[,] MovimentosPossiveis()
+        public override bool[,] PossibleMoves()
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
 
             Position posicao = new Position(0, 0);
 
             // direção norte (acima)
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção nordeste (diagonal superior direita)
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna + 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção leste (direita)
-            posicao.DefinirPosicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção suldeste (diagonal inferior direita)
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna - 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção sul (abaixo)
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção suldoeste (diagonal inferior esquerda)
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna - 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção oeste (esquerda)
-            posicao.DefinirPosicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // direção noroeste (diagonal superior esquerda)
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna + 1);
-            if (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
+            if (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
 
             // #jogadaespecial roque
-            if (QuantidadeDeMovimentos == 0 && !RecebeuXeque)
+            if (NumberOfMoves == 0 && !RecebeuXeque)
             {
                 // #jogadaespecial roque pequeno
-                Position posicaoTorre1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
+                Position posicaoTorre1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 3);
                 if (VerificaTorreDisponivelParaRoque(posicaoTorre1))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Position posicao1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-                    Position posicao2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 2);
+                    Position posicao1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+                    Position posicao2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 2);
                     if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao2) == null)
                     {
-                        matriz[PosicaoAtual.Linha, PosicaoAtual.Coluna + 2] = true;
+                        matriz[CurrentPosition.Linha, CurrentPosition.Coluna + 2] = true;
                     }
                 }
 
                 // #jogadaespecial roque grande
-                Position posicaoTorre2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 4);
+                Position posicaoTorre2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 4);
                 if (VerificaTorreDisponivelParaRoque(posicaoTorre2))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Position posicao1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-                    Position posicao2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 2);
-                    Position posicao3 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 3);
+                    Position posicao1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+                    Position posicao2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 2);
+                    Position posicao3 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 3);
                     if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao2) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao3) == null)
                     {
-                        matriz[PosicaoAtual.Linha, PosicaoAtual.Coluna - 2] = true;
+                        matriz[CurrentPosition.Linha, CurrentPosition.Coluna - 2] = true;
                     }
                 }
             }

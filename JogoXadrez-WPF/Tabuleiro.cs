@@ -143,7 +143,7 @@ namespace Chess
         public void ColocarPeca(Piece peca, Position posicao)
         {
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = peca;
-            peca.PosicaoAtual = posicao;
+            peca.CurrentPosition = posicao;
             _pictureBoxes[posicao.Linha, posicao.Coluna].Image = peca.MostrarImagem();
         }
 
@@ -330,7 +330,7 @@ namespace Chess
 
             // Retira a peça da posição informada
             Piece aux = AcessarPeca(posicao);
-            aux.PosicaoAtual = null;
+            aux.CurrentPosition = null;
 
             // Limpa as informações referentes ao campo localizado nesta posição
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = null;
@@ -375,7 +375,7 @@ namespace Chess
                 Piece peca = AcessarPeca(posicao);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
-                if (peca.CorDaPeca == _jogadorAtual)
+                if (peca.PieceColor == _jogadorAtual)
                 {
                     _origem = posicao;
                     MostrarTabuleiro(ChecarMovimentosPossiveis(peca));
@@ -436,24 +436,24 @@ namespace Chess
         {
             // Movimenta a peça da origem para o destino, armazenando a peça capturada
             Piece peca = RetirarPeca(origem);
-            peca.IncrementarQuantidadeDeMovimentos();
+            peca.IncrementNumberOfMoves();
             Piece pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
 
             // Implementação da jogada especial de Promoção
             if (peca is Pawn &&
-                ((peca.CorDaPeca == Color.White && destino.Linha == 0) ||
-                (peca.CorDaPeca == Color.Black && destino.Linha == 7)))
+                ((peca.PieceColor == Color.White && destino.Linha == 0) ||
+                (peca.PieceColor == Color.Black && destino.Linha == 7)))
             {
                 RetirarPeca(destino);
-                ColocarPeca(new Queen(this, peca.CorDaPeca), destino);
+                ColocarPeca(new Queen(this, peca.PieceColor), destino);
             }
             
             // Implementação da jogada especial Roque Pequeno
             if (peca is King && destino.Coluna == origem.Coluna + 2)
             {
                 Piece torre = RetirarPeca(new Position(origem.Linha, origem.Coluna + 3));
-                torre.IncrementarQuantidadeDeMovimentos();
+                torre.IncrementNumberOfMoves();
                 ColocarPeca(torre, new Position(origem.Linha, origem.Coluna + 1));
             }
 
@@ -461,21 +461,21 @@ namespace Chess
             if (peca is King && destino.Coluna == origem.Coluna - 2)
             {
                 Piece torre = RetirarPeca(new Position(origem.Linha, origem.Coluna - 4));
-                torre.IncrementarQuantidadeDeMovimentos();
+                torre.IncrementNumberOfMoves();
                 ColocarPeca(torre, new Position(origem.Linha, origem.Coluna - 1));
             }
 
             // Implementação da jogada especial En Passant
             if (peca is Pawn && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
-                Position posicaoPeao = new Position(peca.CorDaPeca == Color.White ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
+                Position posicaoPeao = new Position(peca.PieceColor == Color.White ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
                 pecaCapturada = RetirarPeca(posicaoPeao);
             }
 
             // Incrementa contador de peças capturadas
             if (pecaCapturada != null)
             {
-                _ = pecaCapturada.CorDaPeca == Color.White ? _quantidadeBrancasCapturadas++ : _quantidadePretasCapturadas++;
+                _ = pecaCapturada.PieceColor == Color.White ? _quantidadeBrancasCapturadas++ : _quantidadePretasCapturadas++;
             }
 
             return pecaCapturada;
@@ -493,7 +493,7 @@ namespace Chess
             HashSet<Piece> aux = new HashSet<Piece>();
             foreach (Piece peca in _pecasEmJogo)
             {
-                if (peca != null && peca.CorDaPeca == cor)
+                if (peca != null && peca.PieceColor == cor)
                 {
                     aux.Add(peca);
                 }
@@ -524,7 +524,7 @@ namespace Chess
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
-                    if (_pecasEmJogo[linha, coluna] is King && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
+                    if (_pecasEmJogo[linha, coluna] is King && _pecasEmJogo[linha, coluna].PieceColor == cor)
                     {
                         return new Position(linha, coluna);
                     }
@@ -552,7 +552,7 @@ namespace Chess
 
             foreach (Piece peca in PecasEmJogo(CorAdversaria(cor)))
             {
-                bool[,] matriz = peca.MovimentosPossiveis();
+                bool[,] matriz = peca.PossibleMoves();
                 if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
                 {
                     ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
@@ -572,22 +572,22 @@ namespace Chess
         ***************************************************************************/
         public bool[,] ChecarMovimentosPossiveis(Piece peca)
         {
-            bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
+            bool[,] posicoesPossiveis = peca.PossibleMoves();
             for (int coluna = 0; coluna < Colunas; coluna++)
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
                     if (posicoesPossiveis[linha, coluna])
                     {
-                        _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = null;
+                        _pecasEmJogo[peca.CurrentPosition.Linha, peca.CurrentPosition.Coluna] = null;
                         Piece pecaCapturada = AcessarPeca(linha, coluna);
                         _pecasEmJogo[linha, coluna] = peca;
-                        if (VerificaXeque(peca.CorDaPeca))
+                        if (VerificaXeque(peca.PieceColor))
                         {
                             posicoesPossiveis[linha, coluna] = false;
                         }
                         _pecasEmJogo[linha, coluna] = pecaCapturada;
-                        _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = peca;
+                        _pecasEmJogo[peca.CurrentPosition.Linha, peca.CurrentPosition.Coluna] = peca;
                     }
                 }
             }

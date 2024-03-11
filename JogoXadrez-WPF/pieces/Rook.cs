@@ -26,18 +26,18 @@
         * \return Matriz de booleanos indicando as possíveis posições que a torre
         * pode assumir após a sua movimentação.
         ***************************************************************************/
-        public override bool[,] MovimentosPossiveis()
+        public override bool[,] PossibleMoves()
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
 
             Position posicao = new Position(0, 0);
 
             // direção norte (acima)
-            posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
-            while (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+            while (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).CorDaPeca != CorDaPeca)
+                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
                 {
                     break;
                 }
@@ -45,11 +45,11 @@
             }
 
             // direção sul (abaixo)
-            posicao.DefinirPosicao(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna);
-            while (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+            while (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).CorDaPeca != CorDaPeca)
+                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
                 {
                     break;
                 }
@@ -57,11 +57,11 @@
             }
 
             // direção leste (direita)
-            posicao.DefinirPosicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-            while (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+            while (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).CorDaPeca != CorDaPeca)
+                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
                 {
                     break;
                 }
@@ -69,11 +69,11 @@
             }
 
             // direção oeste (esquerda)
-            posicao.DefinirPosicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-            while (PodeMover(posicao))
+            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+            while (CanMove(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).CorDaPeca != CorDaPeca)
+                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
                 {
                     break;
                 }

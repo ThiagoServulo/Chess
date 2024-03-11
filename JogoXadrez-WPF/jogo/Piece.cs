@@ -17,13 +17,13 @@ namespace Chess
         public Image Imagem;
 
         /// \brief Posição atual da peça.
-        public Position PosicaoAtual { get; set; }
+        public Position CurrentPosition { get; set; }
 
         /// \brief Cor da peça.
-        public Color CorDaPeca { get; protected set; }
+        public Color PieceColor { get; protected set; }
 
         /// \brief Quantidade de movimentações da peça.
-        public int QuantidadeDeMovimentos { get; protected set; }
+        public int NumberOfMoves { get; protected set; }
 
         /// \brief Tabuleiro do jogo.
         public Tabuleiro TabuleiroXadrez { get; protected set; }
@@ -36,13 +36,13 @@ namespace Chess
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Piece(Tabuleiro tabuleiro, Color cor)
+        public Piece(Tabuleiro board, Color color)
         {
             FileImagesPath = Path.GetFullPath("./images");
-            PosicaoAtual = null;
-            TabuleiroXadrez = tabuleiro;
-            CorDaPeca = cor;
-            QuantidadeDeMovimentos = 0;
+            CurrentPosition = null;
+            TabuleiroXadrez = board;
+            PieceColor = color;
+            NumberOfMoves = 0;
         }
 
         /** ************************************************************************
@@ -62,15 +62,15 @@ namespace Chess
         * \return Imagem refrente a peça.
         * \exception System.Exception Lançada o path de imagens não for encontrado.
         ***************************************************************************/
-        public Image BuscarImagem(string imagem)
+        public Image BuscarImagem(string image)
         {
             try
             {
-                return Image.FromFile($"{FileImagesPath}/{imagem}");
+                return Image.FromFile($"{FileImagesPath}/{image}");
             }
             catch
             {
-                throw new System.Exception("Erro ao buscar imagens das peças");
+                throw new System.Exception("Error while fetching piece images");
             }
         }
 
@@ -79,9 +79,9 @@ namespace Chess
         * \details Função responsável por incrementar a  quantidade de movimentos da
         * peça.
         ***************************************************************************/
-        public void IncrementarQuantidadeDeMovimentos()
+        public void IncrementNumberOfMoves()
         {
-            QuantidadeDeMovimentos++;
+            NumberOfMoves++;
         }
 
         /** ************************************************************************
@@ -91,9 +91,9 @@ namespace Chess
         * \param posicao Posição a ser verificada.
         * \return 'true' se a posição for válida, 'false' se for inválida.
         ***************************************************************************/
-        public bool PosicaoValida(Position posicao)
+        public bool ValidPosition(Position position)
         {
-            return posicao.Linha <= 7 && posicao.Linha >= 0 && posicao.Coluna <= 7 && posicao.Coluna >= 0;
+            return position.Linha <= 7 && position.Linha >= 0 && position.Coluna <= 7 && position.Coluna >= 0;
         }
 
         /** ************************************************************************
@@ -104,12 +104,12 @@ namespace Chess
         * \return 'true' se a peça puder ser movida para a posição informada, 'false' 
         * se não.
         ***************************************************************************/
-        public bool PodeMover(Position posicao)
+        public bool CanMove(Position position)
         {
-            if (PosicaoValida(posicao))
+            if (ValidPosition(position))
             {
-                Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
-                return (peca == null || peca.CorDaPeca != CorDaPeca);
+                Piece piece = TabuleiroXadrez.AcessarPeca(position);
+                return (piece == null || piece.PieceColor != PieceColor);
             }
             return false;
         }
@@ -121,7 +121,7 @@ namespace Chess
         * \return Matriz de booleanos indicando as possíveis posições que a peça 
         * pode assumir após a sua movimentação.
         ***************************************************************************/
-        public abstract bool[,] MovimentosPossiveis();
+        public abstract bool[,] PossibleMoves();
 
     }
 }
