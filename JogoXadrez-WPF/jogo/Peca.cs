@@ -38,7 +38,7 @@ namespace Chess
         ***************************************************************************/
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
-            FileImagesPath = Path.GetFullPath("./imagens");
+            FileImagesPath = Path.GetFullPath("./images");
             PosicaoAtual = null;
             TabuleiroXadrez = tabuleiro;
             CorDaPeca = cor;
