@@ -7,14 +7,14 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Peao : Peca
+    class Pawn : Peca
     {
         /** ************************************************************************
         * \brief Construtor da classe Peao.
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Peao(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
+        public Pawn(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "peao_branco.png" : "peao_preto.png");
         }
@@ -93,7 +93,7 @@
                     {
                         Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
                         Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
-                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
                             matriz[esquerda.Linha - 1, esquerda.Coluna] = true;
                         }
@@ -104,7 +104,7 @@
                     {
                         Peca peca = TabuleiroXadrez.AcessarPeca(direita);
                         Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
-                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
                             matriz[direita.Linha - 1, direita.Coluna] = true;
                         }
@@ -146,7 +146,7 @@
                     {
                         Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
                         Posicao destino = new Posicao(esquerda.Linha + 1, esquerda.Coluna);
-                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
                             matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
                         }
@@ -157,7 +157,7 @@
                     {
                         Peca peca = TabuleiroXadrez.AcessarPeca(direita);
                         Posicao destino = new Posicao(direita.Linha + 1, direita.Coluna);
-                        if (peca is Peao && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
                             matriz[direita.Linha + 1, direita.Coluna] = true;
                         }

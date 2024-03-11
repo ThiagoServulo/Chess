@@ -7,7 +7,7 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Rei : Peca
+    class King : Peca
     {
         /// \brief Indica se o rei já recebu xeque.
         public bool RecebeuXeque;
@@ -17,7 +17,7 @@
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Rei(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
+        public King(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rei_branco.png" : "rei_preto.png");
             RecebeuXeque = false;
@@ -34,7 +34,7 @@
         private bool VerificaTorreDisponivelParaRoque(Posicao posicao)
         {
             Peca peca = TabuleiroXadrez.AcessarPeca(posicao);
-            return peca is Torre && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
+            return peca is Rook && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
         }
 
         /** ************************************************************************

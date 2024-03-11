@@ -7,14 +7,14 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Bispo : Peca
+    class Bishop : Peca
     {
         /** ************************************************************************
         * \brief Construtor da classe Bispo.
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Bispo(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
+        public Bishop(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "bispo_branco.png" : "bispo_preto.png");
         }

@@ -168,40 +168,40 @@ namespace Chess
             }
 
             // Coloca as peças brancas
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 0));
-            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(7, 1));
-            ColocarPeca(new Bispo(this, Cor.Branco), new Posicao(7, 2));
-            ColocarPeca(new Rainha(this, Cor.Branco), new Posicao(7, 3));
-            ColocarPeca(new Rei(this, Cor.Branco), new Posicao(7, 4));
-            ColocarPeca(new Bispo(this, Cor.Branco), new Posicao(7, 5));
-            ColocarPeca(new Cavalo(this, Cor.Branco), new Posicao(7, 6));
-            ColocarPeca(new Torre(this, Cor.Branco), new Posicao(7, 7));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 7));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 6));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 5));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 4));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 3));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 2));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 1));
-            ColocarPeca(new Peao(this, Cor.Branco), new Posicao(6, 0));
+            ColocarPeca(new Rook(this, Cor.Branco), new Posicao(7, 0));
+            ColocarPeca(new Knight(this, Cor.Branco), new Posicao(7, 1));
+            ColocarPeca(new Bishop(this, Cor.Branco), new Posicao(7, 2));
+            ColocarPeca(new Queen(this, Cor.Branco), new Posicao(7, 3));
+            ColocarPeca(new King(this, Cor.Branco), new Posicao(7, 4));
+            ColocarPeca(new Bishop(this, Cor.Branco), new Posicao(7, 5));
+            ColocarPeca(new Knight(this, Cor.Branco), new Posicao(7, 6));
+            ColocarPeca(new Rook(this, Cor.Branco), new Posicao(7, 7));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 7));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 6));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 5));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 4));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 3));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 2));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 1));
+            ColocarPeca(new Pawn(this, Cor.Branco), new Posicao(6, 0));
 
             // Coloca as peças pretas
-            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(0, 0));
-            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 1));
-            ColocarPeca(new Bispo(this, Cor.Preto), new Posicao(0, 2));
-            ColocarPeca(new Rainha(this, Cor.Preto), new Posicao(0, 3));
-            ColocarPeca(new Rei(this, Cor.Preto), new Posicao(0, 4));
-            ColocarPeca(new Bispo(this, Cor.Preto), new Posicao(0, 5));
-            ColocarPeca(new Cavalo(this, Cor.Preto), new Posicao(0, 6));
-            ColocarPeca(new Torre(this, Cor.Preto), new Posicao(0, 7));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 7));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 6));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 5));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 4));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 3));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 2));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 1));
-            ColocarPeca(new Peao(this, Cor.Preto), new Posicao(1, 0));
+            ColocarPeca(new Rook(this, Cor.Preto), new Posicao(0, 0));
+            ColocarPeca(new Knight(this, Cor.Preto), new Posicao(0, 1));
+            ColocarPeca(new Bishop(this, Cor.Preto), new Posicao(0, 2));
+            ColocarPeca(new Queen(this, Cor.Preto), new Posicao(0, 3));
+            ColocarPeca(new King(this, Cor.Preto), new Posicao(0, 4));
+            ColocarPeca(new Bishop(this, Cor.Preto), new Posicao(0, 5));
+            ColocarPeca(new Knight(this, Cor.Preto), new Posicao(0, 6));
+            ColocarPeca(new Rook(this, Cor.Preto), new Posicao(0, 7));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 7));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 6));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 5));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 4));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 3));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 2));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 1));
+            ColocarPeca(new Pawn(this, Cor.Preto), new Posicao(1, 0));
         }
 
         /** ************************************************************************
@@ -441,16 +441,16 @@ namespace Chess
             ColocarPeca(peca, destino);
 
             // Implementação da jogada especial de Promoção
-            if (peca is Peao &&
+            if (peca is Pawn &&
                 ((peca.CorDaPeca == Cor.Branco && destino.Linha == 0) ||
                 (peca.CorDaPeca == Cor.Preto && destino.Linha == 7)))
             {
                 RetirarPeca(destino);
-                ColocarPeca(new Rainha(this, peca.CorDaPeca), destino);
+                ColocarPeca(new Queen(this, peca.CorDaPeca), destino);
             }
             
             // Implementação da jogada especial Roque Pequeno
-            if (peca is Rei && destino.Coluna == origem.Coluna + 2)
+            if (peca is King && destino.Coluna == origem.Coluna + 2)
             {
                 Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna + 3));
                 torre.IncrementarQuantidadeDeMovimentos();
@@ -458,7 +458,7 @@ namespace Chess
             }
 
             // Implementação da jogada especial Roque Grande
-            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
+            if (peca is King && destino.Coluna == origem.Coluna - 2)
             {
                 Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna - 4));
                 torre.IncrementarQuantidadeDeMovimentos();
@@ -466,7 +466,7 @@ namespace Chess
             }
 
             // Implementação da jogada especial En Passant
-            if (peca is Peao && origem.Coluna != destino.Coluna && pecaCapturada == null)
+            if (peca is Pawn && origem.Coluna != destino.Coluna && pecaCapturada == null)
             {
                 Posicao posicaoPeao = new Posicao(peca.CorDaPeca == Cor.Branco ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
                 pecaCapturada = RetirarPeca(posicaoPeao);
@@ -524,7 +524,7 @@ namespace Chess
             {
                 for (int linha = 0; linha < Linhas; linha++)
                 {
-                    if (_pecasEmJogo[linha, coluna] is Rei && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
+                    if (_pecasEmJogo[linha, coluna] is King && _pecasEmJogo[linha, coluna].CorDaPeca == cor)
                     {
                         return new Posicao(linha, coluna);
                     }
@@ -555,7 +555,7 @@ namespace Chess
                 bool[,] matriz = peca.MovimentosPossiveis();
                 if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
                 {
-                    ((Rei)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
+                    ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
                     return true;
                 }
             }

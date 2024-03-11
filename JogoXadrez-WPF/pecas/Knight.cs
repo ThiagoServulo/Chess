@@ -7,14 +7,14 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Cavalo : Peca
+    class Knight : Peca
     {
         /** ************************************************************************
         * \brief Construtor da classe Cavalo.
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Cavalo(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
+        public Knight(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "cavalo_branco.png" : "cavalo_preto.png");
         }
