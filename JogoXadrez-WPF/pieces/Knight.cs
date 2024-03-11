@@ -30,7 +30,7 @@
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Position posicao = new Position(0, 0);
 
             posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna - 2);
             if (PodeMover(posicao))

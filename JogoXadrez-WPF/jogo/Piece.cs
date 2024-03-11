@@ -17,7 +17,7 @@ namespace Chess
         public Image Imagem;
 
         /// \brief Posição atual da peça.
-        public Posicao PosicaoAtual { get; set; }
+        public Position PosicaoAtual { get; set; }
 
         /// \brief Cor da peça.
         public Color CorDaPeca { get; protected set; }
@@ -91,7 +91,7 @@ namespace Chess
         * \param posicao Posição a ser verificada.
         * \return 'true' se a posição for válida, 'false' se for inválida.
         ***************************************************************************/
-        public bool PosicaoValida(Posicao posicao)
+        public bool PosicaoValida(Position posicao)
         {
             return posicao.Linha <= 7 && posicao.Linha >= 0 && posicao.Coluna <= 7 && posicao.Coluna >= 0;
         }
@@ -104,7 +104,7 @@ namespace Chess
         * \return 'true' se a peça puder ser movida para a posição informada, 'false' 
         * se não.
         ***************************************************************************/
-        public bool PodeMover(Posicao posicao)
+        public bool PodeMover(Position posicao)
         {
             if (PosicaoValida(posicao))
             {

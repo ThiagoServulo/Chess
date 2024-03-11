@@ -31,7 +31,7 @@
         * \return 'true' - se a jogada de roque for possível, 'false' se não for
         * possível.
         ***************************************************************************/
-        private bool VerificaTorreDisponivelParaRoque(Posicao posicao)
+        private bool VerificaTorreDisponivelParaRoque(Position posicao)
         {
             Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
             return peca is Rook && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
@@ -48,7 +48,7 @@
         {
             bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Position posicao = new Position(0, 0);
 
             // direção norte (acima)
             posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
@@ -110,12 +110,12 @@
             if (QuantidadeDeMovimentos == 0 && !RecebeuXeque)
             {
                 // #jogadaespecial roque pequeno
-                Posicao posicaoTorre1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
+                Position posicaoTorre1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 3);
                 if (VerificaTorreDisponivelParaRoque(posicaoTorre1))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Posicao posicao1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-                    Posicao posicao2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 2);
+                    Position posicao1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
+                    Position posicao2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna + 2);
                     if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao2) == null)
                     {
@@ -124,13 +124,13 @@
                 }
 
                 // #jogadaespecial roque grande
-                Posicao posicaoTorre2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 4);
+                Position posicaoTorre2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 4);
                 if (VerificaTorreDisponivelParaRoque(posicaoTorre2))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Posicao posicao1 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-                    Posicao posicao2 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 2);
-                    Posicao posicao3 = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 3);
+                    Position posicao1 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
+                    Position posicao2 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 2);
+                    Position posicao3 = new Position(PosicaoAtual.Linha, PosicaoAtual.Coluna - 3);
                     if (TabuleiroXadrez.AcessarPeca(posicao1) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao2) == null &&
                         TabuleiroXadrez.AcessarPeca(posicao3) == null)

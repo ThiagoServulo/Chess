@@ -8,7 +8,7 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Posicao : System.IComparable
+    class Position : System.IComparable
     {
         /// \brief Número da linha refrente a posição.
         public int Linha { get; set; }
@@ -21,7 +21,7 @@
         * \param linha Número da linha.
         * \param coluna Número da coluna.
         ***************************************************************************/
-        public Posicao(int linha, int coluna)
+        public Position(int linha, int coluna)
         {
             DefinirPosicao(linha, coluna);
         }
@@ -47,7 +47,7 @@
         ***************************************************************************/
         public int CompareTo(object obj)
         {
-            Posicao other = obj as Posicao;
+            Position other = obj as Position;
             return other.Linha == Linha && other.Coluna == Coluna ? 0 : 1;
         }
 
