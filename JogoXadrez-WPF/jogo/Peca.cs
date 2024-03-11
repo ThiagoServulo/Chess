@@ -20,7 +20,7 @@ namespace Chess
         public Posicao PosicaoAtual { get; set; }
 
         /// \brief Cor da peça.
-        public Cor CorDaPeca { get; protected set; }
+        public Color CorDaPeca { get; protected set; }
 
         /// \brief Quantidade de movimentações da peça.
         public int QuantidadeDeMovimentos { get; protected set; }
@@ -36,7 +36,7 @@ namespace Chess
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Peca(Tabuleiro tabuleiro, Cor cor)
+        public Peca(Tabuleiro tabuleiro, Color cor)
         {
             FileImagesPath = Path.GetFullPath("./images");
             PosicaoAtual = null;

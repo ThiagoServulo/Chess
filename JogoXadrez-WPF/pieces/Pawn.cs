@@ -14,9 +14,9 @@
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Pawn(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
+        public Pawn(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_pawn.png" : "black_pawn.png");
+            Imagem = BuscarImagem(corDaPeca == Color.White ? "white_pawn.png" : "black_pawn.png");
         }
 
         /** ************************************************************************
@@ -58,7 +58,7 @@
 
             Posicao posicao = new Posicao(0, 0);
 
-            if (CorDaPeca == Cor.Branco)
+            if (CorDaPeca == Color.White)
             {
                 posicao.DefinirPosicao(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
                 if (PosicaoValida(posicao) && Livre(posicao))
