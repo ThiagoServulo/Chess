@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Collections.Generic;
 
-namespace JogoXadrez_WPF
+namespace Chess
 {
     /** ************************************************************************
     * \brief Informações sobre o tabuleiro.

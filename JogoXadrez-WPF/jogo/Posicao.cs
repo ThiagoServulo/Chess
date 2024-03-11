@@ -1,4 +1,4 @@
-﻿namespace JogoXadrez_WPF
+﻿namespace Chess
 {
     /** ************************************************************************
     * \brief Informações sobre a posição.

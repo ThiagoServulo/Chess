@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace JogoXadrez_WPF
+namespace Chess
 {
     static class Program
     {

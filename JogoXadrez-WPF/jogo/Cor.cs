@@ -1,4 +1,4 @@
-﻿namespace JogoXadrez_WPF
+﻿namespace Chess
 {
     enum Cor
     {

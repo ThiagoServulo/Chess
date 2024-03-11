@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 
-namespace JogoXadrez_WPF
+namespace Chess
 {
     /** ************************************************************************
     * \brief Informações sobre a peça.

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace JogoXadrez_WPF
+namespace Chess
 {
     partial class Tabuleiro
     {
