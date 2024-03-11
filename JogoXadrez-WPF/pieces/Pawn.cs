@@ -7,7 +7,7 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class Pawn : Peca
+    class Pawn : Piece
     {
         /** ************************************************************************
         * \brief Construtor da classe Peao.
@@ -29,7 +29,7 @@
         ***************************************************************************/
         private bool ExisteInimigo(Posicao posicao)
         {
-            Peca peca = TabuleiroXadrez.AcessarPeca(posicao);
+            Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
             return (peca != null && peca.CorDaPeca != CorDaPeca);
         }
 
@@ -91,7 +91,7 @@
                     Posicao esquerda = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
                     if (PosicaoValida(esquerda) && ExisteInimigo(esquerda))
                     {
-                        Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Piece peca = TabuleiroXadrez.AcessarPeca(esquerda);
                         Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
                         if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
@@ -102,7 +102,7 @@
                     Posicao direita = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
                     if (PosicaoValida(direita) && ExisteInimigo(direita))
                     {
-                        Peca peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Piece peca = TabuleiroXadrez.AcessarPeca(direita);
                         Posicao destino = new Posicao(esquerda.Linha - 1, esquerda.Coluna);
                         if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
@@ -144,7 +144,7 @@
                     Posicao esquerda = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
                     if (PosicaoValida(esquerda) && ExisteInimigo(esquerda))
                     {
-                        Peca peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Piece peca = TabuleiroXadrez.AcessarPeca(esquerda);
                         Posicao destino = new Posicao(esquerda.Linha + 1, esquerda.Coluna);
                         if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {
@@ -155,7 +155,7 @@
                     Posicao direita = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
                     if (PosicaoValida(direita) && ExisteInimigo(direita))
                     {
-                        Peca peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Piece peca = TabuleiroXadrez.AcessarPeca(direita);
                         Posicao destino = new Posicao(direita.Linha + 1, direita.Coluna);
                         if (peca is Pawn && peca.QuantidadeDeMovimentos == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
                         {

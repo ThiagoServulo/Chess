@@ -11,7 +11,7 @@ namespace Chess
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    abstract class Peca
+    abstract class Piece
     {
         /// \brief Imagem referente a peça.
         public Image Imagem;
@@ -36,7 +36,7 @@ namespace Chess
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Peca(Tabuleiro tabuleiro, Color cor)
+        public Piece(Tabuleiro tabuleiro, Color cor)
         {
             FileImagesPath = Path.GetFullPath("./images");
             PosicaoAtual = null;
@@ -108,7 +108,7 @@ namespace Chess
         {
             if (PosicaoValida(posicao))
             {
-                Peca peca = TabuleiroXadrez.AcessarPeca(posicao);
+                Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
                 return (peca == null || peca.CorDaPeca != CorDaPeca);
             }
             return false;

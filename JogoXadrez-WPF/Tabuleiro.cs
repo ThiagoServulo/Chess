@@ -24,7 +24,7 @@ namespace Chess
         public bool _xeque;
 
         /// \brief Matriz contendo todas as peças que estão em jogo.
-        private Peca[,] _pecasEmJogo;
+        private Piece[,] _pecasEmJogo;
 
         /// \brief Matriz contendo todas os campos do tabuleiro.
         private PictureBox[,] _pictureBoxes;
@@ -54,7 +54,7 @@ namespace Chess
             InitializeComponent();
 
             // Inicializa a matriz de peças do tabuleiro
-            _pecasEmJogo = new Peca[Linhas, Colunas];
+            _pecasEmJogo = new Piece[Linhas, Colunas];
             _pictureBoxes = new PictureBox[8, 8] {
                 { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
                 { pictureBoxB1, pictureBoxB2, pictureBoxB3, pictureBoxB4, pictureBoxB5, pictureBoxB6, pictureBoxB7, pictureBoxB8 },
@@ -116,7 +116,7 @@ namespace Chess
         * \param coluna Coluna em que a peça se encontra.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Peca AcessarPeca(int linha, int coluna)
+        public Piece AcessarPeca(int linha, int coluna)
         {
             return _pecasEmJogo[linha, coluna];
         }
@@ -128,7 +128,7 @@ namespace Chess
         * \param posicao Posição em que a queremos acessar.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Peca AcessarPeca(Posicao posicao)
+        public Piece AcessarPeca(Posicao posicao)
         {
             return _pecasEmJogo[posicao.Linha, posicao.Coluna];
         }
@@ -140,7 +140,7 @@ namespace Chess
         * \param peca Peça a ser colocada.
         * \param posicao Posição onde a peça será colocada.
         ***************************************************************************/
-        public void ColocarPeca(Peca peca, Posicao posicao)
+        public void ColocarPeca(Piece peca, Posicao posicao)
         {
             _pecasEmJogo[posicao.Linha, posicao.Coluna] = peca;
             peca.PosicaoAtual = posicao;
@@ -320,7 +320,7 @@ namespace Chess
         * \param posicao Posição na qual a peça será retirada.
         * \return Peça retirada da posição informada.
         ***************************************************************************/
-        public Peca RetirarPeca(Posicao posicao)
+        public Piece RetirarPeca(Posicao posicao)
         {
             // Verifica se existe peça na posição informada
             if (!ExistePeca(posicao))
@@ -329,7 +329,7 @@ namespace Chess
             }
 
             // Retira a peça da posição informada
-            Peca aux = AcessarPeca(posicao);
+            Piece aux = AcessarPeca(posicao);
             aux.PosicaoAtual = null;
 
             // Limpa as informações referentes ao campo localizado nesta posição
@@ -372,7 +372,7 @@ namespace Chess
             // Verifica se existe peça na posição informada
             if (ExistePeca(posicao))
             {
-                Peca peca = AcessarPeca(posicao);
+                Piece peca = AcessarPeca(posicao);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
                 if (peca.CorDaPeca == _jogadorAtual)
@@ -432,12 +432,12 @@ namespace Chess
         * \return Peça que se encontrava na posição de destino, que foi capturada
         * pelo jogador.
         ***************************************************************************/
-        public Peca ExecutaMovimento(Posicao origem, Posicao destino)
+        public Piece ExecutaMovimento(Posicao origem, Posicao destino)
         {
             // Movimenta a peça da origem para o destino, armazenando a peça capturada
-            Peca peca = RetirarPeca(origem);
+            Piece peca = RetirarPeca(origem);
             peca.IncrementarQuantidadeDeMovimentos();
-            Peca pecaCapturada = RetirarPeca(destino);
+            Piece pecaCapturada = RetirarPeca(destino);
             ColocarPeca(peca, destino);
 
             // Implementação da jogada especial de Promoção
@@ -452,7 +452,7 @@ namespace Chess
             // Implementação da jogada especial Roque Pequeno
             if (peca is King && destino.Coluna == origem.Coluna + 2)
             {
-                Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna + 3));
+                Piece torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna + 3));
                 torre.IncrementarQuantidadeDeMovimentos();
                 ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna + 1));
             }
@@ -460,7 +460,7 @@ namespace Chess
             // Implementação da jogada especial Roque Grande
             if (peca is King && destino.Coluna == origem.Coluna - 2)
             {
-                Peca torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna - 4));
+                Piece torre = RetirarPeca(new Posicao(origem.Linha, origem.Coluna - 4));
                 torre.IncrementarQuantidadeDeMovimentos();
                 ColocarPeca(torre, new Posicao(origem.Linha, origem.Coluna - 1));
             }
@@ -488,10 +488,10 @@ namespace Chess
         * \param cor Cor do jogador em que se deseja saber as peças que estão em jogo.
         * \return Um conjunto de peças do jogador informado.
         ***************************************************************************/
-        public HashSet<Peca> PecasEmJogo(Color cor)
+        public HashSet<Piece> PecasEmJogo(Color cor)
         {
-            HashSet<Peca> aux = new HashSet<Peca>();
-            foreach (Peca peca in _pecasEmJogo)
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach (Piece peca in _pecasEmJogo)
             {
                 if (peca != null && peca.CorDaPeca == cor)
                 {
@@ -550,7 +550,7 @@ namespace Chess
                 throw new System.Exception($"Não tem rei da cor: {cor} no tabuleiro");
             }
 
-            foreach (Peca peca in PecasEmJogo(CorAdversaria(cor)))
+            foreach (Piece peca in PecasEmJogo(CorAdversaria(cor)))
             {
                 bool[,] matriz = peca.MovimentosPossiveis();
                 if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
@@ -570,7 +570,7 @@ namespace Chess
         * \param peca Peça a ser analisada.
         * \return Matriz de booleanos indicando quais posições uma peça pode assumir.
         ***************************************************************************/
-        public bool[,] ChecarMovimentosPossiveis(Peca peca)
+        public bool[,] ChecarMovimentosPossiveis(Piece peca)
         {
             bool[,] posicoesPossiveis = peca.MovimentosPossiveis();
             for (int coluna = 0; coluna < Colunas; coluna++)
@@ -580,7 +580,7 @@ namespace Chess
                     if (posicoesPossiveis[linha, coluna])
                     {
                         _pecasEmJogo[peca.PosicaoAtual.Linha, peca.PosicaoAtual.Coluna] = null;
-                        Peca pecaCapturada = AcessarPeca(linha, coluna);
+                        Piece pecaCapturada = AcessarPeca(linha, coluna);
                         _pecasEmJogo[linha, coluna] = peca;
                         if (VerificaXeque(peca.CorDaPeca))
                         {
@@ -603,7 +603,7 @@ namespace Chess
         ***************************************************************************/
         public bool VerificaXequeMate(Color cor)
         {
-            foreach (Peca peca in PecasEmJogo(cor))
+            foreach (Piece peca in PecasEmJogo(cor))
             {
                 bool[,] matriz = ChecarMovimentosPossiveis(peca);
                 for (int linha = 0; linha < Linhas; linha++)
@@ -654,7 +654,7 @@ namespace Chess
         ***************************************************************************/
         public bool CorTemOndeMover()
         {
-            foreach(Peca peca in PecasEmJogo(_jogadorAtual))
+            foreach(Piece peca in PecasEmJogo(_jogadorAtual))
             {
                 foreach (bool posicao in ChecarMovimentosPossiveis(peca))
                 {

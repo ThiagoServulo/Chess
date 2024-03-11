@@ -7,7 +7,7 @@
     * \date 19/07/2022
     * \version v1.0.0
     ***************************************************************************/
-    class King : Peca
+    class King : Piece
     {
         /// \brief Indica se o rei já recebu xeque.
         public bool RecebeuXeque;
@@ -33,7 +33,7 @@
         ***************************************************************************/
         private bool VerificaTorreDisponivelParaRoque(Posicao posicao)
         {
-            Peca peca = TabuleiroXadrez.AcessarPeca(posicao);
+            Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
             return peca is Rook && peca.CorDaPeca == CorDaPeca && peca.QuantidadeDeMovimentos == 0;
         }
 
