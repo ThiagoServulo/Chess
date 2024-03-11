@@ -19,7 +19,7 @@
         ***************************************************************************/
         public King(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rei_branco.png" : "rei_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_king.png" : "black_king.png");
             RecebeuXeque = false;
         }
 

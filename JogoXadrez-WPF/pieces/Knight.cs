@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Knight(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "cavalo_branco.png" : "cavalo_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_knight.png" : "black_knight.png");
         }
 
         /** ************************************************************************

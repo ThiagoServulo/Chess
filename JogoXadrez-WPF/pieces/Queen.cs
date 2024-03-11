@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Queen(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "rainha_branco.png" : "rainha_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_queen.png" : "black_queen.png");
         }
 
         /** ************************************************************************

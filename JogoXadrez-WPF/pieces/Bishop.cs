@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Bishop(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "bispo_branco.png" : "bispo_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_bishop.png" : "black_bishop.png");
         }
 
         /** ************************************************************************

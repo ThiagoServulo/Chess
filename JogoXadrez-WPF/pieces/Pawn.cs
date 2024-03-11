@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Pawn(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "peao_branco.png" : "peao_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_pawn.png" : "black_pawn.png");
         }
 
         /** ************************************************************************

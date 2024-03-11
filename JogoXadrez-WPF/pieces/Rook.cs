@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Rook(Tabuleiro tabuleiro, Cor corDaPeca) : base(tabuleiro, corDaPeca)
         {
-            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "torre_branco.png" : "torre_preto.png");
+            Imagem = BuscarImagem(corDaPeca == Cor.Branco ? "white_rook.png" : "black_rook.png");
         }
 
         /** ************************************************************************
