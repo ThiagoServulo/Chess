@@ -33,51 +33,51 @@
             Position position = new Position(0, 0);
 
             // direção norte (acima)
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column);
             while (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
-                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
+                matrix[position.Row, position.Column] = true;
+                if ((ChessBoard.GetPiece(position) != null) && ChessBoard.GetPiece(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                position.Linha -= 1;
+                position.Row -= 1;
             }
 
             // direção sul (abaixo)
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
             while (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
-                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
+                matrix[position.Row, position.Column] = true;
+                if ((ChessBoard.GetPiece(position) != null) && ChessBoard.GetPiece(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                position.Linha += 1;
+                position.Row += 1;
             }
 
             // direção leste (direita)
-            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
-                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
+                matrix[position.Row, position.Column] = true;
+                if ((ChessBoard.GetPiece(position) != null) && ChessBoard.GetPiece(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                position.Coluna += 1;
+                position.Column += 1;
             }
 
             // direção oeste (esquerda)
-            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
-                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
+                matrix[position.Row, position.Column] = true;
+                if ((ChessBoard.GetPiece(position) != null) && ChessBoard.GetPiece(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                position.Coluna -= 1;
+                position.Column -= 1;
             }
 
             return matrix;

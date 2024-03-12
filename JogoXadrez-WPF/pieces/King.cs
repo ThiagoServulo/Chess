@@ -33,7 +33,7 @@
         ***************************************************************************/
         private bool VerificaTorreDisponivelParaRoque(Position position)
         {
-            Piece peca = ChessBoard.AcessarPeca(position);
+            Piece peca = ChessBoard.GetPiece(position);
             return peca is Rook && peca.PieceColor == PieceColor && peca.NumberOfMoves == 0;
         }
 
@@ -51,91 +51,91 @@
             Position position = new Position(0, 0);
 
             // direção norte (acima)
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção nordeste (diagonal superior direita)
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção leste (direita)
-            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção suldeste (diagonal inferior direita)
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção sul (abaixo)
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção suldoeste (diagonal inferior esquerda)
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção oeste (esquerda)
-            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // direção noroeste (diagonal superior esquerda)
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             // #jogadaespecial roque
             if (NumberOfMoves == 0 && !ReceivedCheck)
             {
                 // #jogadaespecial roque pequeno
-                Position positionRook1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 3);
+                Position positionRook1 = new Position(CurrentPosition.Row, CurrentPosition.Column + 3);
                 if (VerificaTorreDisponivelParaRoque(positionRook1))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Position position1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
-                    Position position2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 2);
-                    if (ChessBoard.AcessarPeca(position1) == null &&
-                        ChessBoard.AcessarPeca(position2) == null)
+                    Position position1 = new Position(CurrentPosition.Row, CurrentPosition.Column + 1);
+                    Position position2 = new Position(CurrentPosition.Row, CurrentPosition.Column + 2);
+                    if (ChessBoard.GetPiece(position1) == null &&
+                        ChessBoard.GetPiece(position2) == null)
                     {
-                        matrix[CurrentPosition.Linha, CurrentPosition.Coluna + 2] = true;
+                        matrix[CurrentPosition.Row, CurrentPosition.Column + 2] = true;
                     }
                 }
 
                 // #jogadaespecial roque grande
-                Position positionRook2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 4);
+                Position positionRook2 = new Position(CurrentPosition.Row, CurrentPosition.Column - 4);
                 if (VerificaTorreDisponivelParaRoque(positionRook2))
                 {
                     // Verifica se as posições entre o Rei e a Torre estão vazias
-                    Position position1 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
-                    Position position2 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 2);
-                    Position position3 = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 3);
-                    if (ChessBoard.AcessarPeca(position1) == null &&
-                        ChessBoard.AcessarPeca(position2) == null &&
-                        ChessBoard.AcessarPeca(position3) == null)
+                    Position position1 = new Position(CurrentPosition.Row, CurrentPosition.Column - 1);
+                    Position position2 = new Position(CurrentPosition.Row, CurrentPosition.Column - 2);
+                    Position position3 = new Position(CurrentPosition.Row, CurrentPosition.Column - 3);
+                    if (ChessBoard.GetPiece(position1) == null &&
+                        ChessBoard.GetPiece(position2) == null &&
+                        ChessBoard.GetPiece(position3) == null)
                     {
-                        matrix[CurrentPosition.Linha, CurrentPosition.Coluna - 2] = true;
+                        matrix[CurrentPosition.Row, CurrentPosition.Column - 2] = true;
                     }
                 }
             }

@@ -32,52 +32,52 @@
 
             Position position = new Position(0, 0);
 
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 2);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 2);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row - 2, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row - 2, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 2);
+            position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 2);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 2);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 2);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna + 1);
+            position.SetPosition(CurrentPosition.Row + 2, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna - 1);
+            position.SetPosition(CurrentPosition.Row + 2, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
-            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 2);
+            position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 2);
             if (CanMove(position))
             {
-                matrix[position.Linha, position.Coluna] = true;
+                matrix[position.Row, position.Column] = true;
             }
 
             return matrix;

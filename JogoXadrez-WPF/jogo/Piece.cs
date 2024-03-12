@@ -93,7 +93,7 @@ namespace Chess
         ***************************************************************************/
         public bool ValidPosition(Position position)
         {
-            return position.Linha <= 7 && position.Linha >= 0 && position.Coluna <= 7 && position.Coluna >= 0;
+            return position.Row <= 7 && position.Row >= 0 && position.Column <= 7 && position.Column >= 0;
         }
 
         /** ************************************************************************
@@ -108,7 +108,7 @@ namespace Chess
         {
             if (ValidPosition(position))
             {
-                Piece piece = ChessBoard.AcessarPeca(position);
+                Piece piece = ChessBoard.GetPiece(position);
                 return (piece == null || piece.PieceColor != PieceColor);
             }
             return false;

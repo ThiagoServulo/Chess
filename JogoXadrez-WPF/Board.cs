@@ -112,11 +112,11 @@ namespace Chess
         * \brief Acessa peça.
         * \details Função responsável por acessar uma peça que se encontra na posição
         * informada.
-        * \param linha Linha em que a peça se encontra.
-        * \param coluna Coluna em que a peça se encontra.
+        * \param linha Row em que a peça se encontra.
+        * \param coluna Column em que a peça se encontra.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Piece AcessarPeca(int linha, int coluna)
+        public Piece GetPiece(int linha, int coluna)
         {
             return _pecasEmJogo[linha, coluna];
         }
@@ -128,9 +128,9 @@ namespace Chess
         * \param position Posição em que a queremos acessar.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Piece AcessarPeca(Position position)
+        public Piece GetPiece(Position position)
         {
-            return _pecasEmJogo[position.Linha, position.Coluna];
+            return _pecasEmJogo[position.Row, position.Column];
         }
 
         /** ************************************************************************
@@ -142,9 +142,9 @@ namespace Chess
         ***************************************************************************/
         public void ColocarPeca(Piece peca, Position position)
         {
-            _pecasEmJogo[position.Linha, position.Coluna] = peca;
+            _pecasEmJogo[position.Row, position.Column] = peca;
             peca.CurrentPosition = position;
-            _pictureBoxes[position.Linha, position.Coluna].Image = peca.MostrarImagem();
+            _pictureBoxes[position.Row, position.Column].Image = peca.MostrarImagem();
         }
 
         /** ************************************************************************
@@ -329,12 +329,12 @@ namespace Chess
             }
 
             // Retira a peça da posição informada
-            Piece aux = AcessarPeca(position);
+            Piece aux = GetPiece(position);
             aux.CurrentPosition = null;
 
             // Limpa as informações referentes ao campo localizado nesta posição
-            _pecasEmJogo[position.Linha, position.Coluna] = null;
-            _pictureBoxes[position.Linha, position.Coluna].Image = null;
+            _pecasEmJogo[position.Row, position.Column] = null;
+            _pictureBoxes[position.Row, position.Column].Image = null;
 
             // Retorna a peça retirada
             return aux;
@@ -350,7 +350,7 @@ namespace Chess
         ***************************************************************************/
         public bool ExistePeca(Position position)
         {
-            return AcessarPeca(position) != null;
+            return GetPiece(position) != null;
         }
 
         /** ************************************************************************
@@ -372,7 +372,7 @@ namespace Chess
             // Verifica se existe peça na posição informada
             if (ExistePeca(position))
             {
-                Piece peca = AcessarPeca(position);
+                Piece peca = GetPiece(position);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
                 if (peca.PieceColor == _jogadorAtual)
@@ -384,8 +384,8 @@ namespace Chess
             }
 
             // Se o campo for uma posição posível de uma peça e a origem não for nula, a jogada pode ser realizada
-            if ((_pictureBoxes[position.Linha, position.Coluna].BackColor == System.Drawing.Color.LightBlue ||
-                _pictureBoxes[position.Linha, position.Coluna].BackColor == System.Drawing.Color.LightCyan) &&
+            if ((_pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightBlue ||
+                _pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightCyan) &&
                 _origem != null)
             {
                 MostrarTabuleiro();
@@ -442,33 +442,33 @@ namespace Chess
 
             // Implementação da jogada especial de Promoção
             if (peca is Pawn &&
-                ((peca.PieceColor == Color.White && destino.Linha == 0) ||
-                (peca.PieceColor == Color.Black && destino.Linha == 7)))
+                ((peca.PieceColor == Color.White && destino.Row == 0) ||
+                (peca.PieceColor == Color.Black && destino.Row == 7)))
             {
                 RetirarPeca(destino);
                 ColocarPeca(new Queen(this, peca.PieceColor), destino);
             }
             
             // Implementação da jogada especial Roque Pequeno
-            if (peca is King && destino.Coluna == origem.Coluna + 2)
+            if (peca is King && destino.Column == origem.Column + 2)
             {
-                Piece torre = RetirarPeca(new Position(origem.Linha, origem.Coluna + 3));
+                Piece torre = RetirarPeca(new Position(origem.Row, origem.Column + 3));
                 torre.IncrementNumberOfMoves();
-                ColocarPeca(torre, new Position(origem.Linha, origem.Coluna + 1));
+                ColocarPeca(torre, new Position(origem.Row, origem.Column + 1));
             }
 
             // Implementação da jogada especial Roque Grande
-            if (peca is King && destino.Coluna == origem.Coluna - 2)
+            if (peca is King && destino.Column == origem.Column - 2)
             {
-                Piece torre = RetirarPeca(new Position(origem.Linha, origem.Coluna - 4));
+                Piece torre = RetirarPeca(new Position(origem.Row, origem.Column - 4));
                 torre.IncrementNumberOfMoves();
-                ColocarPeca(torre, new Position(origem.Linha, origem.Coluna - 1));
+                ColocarPeca(torre, new Position(origem.Row, origem.Column - 1));
             }
 
             // Implementação da jogada especial En Passant
-            if (peca is Pawn && origem.Coluna != destino.Coluna && pecaCapturada == null)
+            if (peca is Pawn && origem.Column != destino.Column && pecaCapturada == null)
             {
-                Position posicaoPeao = new Position(peca.PieceColor == Color.White ? destino.Linha + 1 : destino.Linha - 1, destino.Coluna);
+                Position posicaoPeao = new Position(peca.PieceColor == Color.White ? destino.Row + 1 : destino.Row - 1, destino.Column);
                 pecaCapturada = RetirarPeca(posicaoPeao);
             }
 
@@ -553,9 +553,9 @@ namespace Chess
             foreach (Piece peca in PecasEmJogo(CorAdversaria(cor)))
             {
                 bool[,] matrix = peca.PossibleMoves();
-                if (matrix[posicaoRei.Linha, posicaoRei.Coluna])
+                if (matrix[posicaoRei.Row, posicaoRei.Column])
                 {
-                    ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).ReceivedCheck = true;
+                    ((King)_pecasEmJogo[posicaoRei.Row, posicaoRei.Column]).ReceivedCheck = true;
                     return true;
                 }
             }
@@ -579,15 +579,15 @@ namespace Chess
                 {
                     if (posicoesPossiveis[linha, coluna])
                     {
-                        _pecasEmJogo[peca.CurrentPosition.Linha, peca.CurrentPosition.Coluna] = null;
-                        Piece pecaCapturada = AcessarPeca(linha, coluna);
+                        _pecasEmJogo[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = null;
+                        Piece pecaCapturada = GetPiece(linha, coluna);
                         _pecasEmJogo[linha, coluna] = peca;
                         if (VerificaXeque(peca.PieceColor))
                         {
                             posicoesPossiveis[linha, coluna] = false;
                         }
                         _pecasEmJogo[linha, coluna] = pecaCapturada;
-                        _pecasEmJogo[peca.CurrentPosition.Linha, peca.CurrentPosition.Coluna] = peca;
+                        _pecasEmJogo[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = peca;
                     }
                 }
             }

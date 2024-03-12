@@ -11,10 +11,10 @@
     class Position : System.IComparable
     {
         /// \brief Número da linha refrente a posição.
-        public int Linha { get; set; }
+        public int Row { get; set; }
 
         /// \brief Número da coluna refrente a posição.
-        public int Coluna { get; set; }
+        public int Column { get; set; }
 
         /** ************************************************************************
         * \brief Construtor da classe Posicao.
@@ -32,10 +32,10 @@
         * \param linha Número da linha.
         * \param coluna Número da coluna.
         ***************************************************************************/
-        public void SetPosition(int linha, int coluna)
+        public void SetPosition(int row, int column)
         {
-            Linha = linha;
-            Coluna = coluna;
+            Row = row;
+            Column = column;
         }
 
         /** ************************************************************************
@@ -48,7 +48,7 @@
         public int CompareTo(object obj)
         {
             Position other = obj as Position;
-            return other.Linha == Linha && other.Coluna == Coluna ? 0 : 1;
+            return other.Row == Row && other.Column == Column ? 0 : 1;
         }
 
     }
