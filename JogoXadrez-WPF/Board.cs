@@ -15,34 +15,34 @@ namespace Chess
     partial class Board : Form
     {
         /// \brief Quantidade de linhas existentes no board.
-        public int Linhas = 8;
+        public int Rows = 8;
 
         /// \brief Quantidade de colunas existentes no board.
-        public int Colunas = 8;
+        public int Columns = 8;
 
         /// \brief Indica se a partida está em xeque.
-        public bool _xeque;
+        public bool _check;
 
         /// \brief Matriz contendo todas as peças que estão em jogo.
-        private Piece[,] _pecasEmJogo;
+        private Piece[,] _piecesInPlay;
 
         /// \brief Matriz contendo todas os campos do board.
         private PictureBox[,] _pictureBoxes;
 
         /// \brief Posição de origem da jogada atual.
-        private Position _origem;
+        private Position _origin;
 
         /// \brief Cor do jogador atual.
-        private Color _jogadorAtual;
+        private Color _currentPlayer;
 
         /// \brief Número do turno atual.
-        private int _turno;
+        private int _turn;
 
         /// \brief Quantidade de peças brancas capturadas.
-        private int _quantidadeBrancasCapturadas;
+        private int _whiteCapturedQuantity;
 
         /// \brief Quantidade de peças pretas capturadas.
-        private int _quantidadePretasCapturadas;
+        private int _blackCapturedQuantity;
 
         /** ************************************************************************
         * \brief Construtor.
@@ -54,7 +54,7 @@ namespace Chess
             InitializeComponent();
 
             // Inicializa a matrix de peças do board
-            _pecasEmJogo = new Piece[Linhas, Colunas];
+            _piecesInPlay = new Piece[Rows, Columns];
             _pictureBoxes = new PictureBox[8, 8] {
                 { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
                 { pictureBoxB1, pictureBoxB2, pictureBoxB3, pictureBoxB4, pictureBoxB5, pictureBoxB6, pictureBoxB7, pictureBoxB8 },
@@ -77,12 +77,12 @@ namespace Chess
         ***************************************************************************/
         private void InicializarNovoJogo()
         {
-            _xeque = false;
-            _quantidadeBrancasCapturadas = 0;
-            _quantidadePretasCapturadas = 0;
-            _turno = 1;
-            _jogadorAtual = Color.White;
-            _origem = null;
+            _check = false;
+            _whiteCapturedQuantity = 0;
+            _blackCapturedQuantity = 0;
+            _turn = 1;
+            _currentPlayer = Color.White;
+            _origin = null;
             AtualizaLabels();
             InicializaTabuleiro();
         }
@@ -93,7 +93,7 @@ namespace Chess
         ***************************************************************************/
         private void MudaJogador()
         {
-            _jogadorAtual = CorAdversaria(_jogadorAtual);
+            _currentPlayer = CorAdversaria(_currentPlayer);
         }
 
         /** ************************************************************************
@@ -118,7 +118,7 @@ namespace Chess
         ***************************************************************************/
         public Piece GetPiece(int linha, int coluna)
         {
-            return _pecasEmJogo[linha, coluna];
+            return _piecesInPlay[linha, coluna];
         }
 
         /** ************************************************************************
@@ -130,7 +130,7 @@ namespace Chess
         ***************************************************************************/
         public Piece GetPiece(Position position)
         {
-            return _pecasEmJogo[position.Row, position.Column];
+            return _piecesInPlay[position.Row, position.Column];
         }
 
         /** ************************************************************************
@@ -142,7 +142,7 @@ namespace Chess
         ***************************************************************************/
         public void ColocarPeca(Piece peca, Position position)
         {
-            _pecasEmJogo[position.Row, position.Column] = peca;
+            _piecesInPlay[position.Row, position.Column] = peca;
             peca.CurrentPosition = position;
             _pictureBoxes[position.Row, position.Column].Image = peca.MostrarImagem();
         }
@@ -158,11 +158,11 @@ namespace Chess
             MostrarTabuleiro();
 
             // Resetando a imagem de todos os Picture Boxes
-            for (int linha = 0; linha < Linhas; linha++)
+            for (int linha = 0; linha < Rows; linha++)
             {
-                for (int coluna = 0; coluna < Colunas; coluna++)
+                for (int coluna = 0; coluna < Columns; coluna++)
                 {
-                    _pecasEmJogo[linha, coluna] = null;
+                    _piecesInPlay[linha, coluna] = null;
                     _pictureBoxes[linha, coluna].Image = null;
                 }
             }
@@ -211,7 +211,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelXeque()
         {
-            labelXeque.Text = _xeque ? "Você está em Xeque" : " ";
+            labelXeque.Text = _check ? "Você está em Xeque" : " ";
         }
 
         /** ************************************************************************
@@ -221,7 +221,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelJogador()
         {
-            labelJogadorAtual.Text = "Jogador atual: " + (_jogadorAtual == Color.White ? "Branco" : "Preto");
+            labelJogadorAtual.Text = "Jogador atual: " + (_currentPlayer == Color.White ? "Branco" : "Preto");
         }
 
         /** ************************************************************************
@@ -231,7 +231,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelTurno()
         {
-            labelTurno.Text = $"Turno: {_turno}";
+            labelTurno.Text = $"Turno: {_turn}";
         }
 
         /** ************************************************************************
@@ -241,8 +241,8 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelsPecasCapturadas()
         {
-            labelPecasCapturadasBranco.Text = $"Peças capturadas: {_quantidadePretasCapturadas}";
-            labelPecasCapturadasPreto.Text = $"Peças capturadas: {_quantidadeBrancasCapturadas}";
+            labelPecasCapturadasBranco.Text = $"Peças capturadas: {_blackCapturedQuantity}";
+            labelPecasCapturadasPreto.Text = $"Peças capturadas: {_whiteCapturedQuantity}";
         }
 
         /** ************************************************************************
@@ -263,7 +263,7 @@ namespace Chess
         ***************************************************************************/
         private void IncrementaTurno()
         {
-            _turno++;
+            _turn++;
         }
 
 
@@ -276,10 +276,10 @@ namespace Chess
             System.Drawing.Color color;
 
             // Imprime o board com as cores iniciais
-            for (int linha = 0; linha < Linhas; linha++)
+            for (int linha = 0; linha < Rows; linha++)
             {
                 color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
-                for (int coluna = 0; coluna < Colunas; coluna++)
+                for (int coluna = 0; coluna < Columns; coluna++)
                 {
                     _pictureBoxes[linha, coluna].BackColor = color;
                     color = (color == System.Drawing.Color.White) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
@@ -302,10 +302,10 @@ namespace Chess
             MostrarTabuleiro();
 
             // Imprimir board destacando as possíveis jogadas
-            for (int linha = 0; linha < Linhas; linha++)
+            for (int linha = 0; linha < Rows; linha++)
             {
                 color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
-                for (int coluna = 0; coluna < Colunas; coluna++)
+                for (int coluna = 0; coluna < Columns; coluna++)
                 {
                     _pictureBoxes[linha, coluna].BackColor = posicoesPossiveis[linha, coluna] ?
                         (_pictureBoxes[linha, coluna].BackColor == System.Drawing.Color.White ? System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
@@ -333,7 +333,7 @@ namespace Chess
             aux.CurrentPosition = null;
 
             // Limpa as informações referentes ao campo localizado nesta posição
-            _pecasEmJogo[position.Row, position.Column] = null;
+            _piecesInPlay[position.Row, position.Column] = null;
             _pictureBoxes[position.Row, position.Column].Image = null;
 
             // Retorna a peça retirada
@@ -362,10 +362,10 @@ namespace Chess
         private void ProcessaPictureBoxClick(Position position)
         {
             // Checa se a origem não é nula e a posição de destino é igual a de origem
-            if (_origem != null && _origem.CompareTo(position) == 0)
+            if (_origin != null && _origin.CompareTo(position) == 0)
             {
                 MostrarTabuleiro();
-                _origem = null;
+                _origin = null;
                 return;
             }
 
@@ -375,9 +375,9 @@ namespace Chess
                 Piece peca = GetPiece(position);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
-                if (peca.PieceColor == _jogadorAtual)
+                if (peca.PieceColor == _currentPlayer)
                 {
-                    _origem = position;
+                    _origin = position;
                     MostrarTabuleiro(ChecarMovimentosPossiveis(peca));
                     return;
                 }
@@ -386,13 +386,13 @@ namespace Chess
             // Se o campo for uma posição posível de uma peça e a origem não for nula, a jogada pode ser realizada
             if ((_pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightBlue ||
                 _pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightCyan) &&
-                _origem != null)
+                _origin != null)
             {
                 MostrarTabuleiro();
-                ExecutaMovimento(_origem, position);
+                ExecutaMovimento(_origin, position);
                 MudaJogador();
                 IncrementaTurno();
-                _origem = null;
+                _origin = null;
                 VerificaFimDeJogo();
                 AtualizaLabels();
             }
@@ -409,8 +409,8 @@ namespace Chess
             bool ret;
 
             // Verifica xeque mate
-            _xeque = VerificaXeque(_jogadorAtual);
-            ret = _xeque ? VerificaXequeMate(_jogadorAtual) : false;
+            _check = VerificaXeque(_currentPlayer);
+            ret = _check ? VerificaXequeMate(_currentPlayer) : false;
 
             // Verifica empate
             ret = ret ? true : !ret && (!CorTemOndeMover() || (QuantidadeDePecasEmJogo() <= 2));
@@ -475,7 +475,7 @@ namespace Chess
             // Incrementa contador de peças capturadas
             if (pecaCapturada != null)
             {
-                _ = pecaCapturada.PieceColor == Color.White ? _quantidadeBrancasCapturadas++ : _quantidadePretasCapturadas++;
+                _ = pecaCapturada.PieceColor == Color.White ? _whiteCapturedQuantity++ : _blackCapturedQuantity++;
             }
 
             return pecaCapturada;
@@ -491,7 +491,7 @@ namespace Chess
         public HashSet<Piece> PecasEmJogo(Color cor)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach (Piece peca in _pecasEmJogo)
+            foreach (Piece peca in _piecesInPlay)
             {
                 if (peca != null && peca.PieceColor == cor)
                 {
@@ -520,11 +520,11 @@ namespace Chess
         ***************************************************************************/
         private Position PegarPosicaoRei(Color cor)
         {
-            for (int coluna = 0; coluna < Colunas; coluna++)
+            for (int coluna = 0; coluna < Columns; coluna++)
             {
-                for (int linha = 0; linha < Linhas; linha++)
+                for (int linha = 0; linha < Rows; linha++)
                 {
-                    if (_pecasEmJogo[linha, coluna] is King && _pecasEmJogo[linha, coluna].PieceColor == cor)
+                    if (_piecesInPlay[linha, coluna] is King && _piecesInPlay[linha, coluna].PieceColor == cor)
                     {
                         return new Position(linha, coluna);
                     }
@@ -555,7 +555,7 @@ namespace Chess
                 bool[,] matrix = peca.PossibleMoves();
                 if (matrix[posicaoRei.Row, posicaoRei.Column])
                 {
-                    ((King)_pecasEmJogo[posicaoRei.Row, posicaoRei.Column]).ReceivedCheck = true;
+                    ((King)_piecesInPlay[posicaoRei.Row, posicaoRei.Column]).ReceivedCheck = true;
                     return true;
                 }
             }
@@ -573,21 +573,21 @@ namespace Chess
         public bool[,] ChecarMovimentosPossiveis(Piece peca)
         {
             bool[,] posicoesPossiveis = peca.PossibleMoves();
-            for (int coluna = 0; coluna < Colunas; coluna++)
+            for (int coluna = 0; coluna < Columns; coluna++)
             {
-                for (int linha = 0; linha < Linhas; linha++)
+                for (int linha = 0; linha < Rows; linha++)
                 {
                     if (posicoesPossiveis[linha, coluna])
                     {
-                        _pecasEmJogo[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = null;
+                        _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = null;
                         Piece pecaCapturada = GetPiece(linha, coluna);
-                        _pecasEmJogo[linha, coluna] = peca;
+                        _piecesInPlay[linha, coluna] = peca;
                         if (VerificaXeque(peca.PieceColor))
                         {
                             posicoesPossiveis[linha, coluna] = false;
                         }
-                        _pecasEmJogo[linha, coluna] = pecaCapturada;
-                        _pecasEmJogo[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = peca;
+                        _piecesInPlay[linha, coluna] = pecaCapturada;
+                        _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = peca;
                     }
                 }
             }
@@ -606,9 +606,9 @@ namespace Chess
             foreach (Piece peca in PecasEmJogo(cor))
             {
                 bool[,] matrix = ChecarMovimentosPossiveis(peca);
-                for (int linha = 0; linha < Linhas; linha++)
+                for (int linha = 0; linha < Rows; linha++)
                 {
-                    for (int coluna = 0; coluna < Colunas; coluna++)
+                    for (int coluna = 0; coluna < Columns; coluna++)
                     {
                         if (matrix[linha, coluna])
                         {
@@ -630,7 +630,7 @@ namespace Chess
         public void FimDoJogo()
         {
             // Mostra o vencedor
-            string mensagem = _xeque ? $"Xeque Mate\nVencedor: {CorAdversaria(_jogadorAtual)}" : "Empate";
+            string mensagem = _check ? $"Xeque Mate\nVencedor: {CorAdversaria(_currentPlayer)}" : "Empate";
             MessageBox.Show(mensagem);
 
             if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) 
@@ -654,7 +654,7 @@ namespace Chess
         ***************************************************************************/
         public bool CorTemOndeMover()
         {
-            foreach(Piece peca in PecasEmJogo(_jogadorAtual))
+            foreach(Piece peca in PecasEmJogo(_currentPlayer))
             {
                 foreach (bool position in ChecarMovimentosPossiveis(peca))
                 {

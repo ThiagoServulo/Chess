@@ -54,7 +54,7 @@
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
-            bool[,] matrix = new bool[ChessBoard.Linhas, ChessBoard.Colunas];
+            bool[,] matrix = new bool[ChessBoard.Rows, ChessBoard.Columns];
 
             Position position = new Position(0, 0);
 
