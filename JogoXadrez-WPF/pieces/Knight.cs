@@ -14,7 +14,7 @@
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Knight(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Knight(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Color.White ? "white_knight.png" : "black_knight.png");
         }

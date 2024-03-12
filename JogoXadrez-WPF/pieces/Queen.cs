@@ -14,7 +14,7 @@
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Queen(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Queen(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Color.White ? "white_queen.png" : "black_queen.png");
         }

@@ -14,7 +14,7 @@
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Pawn(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Pawn(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Color.White ? "white_pawn.png" : "black_pawn.png");
         }

@@ -14,7 +14,7 @@
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Bishop(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Bishop(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Color.White ? "white_bishop.png" : "black_bishop.png");
         }

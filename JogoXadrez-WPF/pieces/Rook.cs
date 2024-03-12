@@ -14,7 +14,7 @@
         * \param tabuleiro Tabuleiro em que a peça será inserida.
         * \param corDaPeca Cor da peça.
         ***************************************************************************/
-        public Rook(Tabuleiro tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Rook(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
         {
             Imagem = BuscarImagem(corDaPeca == Color.White ? "white_rook.png" : "black_rook.png");
         }

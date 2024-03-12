@@ -12,7 +12,7 @@ namespace Chess
     * \date 20/09/2022
     * \version v1.0.0
     ***************************************************************************/
-    partial class Tabuleiro : Form
+    partial class Board : Form
     {
         /// \brief Quantidade de linhas existentes no tabuleiro.
         public int Linhas = 8;
@@ -48,7 +48,7 @@ namespace Chess
         * \brief Construtor.
         * \details Construtor da classe Tabuleiro.
         ***************************************************************************/
-        public Tabuleiro()
+        public Board()
         {
             // Inicializa os componentes
             InitializeComponent();

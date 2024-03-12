@@ -2,7 +2,7 @@
 
 namespace Chess
 {
-    partial class Tabuleiro
+    partial class Board
     {
         /// \brief Variável de componentes.
         private System.ComponentModel.IContainer components = null;
@@ -29,7 +29,7 @@ namespace Chess
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tabuleiro));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Board));
             this.pictureBoxA1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA4 = new System.Windows.Forms.PictureBox();

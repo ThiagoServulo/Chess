@@ -26,7 +26,7 @@ namespace Chess
         public int NumberOfMoves { get; protected set; }
 
         /// \brief Tabuleiro do jogo.
-        public Tabuleiro TabuleiroXadrez { get; protected set; }
+        public Board TabuleiroXadrez { get; protected set; }
 
         /// \brief Caminho para a imagem da peça.
         public string FileImagesPath;
@@ -36,7 +36,7 @@ namespace Chess
         * \param tabuleiro Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Piece(Tabuleiro board, Color color)
+        public Piece(Board board, Color color)
         {
             FileImagesPath = Path.GetFullPath("./images");
             CurrentPosition = null;

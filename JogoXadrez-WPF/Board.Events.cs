@@ -1,6 +1,6 @@
 ﻿namespace Chess
 {
-    partial class Tabuleiro
+    partial class Board
     {
         private void PictureBoxA1Click(object sender, System.EventArgs e)
         {
