@@ -11,12 +11,12 @@
     {
         /** ************************************************************************
         * \brief Construtor da classe Torre.
-        * \param tabuleiro Tabuleiro em que a peça será inserida.
-        * \param corDaPeca Cor da peça.
+        * \param board Tabuleiro em que a peça será inserida.
+        * \param pieceColor Cor da peça.
         ***************************************************************************/
-        public Rook(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Rook(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = BuscarImagem(corDaPeca == Color.White ? "white_rook.png" : "black_rook.png");
+            Imagem = GetImage(pieceColor == Color.White ? "white_rook.png" : "black_rook.png");
         }
 
         /** ************************************************************************
@@ -28,59 +28,59 @@
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
-            bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
+            bool[,] matrix = new bool[ChessBoard.Linhas, ChessBoard.Colunas];
 
-            Position posicao = new Position(0, 0);
+            Position position = new Position(0, 0);
 
             // direção norte (acima)
-            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
-            while (CanMove(posicao))
+            position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+            while (CanMove(position))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
+                matrix[position.Linha, position.Coluna] = true;
+                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                posicao.Linha -= 1;
+                position.Linha -= 1;
             }
 
             // direção sul (abaixo)
-            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
-            while (CanMove(posicao))
+            position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+            while (CanMove(position))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
+                matrix[position.Linha, position.Coluna] = true;
+                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                posicao.Linha += 1;
+                position.Linha += 1;
             }
 
             // direção leste (direita)
-            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
-            while (CanMove(posicao))
+            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
+            while (CanMove(position))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
+                matrix[position.Linha, position.Coluna] = true;
+                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                posicao.Coluna += 1;
+                position.Coluna += 1;
             }
 
             // direção oeste (esquerda)
-            posicao.DefinirPosicao(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
-            while (CanMove(posicao))
+            position.SetPosition(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
+            while (CanMove(position))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
-                if ((TabuleiroXadrez.AcessarPeca(posicao) != null) && TabuleiroXadrez.AcessarPeca(posicao).PieceColor != PieceColor)
+                matrix[position.Linha, position.Coluna] = true;
+                if ((ChessBoard.AcessarPeca(position) != null) && ChessBoard.AcessarPeca(position).PieceColor != PieceColor)
                 {
                     break;
                 }
-                posicao.Coluna -= 1;
+                position.Coluna -= 1;
             }
 
-            return matriz;
+            return matrix;
         }
 
     }

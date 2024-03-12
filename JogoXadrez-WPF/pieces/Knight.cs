@@ -11,12 +11,12 @@
     {
         /** ************************************************************************
         * \brief Construtor da classe Cavalo.
-        * \param tabuleiro Tabuleiro do jogo.
+        * \param board Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
-        public Knight(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Knight(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = BuscarImagem(corDaPeca == Color.White ? "white_knight.png" : "black_knight.png");
+            Imagem = GetImage(pieceColor == Color.White ? "white_knight.png" : "black_knight.png");
         }
 
         /** ************************************************************************
@@ -28,59 +28,59 @@
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
-            bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
+            bool[,] matrix = new bool[ChessBoard.Linhas, ChessBoard.Colunas];
 
             Position posicao = new Position(0, 0);
 
-            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 2);
+            posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 2);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha - 2, CurrentPosition.Coluna - 1);
+            posicao.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna - 1);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha - 2, CurrentPosition.Coluna + 1);
+            posicao.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna + 1);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 2);
+            posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 2);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 2);
+            posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 2);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha + 2, CurrentPosition.Coluna + 1);
+            posicao.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna + 1);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha + 2, CurrentPosition.Coluna - 1);
+            posicao.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna - 1);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 2);
+            posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 2);
             if (CanMove(posicao))
             {
-                matriz[posicao.Linha, posicao.Coluna] = true;
+                matrix[posicao.Linha, posicao.Coluna] = true;
             }
 
-            return matriz;
+            return matrix;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Chess
     /** ************************************************************************
     * \brief Informações sobre a peça.
     * \details A classe Peca armazena as informações referentes a peça, que será
-    * colocada no tabuleiro do jogo.
+    * colocada no board do jogo.
     * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
     * \date 19/07/2022
     * \version v1.0.0
@@ -26,21 +26,21 @@ namespace Chess
         public int NumberOfMoves { get; protected set; }
 
         /// \brief Tabuleiro do jogo.
-        public Board TabuleiroXadrez { get; protected set; }
+        public Board ChessBoard { get; protected set; }
 
         /// \brief Caminho para a imagem da peça.
         public string FileImagesPath;
 
         /** ************************************************************************
         * \brief Construtor da classe Peca.
-        * \param tabuleiro Tabuleiro do jogo.
+        * \param board Tabuleiro do jogo.
         * \param cor Cor da peça.
         ***************************************************************************/
         public Piece(Board board, Color color)
         {
             FileImagesPath = Path.GetFullPath("./images");
             CurrentPosition = null;
-            TabuleiroXadrez = board;
+            ChessBoard = board;
             PieceColor = color;
             NumberOfMoves = 0;
         }
@@ -62,7 +62,7 @@ namespace Chess
         * \return Imagem refrente a peça.
         * \exception System.Exception Lançada o path de imagens não for encontrado.
         ***************************************************************************/
-        public Image BuscarImagem(string image)
+        public Image GetImage(string image)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Chess
         {
             if (ValidPosition(position))
             {
-                Piece piece = TabuleiroXadrez.AcessarPeca(position);
+                Piece piece = ChessBoard.AcessarPeca(position);
                 return (piece == null || piece.PieceColor != PieceColor);
             }
             return false;

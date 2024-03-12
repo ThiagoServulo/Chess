@@ -11,12 +11,12 @@
     {
         /** ************************************************************************
         * \brief Construtor da classe Peao.
-        * \param tabuleiro Tabuleiro em que a peça será inserida.
-        * \param corDaPeca Cor da peça.
+        * \param board Tabuleiro em que a peça será inserida.
+        * \param pieceColor Cor da peça.
         ***************************************************************************/
-        public Pawn(Board tabuleiro, Color corDaPeca) : base(tabuleiro, corDaPeca)
+        public Pawn(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = BuscarImagem(corDaPeca == Color.White ? "white_pawn.png" : "black_pawn.png");
+            Imagem = GetImage(pieceColor == Color.White ? "white_pawn.png" : "black_pawn.png");
         }
 
         /** ************************************************************************
@@ -29,7 +29,7 @@
         ***************************************************************************/
         private bool ExisteInimigo(Position posicao)
         {
-            Piece peca = TabuleiroXadrez.AcessarPeca(posicao);
+            Piece peca = ChessBoard.AcessarPeca(posicao);
             return (peca != null && peca.PieceColor != PieceColor);
         }
 
@@ -42,7 +42,7 @@
         ***************************************************************************/
         private bool Livre(Position posicao)
         {
-            return (TabuleiroXadrez.AcessarPeca(posicao) == null);
+            return (ChessBoard.AcessarPeca(posicao) == null);
         }
 
         /** ************************************************************************
@@ -54,35 +54,35 @@
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
-            bool[,] matriz = new bool[TabuleiroXadrez.Linhas, TabuleiroXadrez.Colunas];
+            bool[,] matrix = new bool[ChessBoard.Linhas, ChessBoard.Colunas];
 
             Position posicao = new Position(0, 0);
 
             if (PieceColor == Color.White)
             {
-                posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
                 if (ValidPosition(posicao) && Livre(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha - 2, CurrentPosition.Coluna);
+                posicao.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna);
                 if (ValidPosition(posicao) && Livre(posicao) && NumberOfMoves == 0 &&
                     Livre(new Position(CurrentPosition.Linha - 1, CurrentPosition.Coluna)))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
+                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
                 if (ValidPosition(posicao) && ExisteInimigo(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
+                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
                 if (ValidPosition(posicao) && ExisteInimigo(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
                 // Implementação da jogada especial En Passant
@@ -91,51 +91,51 @@
                     Position esquerda = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
                     if (ValidPosition(esquerda) && ExisteInimigo(esquerda))
                     {
-                        Piece peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Piece peca = ChessBoard.AcessarPeca(esquerda);
                         Position destino = new Position(esquerda.Linha - 1, esquerda.Coluna);
-                        if (peca is Pawn && peca.NumberOfMoves == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.NumberOfMoves == 1 && ChessBoard.AcessarPeca(destino) == null)
                         {
-                            matriz[esquerda.Linha - 1, esquerda.Coluna] = true;
+                            matrix[esquerda.Linha - 1, esquerda.Coluna] = true;
                         }
                     }
 
                     Position direita = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
                     if (ValidPosition(direita) && ExisteInimigo(direita))
                     {
-                        Piece peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Piece peca = ChessBoard.AcessarPeca(direita);
                         Position destino = new Position(esquerda.Linha - 1, esquerda.Coluna);
-                        if (peca is Pawn && peca.NumberOfMoves == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.NumberOfMoves == 1 && ChessBoard.AcessarPeca(destino) == null)
                         {
-                            matriz[direita.Linha - 1, direita.Coluna] = true;
+                            matrix[direita.Linha - 1, direita.Coluna] = true;
                         }
                     }
                 }
             }
             else // Peão de cor preta
             {
-                posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
                 if (ValidPosition(posicao) && Livre(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha + 2, CurrentPosition.Coluna);
+                posicao.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna);
                 if (ValidPosition(posicao) && Livre(posicao) && NumberOfMoves == 0 &&
                     Livre(new Position(CurrentPosition.Linha + 1, CurrentPosition.Coluna)))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
+                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
                 if (ValidPosition(posicao) && ExisteInimigo(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                posicao.DefinirPosicao(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
+                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
                 if (ValidPosition(posicao) && ExisteInimigo(posicao))
                 {
-                    matriz[posicao.Linha, posicao.Coluna] = true;
+                    matrix[posicao.Linha, posicao.Coluna] = true;
                 }
 
                 // Implementação da jogada especial En Passant
@@ -144,28 +144,28 @@
                     Position esquerda = new Position(CurrentPosition.Linha, CurrentPosition.Coluna - 1);
                     if (ValidPosition(esquerda) && ExisteInimigo(esquerda))
                     {
-                        Piece peca = TabuleiroXadrez.AcessarPeca(esquerda);
+                        Piece peca = ChessBoard.AcessarPeca(esquerda);
                         Position destino = new Position(esquerda.Linha + 1, esquerda.Coluna);
-                        if (peca is Pawn && peca.NumberOfMoves == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.NumberOfMoves == 1 && ChessBoard.AcessarPeca(destino) == null)
                         {
-                            matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
+                            matrix[esquerda.Linha + 1, esquerda.Coluna] = true;
                         }
                     }
 
                     Position direita = new Position(CurrentPosition.Linha, CurrentPosition.Coluna + 1);
                     if (ValidPosition(direita) && ExisteInimigo(direita))
                     {
-                        Piece peca = TabuleiroXadrez.AcessarPeca(direita);
+                        Piece peca = ChessBoard.AcessarPeca(direita);
                         Position destino = new Position(direita.Linha + 1, direita.Coluna);
-                        if (peca is Pawn && peca.NumberOfMoves == 1 && TabuleiroXadrez.AcessarPeca(destino) == null)
+                        if (peca is Pawn && peca.NumberOfMoves == 1 && ChessBoard.AcessarPeca(destino) == null)
                         {
-                            matriz[direita.Linha + 1, direita.Coluna] = true;
+                            matrix[direita.Linha + 1, direita.Coluna] = true;
                         }
                     }
                 }
             }
 
-            return matriz;
+            return matrix;
         }
     }
 }

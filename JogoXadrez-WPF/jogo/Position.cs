@@ -3,7 +3,7 @@
     /** ************************************************************************
     * \brief Informações sobre a posição.
     * \details A classe Posicao armazena as informações referentes a posição de
-    * uma peça no tabuleiro.
+    * uma peça no board.
     * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
     * \date 19/07/2022
     * \version v1.0.0
@@ -23,7 +23,7 @@
         ***************************************************************************/
         public Position(int linha, int coluna)
         {
-            DefinirPosicao(linha, coluna);
+            SetPosition(linha, coluna);
         }
 
         /** ************************************************************************
@@ -32,7 +32,7 @@
         * \param linha Número da linha.
         * \param coluna Número da coluna.
         ***************************************************************************/
-        public void DefinirPosicao(int linha, int coluna)
+        public void SetPosition(int linha, int coluna)
         {
             Linha = linha;
             Coluna = coluna;

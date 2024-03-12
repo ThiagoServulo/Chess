@@ -5,8 +5,8 @@ using System.Collections.Generic;
 namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o tabuleiro.
-    * \details A classe Tabuleiro armazena as informações referentes ao tabuleiro 
+    * \brief Informações sobre o board.
+    * \details A classe Tabuleiro armazena as informações referentes ao board 
     * do jogo, ou seja, onde as peças serão colocadas.
     * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
     * \date 20/09/2022
@@ -14,10 +14,10 @@ namespace Chess
     ***************************************************************************/
     partial class Board : Form
     {
-        /// \brief Quantidade de linhas existentes no tabuleiro.
+        /// \brief Quantidade de linhas existentes no board.
         public int Linhas = 8;
 
-        /// \brief Quantidade de colunas existentes no tabuleiro.
+        /// \brief Quantidade de colunas existentes no board.
         public int Colunas = 8;
 
         /// \brief Indica se a partida está em xeque.
@@ -26,7 +26,7 @@ namespace Chess
         /// \brief Matriz contendo todas as peças que estão em jogo.
         private Piece[,] _pecasEmJogo;
 
-        /// \brief Matriz contendo todas os campos do tabuleiro.
+        /// \brief Matriz contendo todas os campos do board.
         private PictureBox[,] _pictureBoxes;
 
         /// \brief Posição de origem da jogada atual.
@@ -53,7 +53,7 @@ namespace Chess
             // Inicializa os componentes
             InitializeComponent();
 
-            // Inicializa a matriz de peças do tabuleiro
+            // Inicializa a matrix de peças do board
             _pecasEmJogo = new Piece[Linhas, Colunas];
             _pictureBoxes = new PictureBox[8, 8] {
                 { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
@@ -66,14 +66,14 @@ namespace Chess
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             };
 
-            // Inicializa as variáveis e o layout do tabuleiro
+            // Inicializa as variáveis e o layout do board
             InicializarNovoJogo();
         }
 
         /** ************************************************************************
         * \brief Inicializa um novo jogo.
         * \details Função responsável por inicializar as variáveis e o layout do
-        * tabuleiro para um novo jogo.
+        * board para um novo jogo.
         ***************************************************************************/
         private void InicializarNovoJogo()
         {
@@ -148,13 +148,13 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Inicializa tabuleiro.
-        * \details Função responsável por inicializar o tabuleiro, colocando as peças
+        * \brief Inicializa board.
+        * \details Função responsável por inicializar o board, colocando as peças
         * pretas e brancas em suas posições iniciais.
         ***************************************************************************/
         private void InicializaTabuleiro()
         {
-            // Inicializa layout tabuleiro
+            // Inicializa layout board
             MostrarTabuleiro();
 
             // Resetando a imagem de todos os Picture Boxes
@@ -247,7 +247,7 @@ namespace Chess
 
         /** ************************************************************************
         * \brief Atualiza o labels.
-        * \details Função responsável por atualizar todos os labels do tabuleiro.
+        * \details Função responsável por atualizar todos os labels do board.
         ***************************************************************************/
         private void AtualizaLabels()
         {
@@ -268,14 +268,14 @@ namespace Chess
 
 
         /** ************************************************************************
-        * \brief Mostra tabuleiro.
-        * \details Função responsável por imprimir o tabuleiro de jogo.
+        * \brief Mostra board.
+        * \details Função responsável por imprimir o board de jogo.
         ***************************************************************************/
         private void MostrarTabuleiro()
         {
             System.Drawing.Color color;
 
-            // Imprime o tabuleiro com as cores iniciais
+            // Imprime o board com as cores iniciais
             for (int linha = 0; linha < Linhas; linha++)
             {
                 color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
@@ -288,8 +288,8 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Mostra tabuleiro.
-        * \details Função responsável por imprimir o tabuleiro de jogo, destacando
+        * \brief Mostra board.
+        * \details Função responsável por imprimir o board de jogo, destacando
         * as posíveis movimentações de uma peça.
         * \param posicoesPossiveis Posições possíveis que a peça pode assumir e, 
         * portanto, serão destacadas.
@@ -298,10 +298,10 @@ namespace Chess
         {
             System.Drawing.Color color;
 
-            // Imprimir o tabuleiro nas cores iniciais
+            // Imprimir o board nas cores iniciais
             MostrarTabuleiro();
 
-            // Imprimir tabuleiro destacando as possíveis jogadas
+            // Imprimir board destacando as possíveis jogadas
             for (int linha = 0; linha < Linhas; linha++)
             {
                 color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
@@ -539,7 +539,7 @@ namespace Chess
         * cor está em xeque.
         * \param cor Cor do jogador no qual se deseja saber se está em xeque.
         * \return 'true' se o jogador estiver em xeque, 'false' se não estiver.
-        * \exception System.Exception Lançada quando o rei não estiver no tabuleiro.
+        * \exception System.Exception Lançada quando o rei não estiver no board.
         ***************************************************************************/
         public bool VerificaXeque(Color cor)
         {
@@ -547,13 +547,13 @@ namespace Chess
 
             if (posicaoRei == null)
             {
-                throw new System.Exception($"Não tem rei da cor: {cor} no tabuleiro");
+                throw new System.Exception($"Não tem rei da cor: {cor} no board");
             }
 
             foreach (Piece peca in PecasEmJogo(CorAdversaria(cor)))
             {
-                bool[,] matriz = peca.PossibleMoves();
-                if (matriz[posicaoRei.Linha, posicaoRei.Coluna])
+                bool[,] matrix = peca.PossibleMoves();
+                if (matrix[posicaoRei.Linha, posicaoRei.Coluna])
                 {
                     ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
                     return true;
@@ -605,12 +605,12 @@ namespace Chess
         {
             foreach (Piece peca in PecasEmJogo(cor))
             {
-                bool[,] matriz = ChecarMovimentosPossiveis(peca);
+                bool[,] matrix = ChecarMovimentosPossiveis(peca);
                 for (int linha = 0; linha < Linhas; linha++)
                 {
                     for (int coluna = 0; coluna < Colunas; coluna++)
                     {
-                        if (matriz[linha, coluna])
+                        if (matrix[linha, coluna])
                         {
                             return false;
                         }
