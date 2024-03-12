@@ -88,7 +88,7 @@ namespace Chess
         * \brief Verifica posição válida.
         * \details Função responsável por verificar se uma determinada posição é 
         * válida.
-        * \param posicao Posição a ser verificada.
+        * \param position Posição a ser verificada.
         * \return 'true' se a posição for válida, 'false' se for inválida.
         ***************************************************************************/
         public bool ValidPosition(Position position)
@@ -100,7 +100,7 @@ namespace Chess
         * \brief Verifica se pode mover.
         * \details Função responsável por verificar se a peça pode ser movida para
         * uma determinada posição.
-        * \param posicao Posição a ser verificada.
+        * \param position Posição a ser verificada.
         * \return 'true' se a peça puder ser movida para a posição informada, 'false' 
         * se não.
         ***************************************************************************/

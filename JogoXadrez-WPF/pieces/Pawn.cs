@@ -23,13 +23,13 @@
         * \brief Verifica se existe inimigo.
         * \details Função responsável por verificar se existe uma peça adversária na
         * posição informada.
-        * \param posicao Posição a ser verificada.
+        * \param position Posição a ser verificada.
         * \param 'true' se existir uma peça adversária na posição informada, 'false'
         * se não.
         ***************************************************************************/
-        private bool ExisteInimigo(Position posicao)
+        private bool ExisteInimigo(Position position)
         {
-            Piece peca = ChessBoard.AcessarPeca(posicao);
+            Piece peca = ChessBoard.AcessarPeca(position);
             return (peca != null && peca.PieceColor != PieceColor);
         }
 
@@ -37,12 +37,12 @@
         * \brief Verifica se uma posição está livre.
         * \details Função responsável por verificar se uma determinada posição está 
         * livre.
-        * \param posicao Posição a ser verificada.
+        * \param position Posição a ser verificada.
         * \param 'true' se a posição iformada estiver vazia, 'false' se não.
         ***************************************************************************/
-        private bool Livre(Position posicao)
+        private bool Livre(Position position)
         {
-            return (ChessBoard.AcessarPeca(posicao) == null);
+            return (ChessBoard.AcessarPeca(position) == null);
         }
 
         /** ************************************************************************
@@ -56,33 +56,33 @@
         {
             bool[,] matrix = new bool[ChessBoard.Linhas, ChessBoard.Colunas];
 
-            Position posicao = new Position(0, 0);
+            Position position = new Position(0, 0);
 
             if (PieceColor == Color.White)
             {
-                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
-                if (ValidPosition(posicao) && Livre(posicao))
+                position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna);
+                if (ValidPosition(position) && Livre(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna);
-                if (ValidPosition(posicao) && Livre(posicao) && NumberOfMoves == 0 &&
+                position.SetPosition(CurrentPosition.Linha - 2, CurrentPosition.Coluna);
+                if (ValidPosition(position) && Livre(position) && NumberOfMoves == 0 &&
                     Livre(new Position(CurrentPosition.Linha - 1, CurrentPosition.Coluna)))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
-                if (ValidPosition(posicao) && ExisteInimigo(posicao))
+                position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna - 1);
+                if (ValidPosition(position) && ExisteInimigo(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
-                if (ValidPosition(posicao) && ExisteInimigo(posicao))
+                position.SetPosition(CurrentPosition.Linha - 1, CurrentPosition.Coluna + 1);
+                if (ValidPosition(position) && ExisteInimigo(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
                 // Implementação da jogada especial En Passant
@@ -113,29 +113,29 @@
             }
             else // Peão de cor preta
             {
-                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
-                if (ValidPosition(posicao) && Livre(posicao))
+                position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna);
+                if (ValidPosition(position) && Livre(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna);
-                if (ValidPosition(posicao) && Livre(posicao) && NumberOfMoves == 0 &&
+                position.SetPosition(CurrentPosition.Linha + 2, CurrentPosition.Coluna);
+                if (ValidPosition(position) && Livre(position) && NumberOfMoves == 0 &&
                     Livre(new Position(CurrentPosition.Linha + 1, CurrentPosition.Coluna)))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
-                if (ValidPosition(posicao) && ExisteInimigo(posicao))
+                position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna + 1);
+                if (ValidPosition(position) && ExisteInimigo(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
-                posicao.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
-                if (ValidPosition(posicao) && ExisteInimigo(posicao))
+                position.SetPosition(CurrentPosition.Linha + 1, CurrentPosition.Coluna - 1);
+                if (ValidPosition(position) && ExisteInimigo(position))
                 {
-                    matrix[posicao.Linha, posicao.Coluna] = true;
+                    matrix[position.Linha, position.Coluna] = true;
                 }
 
                 // Implementação da jogada especial En Passant

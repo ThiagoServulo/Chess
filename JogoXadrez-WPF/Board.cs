@@ -125,12 +125,12 @@ namespace Chess
         * \brief Acessa peça.
         * \details Função responsável por acessar uma peça que se encontra na posição
         * informada.
-        * \param posicao Posição em que a queremos acessar.
+        * \param position Posição em que a queremos acessar.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Piece AcessarPeca(Position posicao)
+        public Piece AcessarPeca(Position position)
         {
-            return _pecasEmJogo[posicao.Linha, posicao.Coluna];
+            return _pecasEmJogo[position.Linha, position.Coluna];
         }
 
         /** ************************************************************************
@@ -138,13 +138,13 @@ namespace Chess
         * \details Função responsável por colocar uma peça em uma determinada 
         * posição.
         * \param peca Peça a ser colocada.
-        * \param posicao Posição onde a peça será colocada.
+        * \param position Posição onde a peça será colocada.
         ***************************************************************************/
-        public void ColocarPeca(Piece peca, Position posicao)
+        public void ColocarPeca(Piece peca, Position position)
         {
-            _pecasEmJogo[posicao.Linha, posicao.Coluna] = peca;
-            peca.CurrentPosition = posicao;
-            _pictureBoxes[posicao.Linha, posicao.Coluna].Image = peca.MostrarImagem();
+            _pecasEmJogo[position.Linha, position.Coluna] = peca;
+            peca.CurrentPosition = position;
+            _pictureBoxes[position.Linha, position.Coluna].Image = peca.MostrarImagem();
         }
 
         /** ************************************************************************
@@ -317,24 +317,24 @@ namespace Chess
         /** ************************************************************************
         * \brief Retira peça.
         * \details Função responsável por retirar uma peça de uma determinada posição.
-        * \param posicao Posição na qual a peça será retirada.
+        * \param position Posição na qual a peça será retirada.
         * \return Peça retirada da posição informada.
         ***************************************************************************/
-        public Piece RetirarPeca(Position posicao)
+        public Piece RetirarPeca(Position position)
         {
             // Verifica se existe peça na posição informada
-            if (!ExistePeca(posicao))
+            if (!ExistePeca(position))
             {
                 return null;
             }
 
             // Retira a peça da posição informada
-            Piece aux = AcessarPeca(posicao);
+            Piece aux = AcessarPeca(position);
             aux.CurrentPosition = null;
 
             // Limpa as informações referentes ao campo localizado nesta posição
-            _pecasEmJogo[posicao.Linha, posicao.Coluna] = null;
-            _pictureBoxes[posicao.Linha, posicao.Coluna].Image = null;
+            _pecasEmJogo[position.Linha, position.Coluna] = null;
+            _pictureBoxes[position.Linha, position.Coluna].Image = null;
 
             // Retorna a peça retirada
             return aux;
@@ -344,25 +344,25 @@ namespace Chess
         * \brief Veridica se existe peça.
         * \details Função responsável por verificar se existe peça em uma determinada
         * posição.
-        * \param posicao Posição na qual será verificado se existe uma peça.
+        * \param position Posição na qual será verificado se existe uma peça.
         * \return 'true' caso exista uma peça na posição informada ou 'false' caso 
         * não exista.
         ***************************************************************************/
-        public bool ExistePeca(Position posicao)
+        public bool ExistePeca(Position position)
         {
-            return AcessarPeca(posicao) != null;
+            return AcessarPeca(position) != null;
         }
 
         /** ************************************************************************
         * \brief Processa o click sobre um campo.
         * \details Função responsável por processar um click sobre um determinado
         * 'PictureBox'.
-        * \param posicao Posição do 'PictureBox' que foi clicado.
+        * \param position Posição do 'PictureBox' que foi clicado.
         ***************************************************************************/
-        private void ProcessaPictureBoxClick(Position posicao)
+        private void ProcessaPictureBoxClick(Position position)
         {
             // Checa se a origem não é nula e a posição de destino é igual a de origem
-            if (_origem != null && _origem.CompareTo(posicao) == 0)
+            if (_origem != null && _origem.CompareTo(position) == 0)
             {
                 MostrarTabuleiro();
                 _origem = null;
@@ -370,26 +370,26 @@ namespace Chess
             }
 
             // Verifica se existe peça na posição informada
-            if (ExistePeca(posicao))
+            if (ExistePeca(position))
             {
-                Piece peca = AcessarPeca(posicao);
+                Piece peca = AcessarPeca(position);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
                 if (peca.PieceColor == _jogadorAtual)
                 {
-                    _origem = posicao;
+                    _origem = position;
                     MostrarTabuleiro(ChecarMovimentosPossiveis(peca));
                     return;
                 }
             }
 
             // Se o campo for uma posição posível de uma peça e a origem não for nula, a jogada pode ser realizada
-            if ((_pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == System.Drawing.Color.LightBlue ||
-                _pictureBoxes[posicao.Linha, posicao.Coluna].BackColor == System.Drawing.Color.LightCyan) &&
+            if ((_pictureBoxes[position.Linha, position.Coluna].BackColor == System.Drawing.Color.LightBlue ||
+                _pictureBoxes[position.Linha, position.Coluna].BackColor == System.Drawing.Color.LightCyan) &&
                 _origem != null)
             {
                 MostrarTabuleiro();
-                ExecutaMovimento(_origem, posicao);
+                ExecutaMovimento(_origem, position);
                 MudaJogador();
                 IncrementaTurno();
                 _origem = null;
@@ -555,7 +555,7 @@ namespace Chess
                 bool[,] matrix = peca.PossibleMoves();
                 if (matrix[posicaoRei.Linha, posicaoRei.Coluna])
                 {
-                    ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).RecebeuXeque = true;
+                    ((King)_pecasEmJogo[posicaoRei.Linha, posicaoRei.Coluna]).ReceivedCheck = true;
                     return true;
                 }
             }
@@ -656,9 +656,9 @@ namespace Chess
         {
             foreach(Piece peca in PecasEmJogo(_jogadorAtual))
             {
-                foreach (bool posicao in ChecarMovimentosPossiveis(peca))
+                foreach (bool position in ChecarMovimentosPossiveis(peca))
                 {
-                    if(posicao)
+                    if(position)
                     {
                         return true;
                     }
