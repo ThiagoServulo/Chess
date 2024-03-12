@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Queen(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = GetImage(pieceColor == Color.White ? "white_queen.png" : "black_queen.png");
+            Image = GetImage(pieceColor == Color.White ? "white_queen.png" : "black_queen.png");
         }
 
         /** ************************************************************************

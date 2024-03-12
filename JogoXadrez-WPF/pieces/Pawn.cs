@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Pawn(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = GetImage(pieceColor == Color.White ? "white_pawn.png" : "black_pawn.png");
+            Image = GetImage(pieceColor == Color.White ? "white_pawn.png" : "black_pawn.png");
         }
 
         /** ************************************************************************

@@ -13,8 +13,8 @@ namespace Chess
     ***************************************************************************/
     abstract class Piece
     {
-        /// \brief Imagem referente a peça.
-        public Image Imagem;
+        /// \brief Image referente a peça.
+        public Image Image;
 
         /// \brief Posição atual da peça.
         public Position CurrentPosition { get; set; }
@@ -48,18 +48,18 @@ namespace Chess
         /** ************************************************************************
         * \brief Mostra imagem.
         * \details Função responsável por mostrar a imagem da peça.
-        * \return Imagem refrente a peça.
+        * \return Image refrente a peça.
         ***************************************************************************/
         public Image MostrarImagem()
         {
-            return Imagem;
+            return Image;
         }
 
         /** ************************************************************************
         * \brief Mostra imagem.
         * \details Função responsável por mostrar a imagem da peça.
         * \param imagem Nome da imagem refrente a peça.
-        * \return Imagem refrente a peça.
+        * \return Image refrente a peça.
         * \exception System.Exception Lançada o path de imagens não for encontrado.
         ***************************************************************************/
         public Image GetImage(string image)

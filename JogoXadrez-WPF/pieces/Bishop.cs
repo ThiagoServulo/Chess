@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Bishop(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = GetImage(pieceColor == Color.White ? "white_bishop.png" : "black_bishop.png");
+            Image = GetImage(pieceColor == Color.White ? "white_bishop.png" : "black_bishop.png");
         }
 
         /** ************************************************************************

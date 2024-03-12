@@ -16,7 +16,7 @@
         ***************************************************************************/
         public Rook(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = GetImage(pieceColor == Color.White ? "white_rook.png" : "black_rook.png");
+            Image = GetImage(pieceColor == Color.White ? "white_rook.png" : "black_rook.png");
         }
 
         /** ************************************************************************

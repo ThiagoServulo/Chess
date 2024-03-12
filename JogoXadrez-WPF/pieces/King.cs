@@ -19,7 +19,7 @@
         ***************************************************************************/
         public King(Board board, Color pieceColor) : base(board, pieceColor)
         {
-            Imagem = GetImage(pieceColor == Color.White ? "white_king.png" : "black_king.png");
+            Image = GetImage(pieceColor == Color.White ? "white_king.png" : "black_king.png");
             ReceivedCheck = false;
         }
 
