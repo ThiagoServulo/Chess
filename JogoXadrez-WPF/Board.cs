@@ -67,7 +67,7 @@ namespace Chess
             };
 
             // Inicializa as variáveis e o layout do board
-            InicializarNovoJogo();
+            InitializeNewGame();
         }
 
         /** ************************************************************************
@@ -75,7 +75,7 @@ namespace Chess
         * \details Função responsável por inicializar as variáveis e o layout do
         * board para um novo jogo.
         ***************************************************************************/
-        private void InicializarNovoJogo()
+        private void InitializeNewGame()
         {
             _check = false;
             _whiteCapturedQuantity = 0;
@@ -83,17 +83,17 @@ namespace Chess
             _turn = 1;
             _currentPlayer = Color.White;
             _origin = null;
-            AtualizaLabels();
-            InicializaTabuleiro();
+            UpdateLabels();
+            InitializeBoard();
         }
 
         /** ************************************************************************
         * \brief Muda jogador.
         * \details Função responsável por mudar o jogador atual.
         ***************************************************************************/
-        private void MudaJogador()
+        private void SwitchPlayer()
         {
-            _currentPlayer = CorAdversaria(_currentPlayer);
+            _currentPlayer = OpponentColor(_currentPlayer);
         }
 
         /** ************************************************************************
@@ -103,22 +103,22 @@ namespace Chess
         * \param cor Cor do jogador em que se deseja descobrir o adversário.
         * \return Cor do jogador adversário.
         ***************************************************************************/
-        private Color CorAdversaria(Color cor)
+        private Color OpponentColor(Color color)
         {
-            return cor == Color.White ? Color.Black : Color.White;
+            return color == Color.White ? Color.Black : Color.White;
         }
 
         /** ************************************************************************
         * \brief Acessa peça.
         * \details Função responsável por acessar uma peça que se encontra na posição
         * informada.
-        * \param linha Row em que a peça se encontra.
-        * \param coluna Column em que a peça se encontra.
+        * \param row Row em que a peça se encontra.
+        * \param column Column em que a peça se encontra.
         * \return Peça que está na posição informada.
         ***************************************************************************/
-        public Piece GetPiece(int linha, int coluna)
+        public Piece GetPiece(int row, int column)
         {
-            return _piecesInPlay[linha, coluna];
+            return _piecesInPlay[row, column];
         }
 
         /** ************************************************************************
@@ -140,11 +140,11 @@ namespace Chess
         * \param peca Peça a ser colocada.
         * \param position Posição onde a peça será colocada.
         ***************************************************************************/
-        public void ColocarPeca(Piece peca, Position position)
+        public void ColocarPeca(Piece piece, Position position)
         {
-            _piecesInPlay[position.Row, position.Column] = peca;
-            peca.CurrentPosition = position;
-            _pictureBoxes[position.Row, position.Column].Image = peca.MostrarImagem();
+            _piecesInPlay[position.Row, position.Column] = piece;
+            piece.CurrentPosition = position;
+            _pictureBoxes[position.Row, position.Column].Image = piece.ShowImage();
         }
 
         /** ************************************************************************
@@ -152,18 +152,18 @@ namespace Chess
         * \details Função responsável por inicializar o board, colocando as peças
         * pretas e brancas em suas posições iniciais.
         ***************************************************************************/
-        private void InicializaTabuleiro()
+        private void InitializeBoard()
         {
             // Inicializa layout board
-            MostrarTabuleiro();
+            ShowBoard();
 
             // Resetando a imagem de todos os Picture Boxes
-            for (int linha = 0; linha < Rows; linha++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int coluna = 0; coluna < Columns; coluna++)
+                for (int column = 0; column < Columns; column++)
                 {
-                    _piecesInPlay[linha, coluna] = null;
-                    _pictureBoxes[linha, coluna].Image = null;
+                    _piecesInPlay[row, column] = null;
+                    _pictureBoxes[row, column].Image = null;
                 }
             }
 
@@ -249,7 +249,7 @@ namespace Chess
         * \brief Atualiza o labels.
         * \details Função responsável por atualizar todos os labels do board.
         ***************************************************************************/
-        private void AtualizaLabels()
+        private void UpdateLabels()
         {
             AtualizaLabelJogador();
             AtualizaLabelTurno();
@@ -271,17 +271,17 @@ namespace Chess
         * \brief Mostra board.
         * \details Função responsável por imprimir o board de jogo.
         ***************************************************************************/
-        private void MostrarTabuleiro()
+        private void ShowBoard()
         {
             System.Drawing.Color color;
 
             // Imprime o board com as cores iniciais
-            for (int linha = 0; linha < Rows; linha++)
+            for (int row = 0; row < Rows; row++)
             {
-                color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
-                for (int coluna = 0; coluna < Columns; coluna++)
+                color = (row % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
+                for (int column = 0; column < Columns; column++)
                 {
-                    _pictureBoxes[linha, coluna].BackColor = color;
+                    _pictureBoxes[row, column].BackColor = color;
                     color = (color == System.Drawing.Color.White) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 }
             }
@@ -294,21 +294,21 @@ namespace Chess
         * \param posicoesPossiveis Posições possíveis que a peça pode assumir e, 
         * portanto, serão destacadas.
         ***************************************************************************/
-        private void MostrarTabuleiro(bool[,] posicoesPossiveis)
+        private void ShowBoard(bool[,] posicoesPossiveis)
         {
             System.Drawing.Color color;
 
             // Imprimir o board nas cores iniciais
-            MostrarTabuleiro();
+            ShowBoard();
 
             // Imprimir board destacando as possíveis jogadas
-            for (int linha = 0; linha < Rows; linha++)
+            for (int row = 0; row < Rows; row++)
             {
-                color = (linha % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
-                for (int coluna = 0; coluna < Columns; coluna++)
+                color = (row % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
+                for (int column = 0; column < Columns; column++)
                 {
-                    _pictureBoxes[linha, coluna].BackColor = posicoesPossiveis[linha, coluna] ?
-                        (_pictureBoxes[linha, coluna].BackColor == System.Drawing.Color.White ? System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
+                    _pictureBoxes[row, column].BackColor = posicoesPossiveis[row, column] ?
+                        (_pictureBoxes[row, column].BackColor == System.Drawing.Color.White ? System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
                     color = color == System.Drawing.Color.White ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 }
             }
@@ -364,7 +364,7 @@ namespace Chess
             // Checa se a origem não é nula e a posição de destino é igual a de origem
             if (_origin != null && _origin.CompareTo(position) == 0)
             {
-                MostrarTabuleiro();
+                ShowBoard();
                 _origin = null;
                 return;
             }
@@ -378,7 +378,7 @@ namespace Chess
                 if (peca.PieceColor == _currentPlayer)
                 {
                     _origin = position;
-                    MostrarTabuleiro(ChecarMovimentosPossiveis(peca));
+                    ShowBoard(ChecarMovimentosPossiveis(peca));
                     return;
                 }
             }
@@ -388,13 +388,13 @@ namespace Chess
                 _pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightCyan) &&
                 _origin != null)
             {
-                MostrarTabuleiro();
+                ShowBoard();
                 ExecutaMovimento(_origin, position);
-                MudaJogador();
+                SwitchPlayer();
                 IncrementaTurno();
                 _origin = null;
                 VerificaFimDeJogo();
-                AtualizaLabels();
+                UpdateLabels();
             }
         }
 
@@ -520,13 +520,13 @@ namespace Chess
         ***************************************************************************/
         private Position PegarPosicaoRei(Color cor)
         {
-            for (int coluna = 0; coluna < Columns; coluna++)
+            for (int column = 0; column < Columns; column++)
             {
-                for (int linha = 0; linha < Rows; linha++)
+                for (int row = 0; row < Rows; row++)
                 {
-                    if (_piecesInPlay[linha, coluna] is King && _piecesInPlay[linha, coluna].PieceColor == cor)
+                    if (_piecesInPlay[row, column] is King && _piecesInPlay[row, column].PieceColor == cor)
                     {
-                        return new Position(linha, coluna);
+                        return new Position(row, column);
                     }
                 }
             }
@@ -550,7 +550,7 @@ namespace Chess
                 throw new System.Exception($"Não tem rei da cor: {cor} no board");
             }
 
-            foreach (Piece peca in PecasEmJogo(CorAdversaria(cor)))
+            foreach (Piece peca in PecasEmJogo(OpponentColor(cor)))
             {
                 bool[,] matrix = peca.PossibleMoves();
                 if (matrix[posicaoRei.Row, posicaoRei.Column])
@@ -573,20 +573,20 @@ namespace Chess
         public bool[,] ChecarMovimentosPossiveis(Piece peca)
         {
             bool[,] posicoesPossiveis = peca.PossibleMoves();
-            for (int coluna = 0; coluna < Columns; coluna++)
+            for (int column = 0; column < Columns; column++)
             {
-                for (int linha = 0; linha < Rows; linha++)
+                for (int row = 0; row < Rows; row++)
                 {
-                    if (posicoesPossiveis[linha, coluna])
+                    if (posicoesPossiveis[row, column])
                     {
                         _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = null;
-                        Piece pecaCapturada = GetPiece(linha, coluna);
-                        _piecesInPlay[linha, coluna] = peca;
+                        Piece pecaCapturada = GetPiece(row, column);
+                        _piecesInPlay[row, column] = peca;
                         if (VerificaXeque(peca.PieceColor))
                         {
-                            posicoesPossiveis[linha, coluna] = false;
+                            posicoesPossiveis[row, column] = false;
                         }
-                        _piecesInPlay[linha, coluna] = pecaCapturada;
+                        _piecesInPlay[row, column] = pecaCapturada;
                         _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = peca;
                     }
                 }
@@ -606,11 +606,11 @@ namespace Chess
             foreach (Piece peca in PecasEmJogo(cor))
             {
                 bool[,] matrix = ChecarMovimentosPossiveis(peca);
-                for (int linha = 0; linha < Rows; linha++)
+                for (int row = 0; row < Rows; row++)
                 {
-                    for (int coluna = 0; coluna < Columns; coluna++)
+                    for (int column = 0; column < Columns; column++)
                     {
-                        if (matrix[linha, coluna])
+                        if (matrix[row, column])
                         {
                             return false;
                         }
@@ -630,13 +630,13 @@ namespace Chess
         public void FimDoJogo()
         {
             // Mostra o vencedor
-            string mensagem = _check ? $"Xeque Mate\nVencedor: {CorAdversaria(_currentPlayer)}" : "Empate";
+            string mensagem = _check ? $"Xeque Mate\nVencedor: {OpponentColor(_currentPlayer)}" : "Empate";
             MessageBox.Show(mensagem);
 
             if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) 
                 == DialogResult.Yes)
             {
-                InicializarNovoJogo();
+                InitializeNewGame();
             }
             else
             {

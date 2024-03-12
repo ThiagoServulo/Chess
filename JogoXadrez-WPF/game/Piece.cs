@@ -50,7 +50,7 @@ namespace Chess
         * \details Função responsável por mostrar a imagem da peça.
         * \return Image refrente a peça.
         ***************************************************************************/
-        public Image MostrarImagem()
+        public Image ShowImage()
         {
             return Image;
         }

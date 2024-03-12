@@ -10,27 +10,27 @@
     ***************************************************************************/
     class Position : System.IComparable
     {
-        /// \brief Número da linha refrente a posição.
+        /// \brief Número da row refrente a posição.
         public int Row { get; set; }
 
-        /// \brief Número da coluna refrente a posição.
+        /// \brief Número da column refrente a posição.
         public int Column { get; set; }
 
         /** ************************************************************************
         * \brief Construtor da classe Posicao.
-        * \param linha Número da linha.
-        * \param coluna Número da coluna.
+        * \param row Número da row.
+        * \param column Número da column.
         ***************************************************************************/
-        public Position(int linha, int coluna)
+        public Position(int row, int column)
         {
-            SetPosition(linha, coluna);
+            SetPosition(row, column);
         }
 
         /** ************************************************************************
         * \brief Define posição.
         * \details Função responsável por definir uma posição.
-        * \param linha Número da linha.
-        * \param coluna Número da coluna.
+        * \param row Número da row.
+        * \param column Número da column.
         ***************************************************************************/
         public void SetPosition(int row, int column)
         {
