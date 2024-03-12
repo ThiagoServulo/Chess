@@ -94,13 +94,13 @@ namespace Chess
             this.pictureBoxG3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxG2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxG1 = new System.Windows.Forms.PictureBox();
-            this.labelTurno = new System.Windows.Forms.Label();
-            this.groupBoxBranco = new System.Windows.Forms.GroupBox();
-            this.labelPecasCapturadasBranco = new System.Windows.Forms.Label();
-            this.groupBoxPreto = new System.Windows.Forms.GroupBox();
-            this.labelPecasCapturadasPreto = new System.Windows.Forms.Label();
-            this.labelJogadorAtual = new System.Windows.Forms.Label();
-            this.labelXeque = new System.Windows.Forms.Label();
+            this.labelTurn = new System.Windows.Forms.Label();
+            this.groupBoxWhite = new System.Windows.Forms.GroupBox();
+            this.labelWhiteCapturedPieces = new System.Windows.Forms.Label();
+            this.groupBoxBlack = new System.Windows.Forms.GroupBox();
+            this.labelBlackCapturedPieces = new System.Windows.Forms.Label();
+            this.labelCurrentPlayer = new System.Windows.Forms.Label();
+            this.labelCheck = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA4)).BeginInit();
@@ -165,8 +165,8 @@ namespace Chess
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG1)).BeginInit();
-            this.groupBoxBranco.SuspendLayout();
-            this.groupBoxPreto.SuspendLayout();
+            this.groupBoxWhite.SuspendLayout();
+            this.groupBoxBlack.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxA1
@@ -809,85 +809,85 @@ namespace Chess
             this.pictureBoxG1.TabStop = false;
             this.pictureBoxG1.Click += new System.EventHandler(this.PictureBoxG1Click);
             // 
-            // labelTurno
+            // labelTurn
             // 
-            this.labelTurno.AutoSize = true;
-            this.labelTurno.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTurno.Location = new System.Drawing.Point(372, 14);
-            this.labelTurno.Name = "labelTurno";
-            this.labelTurno.Size = new System.Drawing.Size(88, 28);
-            this.labelTurno.TabIndex = 64;
-            this.labelTurno.Text = "Turno:  1";
+            this.labelTurn.AutoSize = true;
+            this.labelTurn.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTurn.Location = new System.Drawing.Point(372, 14);
+            this.labelTurn.Name = "labelTurn";
+            this.labelTurn.Size = new System.Drawing.Size(88, 28);
+            this.labelTurn.TabIndex = 64;
+            this.labelTurn.Text = "Turno:  1";
             // 
-            // groupBoxBranco
+            // groupBoxWhite
             // 
-            this.groupBoxBranco.Controls.Add(this.labelPecasCapturadasBranco);
-            this.groupBoxBranco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBoxBranco.Location = new System.Drawing.Point(21, 26);
-            this.groupBoxBranco.Name = "groupBoxBranco";
-            this.groupBoxBranco.Size = new System.Drawing.Size(200, 91);
-            this.groupBoxBranco.TabIndex = 65;
-            this.groupBoxBranco.TabStop = false;
-            this.groupBoxBranco.Text = "Jogador 1: Branco";
+            this.groupBoxWhite.Controls.Add(this.labelWhiteCapturedPieces);
+            this.groupBoxWhite.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxWhite.Location = new System.Drawing.Point(21, 26);
+            this.groupBoxWhite.Name = "groupBoxWhite";
+            this.groupBoxWhite.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxWhite.TabIndex = 65;
+            this.groupBoxWhite.TabStop = false;
+            this.groupBoxWhite.Text = "Jogador 1: Branco";
             // 
-            // labelPecasCapturadasBranco
+            // labelWhiteCapturedPieces
             // 
-            this.labelPecasCapturadasBranco.AutoSize = true;
-            this.labelPecasCapturadasBranco.Location = new System.Drawing.Point(24, 41);
-            this.labelPecasCapturadasBranco.Name = "labelPecasCapturadasBranco";
-            this.labelPecasCapturadasBranco.Size = new System.Drawing.Size(144, 21);
-            this.labelPecasCapturadasBranco.TabIndex = 66;
-            this.labelPecasCapturadasBranco.Text = "Peças capturadas: 0";
+            this.labelWhiteCapturedPieces.AutoSize = true;
+            this.labelWhiteCapturedPieces.Location = new System.Drawing.Point(24, 41);
+            this.labelWhiteCapturedPieces.Name = "labelWhiteCapturedPieces";
+            this.labelWhiteCapturedPieces.Size = new System.Drawing.Size(144, 21);
+            this.labelWhiteCapturedPieces.TabIndex = 66;
+            this.labelWhiteCapturedPieces.Text = "Peças capturadas: 0";
             // 
-            // groupBoxPreto
+            // groupBoxBlack
             // 
-            this.groupBoxPreto.Controls.Add(this.labelPecasCapturadasPreto);
-            this.groupBoxPreto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBoxPreto.Location = new System.Drawing.Point(621, 26);
-            this.groupBoxPreto.Name = "groupBoxPreto";
-            this.groupBoxPreto.Size = new System.Drawing.Size(200, 91);
-            this.groupBoxPreto.TabIndex = 67;
-            this.groupBoxPreto.TabStop = false;
-            this.groupBoxPreto.Text = "Jogador 2: Preto";
+            this.groupBoxBlack.Controls.Add(this.labelBlackCapturedPieces);
+            this.groupBoxBlack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxBlack.Location = new System.Drawing.Point(621, 26);
+            this.groupBoxBlack.Name = "groupBoxBlack";
+            this.groupBoxBlack.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxBlack.TabIndex = 67;
+            this.groupBoxBlack.TabStop = false;
+            this.groupBoxBlack.Text = "Jogador 2: Preto";
             // 
-            // labelPecasCapturadasPreto
+            // labelBlackCapturedPieces
             // 
-            this.labelPecasCapturadasPreto.AutoSize = true;
-            this.labelPecasCapturadasPreto.Location = new System.Drawing.Point(24, 41);
-            this.labelPecasCapturadasPreto.Name = "labelPecasCapturadasPreto";
-            this.labelPecasCapturadasPreto.Size = new System.Drawing.Size(144, 21);
-            this.labelPecasCapturadasPreto.TabIndex = 66;
-            this.labelPecasCapturadasPreto.Text = "Peças capturadas: 0";
+            this.labelBlackCapturedPieces.AutoSize = true;
+            this.labelBlackCapturedPieces.Location = new System.Drawing.Point(24, 41);
+            this.labelBlackCapturedPieces.Name = "labelBlackCapturedPieces";
+            this.labelBlackCapturedPieces.Size = new System.Drawing.Size(144, 21);
+            this.labelBlackCapturedPieces.TabIndex = 66;
+            this.labelBlackCapturedPieces.Text = "Peças capturadas: 0";
             // 
-            // labelJogadorAtual
+            // labelCurrentPlayer
             // 
-            this.labelJogadorAtual.AutoSize = true;
-            this.labelJogadorAtual.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelJogadorAtual.Location = new System.Drawing.Point(317, 55);
-            this.labelJogadorAtual.Name = "labelJogadorAtual";
-            this.labelJogadorAtual.Size = new System.Drawing.Size(204, 28);
-            this.labelJogadorAtual.TabIndex = 68;
-            this.labelJogadorAtual.Text = "Jogador Atual: Branco";
+            this.labelCurrentPlayer.AutoSize = true;
+            this.labelCurrentPlayer.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentPlayer.Location = new System.Drawing.Point(317, 55);
+            this.labelCurrentPlayer.Name = "labelCurrentPlayer";
+            this.labelCurrentPlayer.Size = new System.Drawing.Size(204, 28);
+            this.labelCurrentPlayer.TabIndex = 68;
+            this.labelCurrentPlayer.Text = "Jogador Atual: Branco";
             // 
-            // labelXeque
+            // labelCheck
             // 
-            this.labelXeque.AutoSize = true;
-            this.labelXeque.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelXeque.Location = new System.Drawing.Point(324, 99);
-            this.labelXeque.Name = "labelXeque";
-            this.labelXeque.Size = new System.Drawing.Size(183, 28);
-            this.labelXeque.TabIndex = 69;
-            this.labelXeque.Text = "Você está em xeque";
+            this.labelCheck.AutoSize = true;
+            this.labelCheck.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCheck.Location = new System.Drawing.Point(324, 99);
+            this.labelCheck.Name = "labelCheck";
+            this.labelCheck.Size = new System.Drawing.Size(183, 28);
+            this.labelCheck.TabIndex = 69;
+            this.labelCheck.Text = "Você está em xeque";
             // 
             // Tabuleiro
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(839, 962);
-            this.Controls.Add(this.labelXeque);
-            this.Controls.Add(this.labelJogadorAtual);
-            this.Controls.Add(this.groupBoxPreto);
-            this.Controls.Add(this.groupBoxBranco);
-            this.Controls.Add(this.labelTurno);
+            this.Controls.Add(this.labelCheck);
+            this.Controls.Add(this.labelCurrentPlayer);
+            this.Controls.Add(this.groupBoxBlack);
+            this.Controls.Add(this.groupBoxWhite);
+            this.Controls.Add(this.labelTurn);
             this.Controls.Add(this.pictureBoxH8);
             this.Controls.Add(this.pictureBoxH7);
             this.Controls.Add(this.pictureBoxH6);
@@ -1023,10 +1023,10 @@ namespace Chess
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxG1)).EndInit();
-            this.groupBoxBranco.ResumeLayout(false);
-            this.groupBoxBranco.PerformLayout();
-            this.groupBoxPreto.ResumeLayout(false);
-            this.groupBoxPreto.PerformLayout();
+            this.groupBoxWhite.ResumeLayout(false);
+            this.groupBoxWhite.PerformLayout();
+            this.groupBoxBlack.ResumeLayout(false);
+            this.groupBoxBlack.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1098,13 +1098,13 @@ namespace Chess
         public System.Windows.Forms.PictureBox pictureBoxG3;
         public System.Windows.Forms.PictureBox pictureBoxG2;
         public System.Windows.Forms.PictureBox pictureBoxG1;
-        private Label labelTurno;
-        private GroupBox groupBoxBranco;
-        private Label labelPecasCapturadasBranco;
-        private GroupBox groupBoxPreto;
-        private Label labelPecasCapturadasPreto;
-        private Label labelJogadorAtual;
-        private Label labelXeque;
+        private Label labelTurn;
+        private GroupBox groupBoxWhite;
+        private Label labelWhiteCapturedPieces;
+        private GroupBox groupBoxBlack;
+        private Label labelBlackCapturedPieces;
+        private Label labelCurrentPlayer;
+        private Label labelCheck;
     }
 }
 

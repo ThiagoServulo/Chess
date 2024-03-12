@@ -56,7 +56,7 @@
                 position.Row += 1;
             }
 
-            // direção leste (direita)
+            // direção leste (right)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -68,7 +68,7 @@
                 position.Column += 1;
             }
 
-            // direção oeste (esquerda)
+            // direção oeste (left)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             while (CanMove(position))
             {

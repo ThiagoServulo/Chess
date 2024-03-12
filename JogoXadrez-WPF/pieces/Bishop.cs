@@ -32,7 +32,7 @@
 
             Position position = new Position(0, 0);
 
-            // direção noroeste (diagonal superior esquerda)
+            // direção noroeste (diagonal superior left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
@@ -44,7 +44,7 @@
                 position.SetPosition(position.Row + 1, position.Column - 1);
             }
 
-            // direção nordeste (diagonal superior direita)
+            // direção nordeste (diagonal superior right)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -56,7 +56,7 @@
                 position.SetPosition(position.Row + 1, position.Column + 1);
             }
 
-            // direção suldoeste (diagonal inferior esquerda)
+            // direção suldoeste (diagonal inferior left)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -68,7 +68,7 @@
                 position.SetPosition(position.Row - 1, position.Column + 1);
             }
 
-            // direção suldeste (diagonal inferior direita)
+            // direção suldeste (diagonal inferior right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {

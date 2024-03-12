@@ -137,10 +137,10 @@ namespace Chess
         * \brief Colocar peça.
         * \details Função responsável por colocar uma peça em uma determinada 
         * posição.
-        * \param peca Peça a ser colocada.
+        * \param piece Peça a ser colocada.
         * \param position Posição onde a peça será colocada.
         ***************************************************************************/
-        public void ColocarPeca(Piece piece, Position position)
+        public void PlacePiece(Piece piece, Position position)
         {
             _piecesInPlay[position.Row, position.Column] = piece;
             piece.CurrentPosition = position;
@@ -168,40 +168,40 @@ namespace Chess
             }
 
             // Coloca as peças brancas
-            ColocarPeca(new Rook(this, Color.White), new Position(7, 0));
-            ColocarPeca(new Knight(this, Color.White), new Position(7, 1));
-            ColocarPeca(new Bishop(this, Color.White), new Position(7, 2));
-            ColocarPeca(new Queen(this, Color.White), new Position(7, 3));
-            ColocarPeca(new King(this, Color.White), new Position(7, 4));
-            ColocarPeca(new Bishop(this, Color.White), new Position(7, 5));
-            ColocarPeca(new Knight(this, Color.White), new Position(7, 6));
-            ColocarPeca(new Rook(this, Color.White), new Position(7, 7));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 7));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 6));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 5));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 4));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 3));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 2));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 1));
-            ColocarPeca(new Pawn(this, Color.White), new Position(6, 0));
+            PlacePiece(new Rook(this, Color.White), new Position(7, 0));
+            PlacePiece(new Knight(this, Color.White), new Position(7, 1));
+            PlacePiece(new Bishop(this, Color.White), new Position(7, 2));
+            PlacePiece(new Queen(this, Color.White), new Position(7, 3));
+            PlacePiece(new King(this, Color.White), new Position(7, 4));
+            PlacePiece(new Bishop(this, Color.White), new Position(7, 5));
+            PlacePiece(new Knight(this, Color.White), new Position(7, 6));
+            PlacePiece(new Rook(this, Color.White), new Position(7, 7));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 7));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 6));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 5));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 4));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 3));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 2));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 1));
+            PlacePiece(new Pawn(this, Color.White), new Position(6, 0));
 
             // Coloca as peças pretas
-            ColocarPeca(new Rook(this, Color.Black), new Position(0, 0));
-            ColocarPeca(new Knight(this, Color.Black), new Position(0, 1));
-            ColocarPeca(new Bishop(this, Color.Black), new Position(0, 2));
-            ColocarPeca(new Queen(this, Color.Black), new Position(0, 3));
-            ColocarPeca(new King(this, Color.Black), new Position(0, 4));
-            ColocarPeca(new Bishop(this, Color.Black), new Position(0, 5));
-            ColocarPeca(new Knight(this, Color.Black), new Position(0, 6));
-            ColocarPeca(new Rook(this, Color.Black), new Position(0, 7));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 7));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 6));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 5));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 4));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 3));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 2));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 1));
-            ColocarPeca(new Pawn(this, Color.Black), new Position(1, 0));
+            PlacePiece(new Rook(this, Color.Black), new Position(0, 0));
+            PlacePiece(new Knight(this, Color.Black), new Position(0, 1));
+            PlacePiece(new Bishop(this, Color.Black), new Position(0, 2));
+            PlacePiece(new Queen(this, Color.Black), new Position(0, 3));
+            PlacePiece(new King(this, Color.Black), new Position(0, 4));
+            PlacePiece(new Bishop(this, Color.Black), new Position(0, 5));
+            PlacePiece(new Knight(this, Color.Black), new Position(0, 6));
+            PlacePiece(new Rook(this, Color.Black), new Position(0, 7));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 7));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 6));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 5));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 4));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 3));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 2));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 1));
+            PlacePiece(new Pawn(this, Color.Black), new Position(1, 0));
         }
 
         /** ************************************************************************
@@ -211,7 +211,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelXeque()
         {
-            labelXeque.Text = _check ? "Você está em Xeque" : " ";
+            labelCheck.Text = _check ? "Você está em Xeque" : " ";
         }
 
         /** ************************************************************************
@@ -221,7 +221,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelJogador()
         {
-            labelJogadorAtual.Text = "Jogador atual: " + (_currentPlayer == Color.White ? "Branco" : "Preto");
+            labelCurrentPlayer.Text = "Jogador atual: " + (_currentPlayer == Color.White ? "Branco" : "Preto");
         }
 
         /** ************************************************************************
@@ -231,7 +231,7 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelTurno()
         {
-            labelTurno.Text = $"Turno: {_turn}";
+            labelTurn.Text = $"Turno: {_turn}";
         }
 
         /** ************************************************************************
@@ -241,8 +241,8 @@ namespace Chess
         ***************************************************************************/
         private void AtualizaLabelsPecasCapturadas()
         {
-            labelPecasCapturadasBranco.Text = $"Peças capturadas: {_blackCapturedQuantity}";
-            labelPecasCapturadasPreto.Text = $"Peças capturadas: {_whiteCapturedQuantity}";
+            labelWhiteCapturedPieces.Text = $"Peças capturadas: {_blackCapturedQuantity}";
+            labelBlackCapturedPieces.Text = $"Peças capturadas: {_whiteCapturedQuantity}";
         }
 
         /** ************************************************************************
@@ -361,7 +361,7 @@ namespace Chess
         ***************************************************************************/
         private void ProcessaPictureBoxClick(Position position)
         {
-            // Checa se a origem não é nula e a posição de destino é igual a de origem
+            // Checa se a origem não é nula e a posição de destination é igual a de origem
             if (_origin != null && _origin.CompareTo(position) == 0)
             {
                 ShowBoard();
@@ -372,13 +372,13 @@ namespace Chess
             // Verifica se existe peça na posição informada
             if (ExistePeca(position))
             {
-                Piece peca = GetPiece(position);
+                Piece piece = GetPiece(position);
 
                 // Se a peça for do jogado atual, essa será a origem da jogada
-                if (peca.PieceColor == _currentPlayer)
+                if (piece.PieceColor == _currentPlayer)
                 {
                     _origin = position;
-                    ShowBoard(ChecarMovimentosPossiveis(peca));
+                    ShowBoard(ChecarMovimentosPossiveis(piece));
                     return;
                 }
             }
@@ -428,47 +428,47 @@ namespace Chess
         * \brief Executa o movimento da peça.
         * \details Função responsável por executar a movimentação de uma peça.
         * \param origem Posição de origem da peça.
-        * \param destino Posição de destino da peça.
-        * \return Peça que se encontrava na posição de destino, que foi capturada
+        * \param destination Posição de destination da peça.
+        * \return Peça que se encontrava na posição de destination, que foi capturada
         * pelo jogador.
         ***************************************************************************/
-        public Piece ExecutaMovimento(Position origem, Position destino)
+        public Piece ExecutaMovimento(Position origem, Position destination)
         {
-            // Movimenta a peça da origem para o destino, armazenando a peça capturada
-            Piece peca = RetirarPeca(origem);
-            peca.IncrementNumberOfMoves();
-            Piece pecaCapturada = RetirarPeca(destino);
-            ColocarPeca(peca, destino);
+            // Movimenta a peça da origem para o destination, armazenando a peça capturada
+            Piece piece = RetirarPeca(origem);
+            piece.IncrementNumberOfMoves();
+            Piece pecaCapturada = RetirarPeca(destination);
+            PlacePiece(piece, destination);
 
             // Implementação da jogada especial de Promoção
-            if (peca is Pawn &&
-                ((peca.PieceColor == Color.White && destino.Row == 0) ||
-                (peca.PieceColor == Color.Black && destino.Row == 7)))
+            if (piece is Pawn &&
+                ((piece.PieceColor == Color.White && destination.Row == 0) ||
+                (piece.PieceColor == Color.Black && destination.Row == 7)))
             {
-                RetirarPeca(destino);
-                ColocarPeca(new Queen(this, peca.PieceColor), destino);
+                RetirarPeca(destination);
+                PlacePiece(new Queen(this, piece.PieceColor), destination);
             }
             
             // Implementação da jogada especial Roque Pequeno
-            if (peca is King && destino.Column == origem.Column + 2)
+            if (piece is King && destination.Column == origem.Column + 2)
             {
                 Piece torre = RetirarPeca(new Position(origem.Row, origem.Column + 3));
                 torre.IncrementNumberOfMoves();
-                ColocarPeca(torre, new Position(origem.Row, origem.Column + 1));
+                PlacePiece(torre, new Position(origem.Row, origem.Column + 1));
             }
 
             // Implementação da jogada especial Roque Grande
-            if (peca is King && destino.Column == origem.Column - 2)
+            if (piece is King && destination.Column == origem.Column - 2)
             {
                 Piece torre = RetirarPeca(new Position(origem.Row, origem.Column - 4));
                 torre.IncrementNumberOfMoves();
-                ColocarPeca(torre, new Position(origem.Row, origem.Column - 1));
+                PlacePiece(torre, new Position(origem.Row, origem.Column - 1));
             }
 
             // Implementação da jogada especial En Passant
-            if (peca is Pawn && origem.Column != destino.Column && pecaCapturada == null)
+            if (piece is Pawn && origem.Column != destination.Column && pecaCapturada == null)
             {
-                Position posicaoPeao = new Position(peca.PieceColor == Color.White ? destino.Row + 1 : destino.Row - 1, destino.Column);
+                Position posicaoPeao = new Position(piece.PieceColor == Color.White ? destination.Row + 1 : destination.Row - 1, destination.Column);
                 pecaCapturada = RetirarPeca(posicaoPeao);
             }
 
@@ -491,11 +491,11 @@ namespace Chess
         public HashSet<Piece> PecasEmJogo(Color cor)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach (Piece peca in _piecesInPlay)
+            foreach (Piece piece in _piecesInPlay)
             {
-                if (peca != null && peca.PieceColor == cor)
+                if (piece != null && piece.PieceColor == cor)
                 {
-                    aux.Add(peca);
+                    aux.Add(piece);
                 }
             }
             return aux;
@@ -550,9 +550,9 @@ namespace Chess
                 throw new System.Exception($"Não tem rei da cor: {cor} no board");
             }
 
-            foreach (Piece peca in PecasEmJogo(OpponentColor(cor)))
+            foreach (Piece piece in PecasEmJogo(OpponentColor(cor)))
             {
-                bool[,] matrix = peca.PossibleMoves();
+                bool[,] matrix = piece.PossibleMoves();
                 if (matrix[posicaoRei.Row, posicaoRei.Column])
                 {
                     ((King)_piecesInPlay[posicaoRei.Row, posicaoRei.Column]).ReceivedCheck = true;
@@ -567,27 +567,27 @@ namespace Chess
         * \brief Checa as posíveis movimentações de uma peça.
         * \details Função responsável por checar e listar as posíveis movimentações
         * de uma determinada peça.
-        * \param peca Peça a ser analisada.
+        * \param piece Peça a ser analisada.
         * \return Matriz de booleanos indicando quais posições uma peça pode assumir.
         ***************************************************************************/
-        public bool[,] ChecarMovimentosPossiveis(Piece peca)
+        public bool[,] ChecarMovimentosPossiveis(Piece piece)
         {
-            bool[,] posicoesPossiveis = peca.PossibleMoves();
+            bool[,] posicoesPossiveis = piece.PossibleMoves();
             for (int column = 0; column < Columns; column++)
             {
                 for (int row = 0; row < Rows; row++)
                 {
                     if (posicoesPossiveis[row, column])
                     {
-                        _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = null;
+                        _piecesInPlay[piece.CurrentPosition.Row, piece.CurrentPosition.Column] = null;
                         Piece pecaCapturada = GetPiece(row, column);
-                        _piecesInPlay[row, column] = peca;
-                        if (VerificaXeque(peca.PieceColor))
+                        _piecesInPlay[row, column] = piece;
+                        if (VerificaXeque(piece.PieceColor))
                         {
                             posicoesPossiveis[row, column] = false;
                         }
                         _piecesInPlay[row, column] = pecaCapturada;
-                        _piecesInPlay[peca.CurrentPosition.Row, peca.CurrentPosition.Column] = peca;
+                        _piecesInPlay[piece.CurrentPosition.Row, piece.CurrentPosition.Column] = piece;
                     }
                 }
             }
@@ -603,9 +603,9 @@ namespace Chess
         ***************************************************************************/
         public bool VerificaXequeMate(Color cor)
         {
-            foreach (Piece peca in PecasEmJogo(cor))
+            foreach (Piece piece in PecasEmJogo(cor))
             {
-                bool[,] matrix = ChecarMovimentosPossiveis(peca);
+                bool[,] matrix = ChecarMovimentosPossiveis(piece);
                 for (int row = 0; row < Rows; row++)
                 {
                     for (int column = 0; column < Columns; column++)
@@ -654,9 +654,9 @@ namespace Chess
         ***************************************************************************/
         public bool CorTemOndeMover()
         {
-            foreach(Piece peca in PecasEmJogo(_currentPlayer))
+            foreach(Piece piece in PecasEmJogo(_currentPlayer))
             {
-                foreach (bool position in ChecarMovimentosPossiveis(peca))
+                foreach (bool position in ChecarMovimentosPossiveis(piece))
                 {
                     if(position)
                     {

@@ -33,8 +33,8 @@
         ***************************************************************************/
         private bool VerificaTorreDisponivelParaRoque(Position position)
         {
-            Piece peca = ChessBoard.GetPiece(position);
-            return peca is Rook && peca.PieceColor == PieceColor && peca.NumberOfMoves == 0;
+            Piece piece = ChessBoard.GetPiece(position);
+            return piece is Rook && piece.PieceColor == PieceColor && piece.NumberOfMoves == 0;
         }
 
         /** ************************************************************************
@@ -57,21 +57,21 @@
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção nordeste (diagonal superior direita)
+            // direção nordeste (diagonal superior right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção leste (direita)
+            // direção leste (right)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção suldeste (diagonal inferior direita)
+            // direção suldeste (diagonal inferior right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
@@ -85,21 +85,21 @@
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção suldoeste (diagonal inferior esquerda)
+            // direção suldoeste (diagonal inferior left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção oeste (esquerda)
+            // direção oeste (left)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção noroeste (diagonal superior esquerda)
+            // direção noroeste (diagonal superior left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
