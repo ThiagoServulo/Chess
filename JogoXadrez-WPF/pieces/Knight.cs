@@ -12,7 +12,7 @@
         /** ************************************************************************
         * \brief Construtor da classe Cavalo.
         * \param board Tabuleiro do jogo.
-        * \param cor Cor da peça.
+        * \param color Cor da peça.
         ***************************************************************************/
         public Knight(Board board, Color pieceColor) : base(board, pieceColor)
         {

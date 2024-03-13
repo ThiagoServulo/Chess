@@ -111,7 +111,7 @@
                     }
                 }
             }
-            else // Peão de cor preta
+            else // Peão de color preta
             {
                 position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
                 if (ValidPosition(position) && IsFree(position))

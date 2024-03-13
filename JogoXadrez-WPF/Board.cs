@@ -97,10 +97,10 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Busca cor adversária.
-        * \details Função responsável por retornar a cor adversária de um determinado
+        * \brief Busca color adversária.
+        * \details Função responsável por retornar a color adversária de um determinado
         * jogador.
-        * \param cor Cor do jogador em que se deseja descobrir o adversário.
+        * \param color Cor do jogador em que se deseja descobrir o adversário.
         * \return Cor do jogador adversário.
         ***************************************************************************/
         private Color OpponentColor(Color color)
@@ -209,19 +209,19 @@ namespace Chess
         * \details Função responsável por atualizar o label de xeque, indicando se o 
         * jogador atual está ou não em xeque.
         ***************************************************************************/
-        private void AtualizaLabelXeque()
+        private void UpdateCheckLabel()
         {
-            labelCheck.Text = _check ? "Você está em Xeque" : " ";
+            labelCheck.Text = _check ? "You are in check" : " ";
         }
 
         /** ************************************************************************
         * \brief Atualiza o label do jogador.
         * \details Função responsável por atualizar o label do jogador, indicando a
-        * cor do jogador atual.
+        * color do jogador atual.
         ***************************************************************************/
-        private void AtualizaLabelJogador()
+        private void UpdatePlayerLabel()
         {
-            labelCurrentPlayer.Text = "Jogador atual: " + (_currentPlayer == Color.White ? "Branco" : "Preto");
+            labelCurrentPlayer.Text = "Current player: " + (_currentPlayer == Color.White ? "White" : "Black");
         }
 
         /** ************************************************************************
@@ -229,9 +229,9 @@ namespace Chess
         * \details Função responsável por atualizar o label de turno, indicando o 
         * número do turno atual.
         ***************************************************************************/
-        private void AtualizaLabelTurno()
+        private void UpdateTurnLabel()
         {
-            labelTurn.Text = $"Turno: {_turn}";
+            labelTurn.Text = $"Turn: {_turn}";
         }
 
         /** ************************************************************************
@@ -239,10 +239,10 @@ namespace Chess
         * \details Função responsável por atualizar o label de peças capturadas, 
         * indicando o número de peças capturadas por cada jogador.
         ***************************************************************************/
-        private void AtualizaLabelsPecasCapturadas()
+        private void UpdateCapturedPiecesLabels()
         {
-            labelWhiteCapturedPieces.Text = $"Peças capturadas: {_blackCapturedQuantity}";
-            labelBlackCapturedPieces.Text = $"Peças capturadas: {_whiteCapturedQuantity}";
+            labelWhiteCapturedPieces.Text = $"Captured pieces: {_blackCapturedQuantity}";
+            labelBlackCapturedPieces.Text = $"Captured pieces: {_whiteCapturedQuantity}";
         }
 
         /** ************************************************************************
@@ -251,17 +251,17 @@ namespace Chess
         ***************************************************************************/
         private void UpdateLabels()
         {
-            AtualizaLabelJogador();
-            AtualizaLabelTurno();
-            AtualizaLabelsPecasCapturadas();
-            AtualizaLabelXeque();
+            UpdatePlayerLabel();
+            UpdateTurnLabel();
+            UpdateCapturedPiecesLabels();
+            UpdateCheckLabel();
         }
 
         /** ************************************************************************
         * \brief Incrementa turno.
         * \details Função responsável por incrementar o número do turno atual.
         ***************************************************************************/
-        private void IncrementaTurno()
+        private void IncrementTurn()
         {
             _turn++;
         }
@@ -291,10 +291,10 @@ namespace Chess
         * \brief Mostra board.
         * \details Função responsável por imprimir o board de jogo, destacando
         * as posíveis movimentações de uma peça.
-        * \param posicoesPossiveis Posições possíveis que a peça pode assumir e, 
+        * \param possiblePositions Posições possíveis que a peça pode assumir e, 
         * portanto, serão destacadas.
         ***************************************************************************/
-        private void ShowBoard(bool[,] posicoesPossiveis)
+        private void ShowBoard(bool[,] possiblePositions)
         {
             System.Drawing.Color color;
 
@@ -307,7 +307,7 @@ namespace Chess
                 color = (row % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 for (int column = 0; column < Columns; column++)
                 {
-                    _pictureBoxes[row, column].BackColor = posicoesPossiveis[row, column] ?
+                    _pictureBoxes[row, column].BackColor = possiblePositions[row, column] ?
                         (_pictureBoxes[row, column].BackColor == System.Drawing.Color.White ? System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
                     color = color == System.Drawing.Color.White ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 }
@@ -320,10 +320,10 @@ namespace Chess
         * \param position Posição na qual a peça será retirada.
         * \return Peça retirada da posição informada.
         ***************************************************************************/
-        public Piece RetirarPeca(Position position)
+        public Piece RemovePiece(Position position)
         {
             // Verifica se existe peça na posição informada
-            if (!ExistePeca(position))
+            if (!PieceExists(position))
             {
                 return null;
             }
@@ -348,7 +348,7 @@ namespace Chess
         * \return 'true' caso exista uma peça na posição informada ou 'false' caso 
         * não exista.
         ***************************************************************************/
-        public bool ExistePeca(Position position)
+        public bool PieceExists(Position position)
         {
             return GetPiece(position) != null;
         }
@@ -359,7 +359,7 @@ namespace Chess
         * 'PictureBox'.
         * \param position Posição do 'PictureBox' que foi clicado.
         ***************************************************************************/
-        private void ProcessaPictureBoxClick(Position position)
+        private void ProcessPictureBoxClick(Position position)
         {
             // Checa se a origem não é nula e a posição de destination é igual a de origem
             if (_origin != null && _origin.CompareTo(position) == 0)
@@ -370,7 +370,7 @@ namespace Chess
             }
 
             // Verifica se existe peça na posição informada
-            if (ExistePeca(position))
+            if (PieceExists(position))
             {
                 Piece piece = GetPiece(position);
 
@@ -378,7 +378,7 @@ namespace Chess
                 if (piece.PieceColor == _currentPlayer)
                 {
                     _origin = position;
-                    ShowBoard(ChecarMovimentosPossiveis(piece));
+                    ShowBoard(CheckPossibleMoves(piece));
                     return;
                 }
             }
@@ -391,7 +391,7 @@ namespace Chess
                 ShowBoard();
                 ExecutaMovimento(_origin, position);
                 SwitchPlayer();
-                IncrementaTurno();
+                IncrementTurn();
                 _origin = null;
                 VerificaFimDeJogo();
                 UpdateLabels();
@@ -409,16 +409,16 @@ namespace Chess
             bool ret;
 
             // Verifica xeque mate
-            _check = VerificaXeque(_currentPlayer);
-            ret = _check ? VerificaXequeMate(_currentPlayer) : false;
+            _check = CheckCheck(_currentPlayer);
+            ret = _check ? CheckCheckmate(_currentPlayer) : false;
 
             // Verifica empate
-            ret = ret ? true : !ret && (!CorTemOndeMover() || (QuantidadeDePecasEmJogo() <= 2));
+            ret = ret ? true : !ret && (!ColorHasWhereToMove() || (NumberOfPiecesInPlay() <= 2));
 
             // Chama a função de fim de jogo caso nescessário
             if(ret)
             {
-                FimDoJogo();
+                EndOfGame();
             }
 
             return ret;
@@ -435,9 +435,9 @@ namespace Chess
         public Piece ExecutaMovimento(Position origem, Position destination)
         {
             // Movimenta a peça da origem para o destination, armazenando a peça capturada
-            Piece piece = RetirarPeca(origem);
+            Piece piece = RemovePiece(origem);
             piece.IncrementNumberOfMoves();
-            Piece pecaCapturada = RetirarPeca(destination);
+            Piece capturedPiece = RemovePiece(destination);
             PlacePiece(piece, destination);
 
             // Implementação da jogada especial de Promoção
@@ -445,14 +445,14 @@ namespace Chess
                 ((piece.PieceColor == Color.White && destination.Row == 0) ||
                 (piece.PieceColor == Color.Black && destination.Row == 7)))
             {
-                RetirarPeca(destination);
+                RemovePiece(destination);
                 PlacePiece(new Queen(this, piece.PieceColor), destination);
             }
             
             // Implementação da jogada especial Roque Pequeno
             if (piece is King && destination.Column == origem.Column + 2)
             {
-                Piece torre = RetirarPeca(new Position(origem.Row, origem.Column + 3));
+                Piece torre = RemovePiece(new Position(origem.Row, origem.Column + 3));
                 torre.IncrementNumberOfMoves();
                 PlacePiece(torre, new Position(origem.Row, origem.Column + 1));
             }
@@ -460,40 +460,40 @@ namespace Chess
             // Implementação da jogada especial Roque Grande
             if (piece is King && destination.Column == origem.Column - 2)
             {
-                Piece torre = RetirarPeca(new Position(origem.Row, origem.Column - 4));
+                Piece torre = RemovePiece(new Position(origem.Row, origem.Column - 4));
                 torre.IncrementNumberOfMoves();
                 PlacePiece(torre, new Position(origem.Row, origem.Column - 1));
             }
 
             // Implementação da jogada especial En Passant
-            if (piece is Pawn && origem.Column != destination.Column && pecaCapturada == null)
+            if (piece is Pawn && origem.Column != destination.Column && capturedPiece == null)
             {
                 Position posicaoPeao = new Position(piece.PieceColor == Color.White ? destination.Row + 1 : destination.Row - 1, destination.Column);
-                pecaCapturada = RetirarPeca(posicaoPeao);
+                capturedPiece = RemovePiece(posicaoPeao);
             }
 
             // Incrementa contador de peças capturadas
-            if (pecaCapturada != null)
+            if (capturedPiece != null)
             {
-                _ = pecaCapturada.PieceColor == Color.White ? _whiteCapturedQuantity++ : _blackCapturedQuantity++;
+                _ = capturedPiece.PieceColor == Color.White ? _whiteCapturedQuantity++ : _blackCapturedQuantity++;
             }
 
-            return pecaCapturada;
+            return capturedPiece;
         }
 
         /** ************************************************************************
         * \brief Lista as peças que estão em jogo.
         * \details Função responsável por informar quais são as peças em jogo de um
         * determinado jogador.
-        * \param cor Cor do jogador em que se deseja saber as peças que estão em jogo.
+        * \param color Cor do jogador em que se deseja saber as peças que estão em jogo.
         * \return Um conjunto de peças do jogador informado.
         ***************************************************************************/
-        public HashSet<Piece> PecasEmJogo(Color cor)
+        public HashSet<Piece> PiecesInPlay(Color color)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
             foreach (Piece piece in _piecesInPlay)
             {
-                if (piece != null && piece.PieceColor == cor)
+                if (piece != null && piece.PieceColor == color)
                 {
                     aux.Add(piece);
                 }
@@ -506,25 +506,25 @@ namespace Chess
         * \details Função responsável por informar a quantidade de peças em jogo.
         * \return Quantidade de peças em jogo.
         ***************************************************************************/
-        public int QuantidadeDePecasEmJogo()
+        public int NumberOfPiecesInPlay()
         {
-            return PecasEmJogo(Color.White).Count + PecasEmJogo(Color.Black).Count;
+            return PiecesInPlay(Color.White).Count + PiecesInPlay(Color.Black).Count;
         }
 
         /** ************************************************************************
         * \brief Pega a posição do rei.
         * \details Função responsável por informar qual a posição do rei de uma 
-        * determinada cor.
-        * \param cor Cor do jogador no qual se deseja saber em que posição está o rei.
+        * determinada color.
+        * \param color Cor do jogador no qual se deseja saber em que posição está o rei.
         * \return Posição do rei do jogador informado.
         ***************************************************************************/
-        private Position PegarPosicaoRei(Color cor)
+        private Position PegarPosicaoRei(Color color)
         {
             for (int column = 0; column < Columns; column++)
             {
                 for (int row = 0; row < Rows; row++)
                 {
-                    if (_piecesInPlay[row, column] is King && _piecesInPlay[row, column].PieceColor == cor)
+                    if (_piecesInPlay[row, column] is King && _piecesInPlay[row, column].PieceColor == color)
                     {
                         return new Position(row, column);
                     }
@@ -536,26 +536,26 @@ namespace Chess
         /** ************************************************************************
         * \brief Verifica se o jogador está em xeque.
         * \details Função responsável por verificar se o jogador de uma determinada 
-        * cor está em xeque.
-        * \param cor Cor do jogador no qual se deseja saber se está em xeque.
+        * color está em xeque.
+        * \param color Cor do jogador no qual se deseja saber se está em xeque.
         * \return 'true' se o jogador estiver em xeque, 'false' se não estiver.
         * \exception System.Exception Lançada quando o rei não estiver no board.
         ***************************************************************************/
-        public bool VerificaXeque(Color cor)
+        public bool CheckCheck(Color color)
         {
-            Position posicaoRei = PegarPosicaoRei(cor);
+            Position kingPosition = PegarPosicaoRei(color);
 
-            if (posicaoRei == null)
+            if (kingPosition == null)
             {
-                throw new System.Exception($"Não tem rei da cor: {cor} no board");
+                throw new System.Exception($"There is no {color} king on the board.");
             }
 
-            foreach (Piece piece in PecasEmJogo(OpponentColor(cor)))
+            foreach (Piece piece in PiecesInPlay(OpponentColor(color)))
             {
                 bool[,] matrix = piece.PossibleMoves();
-                if (matrix[posicaoRei.Row, posicaoRei.Column])
+                if (matrix[kingPosition.Row, kingPosition.Column])
                 {
-                    ((King)_piecesInPlay[posicaoRei.Row, posicaoRei.Column]).ReceivedCheck = true;
+                    ((King)_piecesInPlay[kingPosition.Row, kingPosition.Column]).ReceivedCheck = true;
                     return true;
                 }
             }
@@ -570,42 +570,42 @@ namespace Chess
         * \param piece Peça a ser analisada.
         * \return Matriz de booleanos indicando quais posições uma peça pode assumir.
         ***************************************************************************/
-        public bool[,] ChecarMovimentosPossiveis(Piece piece)
+        public bool[,] CheckPossibleMoves(Piece piece)
         {
-            bool[,] posicoesPossiveis = piece.PossibleMoves();
+            bool[,] possiblePositions = piece.PossibleMoves();
             for (int column = 0; column < Columns; column++)
             {
                 for (int row = 0; row < Rows; row++)
                 {
-                    if (posicoesPossiveis[row, column])
+                    if (possiblePositions[row, column])
                     {
                         _piecesInPlay[piece.CurrentPosition.Row, piece.CurrentPosition.Column] = null;
-                        Piece pecaCapturada = GetPiece(row, column);
+                        Piece capturedPiece = GetPiece(row, column);
                         _piecesInPlay[row, column] = piece;
-                        if (VerificaXeque(piece.PieceColor))
+                        if (CheckCheck(piece.PieceColor))
                         {
-                            posicoesPossiveis[row, column] = false;
+                            possiblePositions[row, column] = false;
                         }
-                        _piecesInPlay[row, column] = pecaCapturada;
+                        _piecesInPlay[row, column] = capturedPiece;
                         _piecesInPlay[piece.CurrentPosition.Row, piece.CurrentPosition.Column] = piece;
                     }
                 }
             }
-            return posicoesPossiveis;
+            return possiblePositions;
         }
 
         /** ************************************************************************
         * \brief Verifica xeque mate.
         * \details Função responsável por verificar se um determinado jogador está 
         * em xeque mate.
-        * \param cor Cor do jogador a ser verificado.
+        * \param color Cor do jogador a ser verificado.
         * \return 'true' se o jogador estiver em xeque mate, 'false' se não estiver.
         ***************************************************************************/
-        public bool VerificaXequeMate(Color cor)
+        public bool CheckCheckmate(Color color)
         {
-            foreach (Piece piece in PecasEmJogo(cor))
+            foreach (Piece piece in PiecesInPlay(color))
             {
-                bool[,] matrix = ChecarMovimentosPossiveis(piece);
+                bool[,] matrix = CheckPossibleMoves(piece);
                 for (int row = 0; row < Rows; row++)
                 {
                     for (int column = 0; column < Columns; column++)
@@ -627,14 +627,14 @@ namespace Chess
         * vencedor ou o empate, além de perguntar se o jogador deseja iniciar um
         * novo jogo.
         ***************************************************************************/
-        public void FimDoJogo()
+        public void EndOfGame()
         {
             // Mostra o vencedor
-            string mensagem = _check ? $"Xeque Mate\nVencedor: {OpponentColor(_currentPlayer)}" : "Empate";
-            MessageBox.Show(mensagem);
+            string message = _check ? $"Checkmate\nWinner: {OpponentColor(_currentPlayer)}" : "Draw";
+            MessageBox.Show(message);
 
-            if (MessageBox.Show("Deseja jogar outra partida?", "Fim de jogo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) 
-                == DialogResult.Yes)
+            if (MessageBox.Show("Do you want to play another game?", "End of game", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 InitializeNewGame();
             }
@@ -652,11 +652,11 @@ namespace Chess
         * \return 'true' se o jogador possuir movimentos possíveis, 'false' se não
         * possuir.
         ***************************************************************************/
-        public bool CorTemOndeMover()
+        public bool ColorHasWhereToMove()
         {
-            foreach(Piece piece in PecasEmJogo(_currentPlayer))
+            foreach(Piece piece in PiecesInPlay(_currentPlayer))
             {
-                foreach (bool position in ChecarMovimentosPossiveis(piece))
+                foreach (bool position in CheckPossibleMoves(piece))
                 {
                     if(position)
                     {

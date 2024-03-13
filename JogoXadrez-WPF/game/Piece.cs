@@ -34,7 +34,7 @@ namespace Chess
         /** ************************************************************************
         * \brief Construtor da classe Peca.
         * \param board Tabuleiro do jogo.
-        * \param cor Cor da peça.
+        * \param color Cor da peça.
         ***************************************************************************/
         public Piece(Board board, Color color)
         {

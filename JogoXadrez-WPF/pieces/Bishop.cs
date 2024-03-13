@@ -12,7 +12,7 @@
         /** ************************************************************************
         * \brief Construtor da classe Bispo.
         * \param board Tabuleiro do jogo.
-        * \param cor Cor da peça.
+        * \param color Cor da peça.
         ***************************************************************************/
         public Bishop(Board board, Color pieceColor) : base(board, pieceColor)
         {

@@ -817,7 +817,7 @@ namespace Chess
             this.labelTurn.Name = "labelTurn";
             this.labelTurn.Size = new System.Drawing.Size(88, 28);
             this.labelTurn.TabIndex = 64;
-            this.labelTurn.Text = "Turno:  1";
+            this.labelTurn.Text = "Turn:  1";
             // 
             // groupBoxWhite
             // 
@@ -837,7 +837,7 @@ namespace Chess
             this.labelWhiteCapturedPieces.Name = "labelWhiteCapturedPieces";
             this.labelWhiteCapturedPieces.Size = new System.Drawing.Size(144, 21);
             this.labelWhiteCapturedPieces.TabIndex = 66;
-            this.labelWhiteCapturedPieces.Text = "Peças capturadas: 0";
+            this.labelWhiteCapturedPieces.Text = "Captured pieces: 0";
             // 
             // groupBoxBlack
             // 
@@ -848,7 +848,7 @@ namespace Chess
             this.groupBoxBlack.Size = new System.Drawing.Size(200, 91);
             this.groupBoxBlack.TabIndex = 67;
             this.groupBoxBlack.TabStop = false;
-            this.groupBoxBlack.Text = "Jogador 2: Preto";
+            this.groupBoxBlack.Text = "Player 2: Black";
             // 
             // labelBlackCapturedPieces
             // 
@@ -857,7 +857,7 @@ namespace Chess
             this.labelBlackCapturedPieces.Name = "labelBlackCapturedPieces";
             this.labelBlackCapturedPieces.Size = new System.Drawing.Size(144, 21);
             this.labelBlackCapturedPieces.TabIndex = 66;
-            this.labelBlackCapturedPieces.Text = "Peças capturadas: 0";
+            this.labelBlackCapturedPieces.Text = "Captured pieces: 0";
             // 
             // labelCurrentPlayer
             // 
@@ -867,7 +867,7 @@ namespace Chess
             this.labelCurrentPlayer.Name = "labelCurrentPlayer";
             this.labelCurrentPlayer.Size = new System.Drawing.Size(204, 28);
             this.labelCurrentPlayer.TabIndex = 68;
-            this.labelCurrentPlayer.Text = "Jogador Atual: Branco";
+            this.labelCurrentPlayer.Text = "Current player: White";
             // 
             // labelCheck
             // 
@@ -877,7 +877,7 @@ namespace Chess
             this.labelCheck.Name = "labelCheck";
             this.labelCheck.Size = new System.Drawing.Size(183, 28);
             this.labelCheck.TabIndex = 69;
-            this.labelCheck.Text = "Você está em xeque";
+            this.labelCheck.Text = "You are in check";
             // 
             // Tabuleiro
             // 
@@ -957,8 +957,8 @@ namespace Chess
             this.MaximumSize = new System.Drawing.Size(855, 1001);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(855, 1001);
-            this.Name = "Tabuleiro";
-            this.Text = "Xadrez";
+            this.Name = "Board";
+            this.Text = "Chess";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA4)).EndInit();
