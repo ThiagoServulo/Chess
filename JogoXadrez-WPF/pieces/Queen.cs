@@ -1,18 +1,18 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre a rainha.
-    * \details A classe Rainha armazena as informações referentes a rainha.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the queen.
+    * \details The Queen class stores information about the queen.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 14/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class Queen : Piece
     {
         /** ************************************************************************
-        * \brief Construtor da classe Rainha.
-        * \param board Tabuleiro em que a peça será inserida.
-        * \param pieceColor Cor da peça.
+        * \brief Constructor of the Queen class.
+        * \param board Board where the piece will be inserted.
+        * \param pieceColor Color of the piece.
         ***************************************************************************/
         public Queen(Board board, Color pieceColor) : base(board, pieceColor)
         {
@@ -20,11 +20,11 @@
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis da
-        * rainha.
-        * \return Matriz de booleanos indicando as possíveis posições que a rainha 
-        * pode assumir após a sua movimentação.
+        * \brief List possible moves.
+        * \details Abstract function responsible for listing the possible moves of
+        * the queen.
+        * \return Boolean matrix indicating the possible positions that the queen 
+        * can assume after its movement.
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
@@ -32,7 +32,7 @@
 
             Position position = new Position(0, 0);
 
-            // direção norte (acima)
+            // North direction (up)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column);
             while (CanMove(position))
             {
@@ -44,7 +44,7 @@
                 position.Row -= 1;
             }
 
-            // direção sul (abaixo)
+            // South direction (down)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
             while (CanMove(position))
             {
@@ -56,7 +56,7 @@
                 position.Row += 1;
             }
 
-            // direção leste (right)
+            // East direction (right)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -68,7 +68,7 @@
                 position.Column += 1;
             }
 
-            // direção oeste (left)
+            // West direction (left)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
@@ -80,7 +80,7 @@
                 position.Column -= 1;
             }
 
-            // direção noroeste (diagonal superior left)
+            // Northwest direction (diagonal up left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
@@ -92,7 +92,7 @@
                 position.SetPosition(position.Row + 1, position.Column - 1);
             }
 
-            // direção nordeste (diagonal superior right)
+            // Northeast direction (diagonal up right)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -104,7 +104,7 @@
                 position.SetPosition(position.Row + 1, position.Column + 1);
             }
 
-            // direção suldoeste (diagonal inferior left)
+            // Southwest direction (diagonal down left)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -116,7 +116,7 @@
                 position.SetPosition(position.Row - 1, position.Column + 1);
             }
 
-            // direção suldeste (diagonal inferior right)
+            // Southeast direction (diagonal down right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {

@@ -1,18 +1,18 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o peão.
-    * \details A classe Peao armazena as informações referentes ao peão.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the pawn.
+    * \details The Pawn class stores information about the pawn.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 14/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class Pawn : Piece
     {
         /** ************************************************************************
-        * \brief Construtor da classe Peao.
-        * \param board Tabuleiro em que a peça será inserida.
-        * \param pieceColor Cor da peça.
+        * \brief Constructor of the Pawn class.
+        * \param board Board where the piece will be inserted.
+        * \param pieceColor Color of the piece.
         ***************************************************************************/
         public Pawn(Board board, Color pieceColor) : base(board, pieceColor)
         {
@@ -20,12 +20,12 @@
         }
 
         /** ************************************************************************
-        * \brief Verifica se existe inimigo.
-        * \details Função responsável por verificar se existe uma peça adversária na
-        * posição informada.
-        * \param position Posição a ser verificada.
-        * \param 'true' se existir uma peça adversária na posição informada, 'false'
-        * se não.
+        * \brief Check if there is an enemy.
+        * \details Function responsible for checking if there is an opponent's piece
+        * at the given position.
+        * \param position Position to be checked.
+        * \return 'true' if there is an opponent's piece at the given position,
+        * 'false' otherwise.
         ***************************************************************************/
         private bool ThereIsEnemy(Position position)
         {
@@ -34,11 +34,10 @@
         }
 
         /** ************************************************************************
-        * \brief Verifica se uma posição está livre.
-        * \details Função responsável por verificar se uma determinada posição está 
-        * livre.
-        * \param position Posição a ser verificada.
-        * \param 'true' se a posição iformada estiver vazia, 'false' se não.
+        * \brief Check if a position is free.
+        * \details Function responsible for checking if a certain position is free.
+        * \param position Position to be checked.
+        * \return 'true' if the given position is empty, 'false' otherwise.
         ***************************************************************************/
         private bool IsFree(Position position)
         {
@@ -46,11 +45,11 @@
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis do
-        * peão.
-        * \return Matriz de booleanos indicando as possíveis posições que o peão 
-        * pode assumir após a sua movimentação.
+         * \brief List possible moves.
+         * \details Abstract function responsible for listing the possible moves of
+         * the pawn.
+         * \return Boolean matrix indicating the possible positions that the pawn 
+         * can assume after its movement.
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
@@ -85,7 +84,7 @@
                     matrix[position.Row, position.Column] = true;
                 }
 
-                // Implementação da jogada especial En Passant
+                // Implementation of the En Passant special move
                 if (CurrentPosition.Row == 3)
                 {
                     Position left = new Position(CurrentPosition.Row, CurrentPosition.Column - 1);
@@ -111,7 +110,7 @@
                     }
                 }
             }
-            else // Peão de color preta
+            else // Black pawn
             {
                 position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
                 if (ValidPosition(position) && IsFree(position))
@@ -138,7 +137,7 @@
                     matrix[position.Row, position.Column] = true;
                 }
 
-                // Implementação da jogada especial En Passant
+                // Implementation of the En Passant special move
                 if (CurrentPosition.Row == 4)
                 {
                     Position left = new Position(CurrentPosition.Row, CurrentPosition.Column - 1);
