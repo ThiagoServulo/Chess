@@ -1,25 +1,25 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre a posição.
-    * \details A classe Posicao armazena as informações referentes a posição de
-    * uma peça no board.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the position.
+    * \details The Position class stores information about the position of
+    * a piece on the board.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 16/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class Position : System.IComparable
     {
-        /// \brief Número da row refrente a posição.
+        /// \brief Row number corresponding to the position.
         public int Row { get; set; }
 
-        /// \brief Número da column refrente a posição.
+        /// \brief Column number corresponding to the position.
         public int Column { get; set; }
 
         /** ************************************************************************
-        * \brief Construtor da classe Posicao.
-        * \param row Número da row.
-        * \param column Número da column.
+        * \brief Constructor of the Position class.
+        * \param row Row number.
+        * \param column Column number.
         ***************************************************************************/
         public Position(int row, int column)
         {
@@ -27,10 +27,10 @@
         }
 
         /** ************************************************************************
-        * \brief Define posição.
-        * \details Função responsável por definir uma posição.
-        * \param row Número da row.
-        * \param column Número da column.
+        * \brief Set position.
+        * \details Function responsible for setting a position.
+        * \param row Row number.
+        * \param column Column number.
         ***************************************************************************/
         public void SetPosition(int row, int column)
         {
@@ -39,11 +39,11 @@
         }
 
         /** ************************************************************************
-        * \brief Compara posições.
-        * \details Função responsável por comparar posições.
-        * \param obj Objeto do tipo Posicao para ser comparado.
-        * \param 0 - se as posições comparadas forem iguais, 1 - se as posições 
-        * comparadas forem diferentes.
+        * \brief Compare positions.
+        * \details Function responsible for comparing positions.
+        * \param obj Object of type Position to be compared.
+        * \return 0 if the compared positions are equal, 1 if the compared positions 
+        * are different.
         ***************************************************************************/
         public int CompareTo(object obj)
         {

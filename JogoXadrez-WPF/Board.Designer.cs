@@ -4,13 +4,13 @@ namespace Chess
 {
     partial class Board
     {
-        /// \brief Variável de componentes.
+        /// \brief Component variable.
         private System.ComponentModel.IContainer components = null;
 
         /** ************************************************************************
         * \brief Dispose.
-        * \details Função de dispose.
-        * \param disposing Indicador para habilitar o disposing.
+        * \details Dispose function.
+        * \param disposing Indicator to enable disposing.
         ***************************************************************************/
         protected override void Dispose(bool disposing)
         {
@@ -828,7 +828,7 @@ namespace Chess
             this.groupBoxWhite.Size = new System.Drawing.Size(200, 91);
             this.groupBoxWhite.TabIndex = 65;
             this.groupBoxWhite.TabStop = false;
-            this.groupBoxWhite.Text = "Jogador 1: Branco";
+            this.groupBoxWhite.Text = "Player 1: White";
             // 
             // labelWhiteCapturedPieces
             // 

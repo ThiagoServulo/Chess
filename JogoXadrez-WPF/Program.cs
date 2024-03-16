@@ -8,8 +8,8 @@ namespace Chess
         [STAThread]
 
         /** ************************************************************************
-        * \brief Função Main.
-        * \details Entry point da aplicação.
+        * \brief Main function.
+        * \details Entry point of the application.
         ***************************************************************************/
         static void Main()
         {
