@@ -1,21 +1,21 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o rei.
-    * \details A classe Rei armazena as informações referentes ao rei.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the king.
+    * \details The King class stores information about the king.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 15/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class King : Piece
     {
-        /// \brief Indica se o rei já recebu xeque.
+        /// \brief Indicates if the king has already received check.
         public bool ReceivedCheck;
 
         /** ************************************************************************
-        * \brief Construtor da classe Rei.
-        * \param board Tabuleiro em que a peça será inserida.
-        * \param pieceColor Cor da peça.
+        * \brief Constructor of the King class.
+        * \param board Board where the piece will be inserted.
+        * \param pieceColor Color of the piece.
         ***************************************************************************/
         public King(Board board, Color pieceColor) : base(board, pieceColor)
         {
@@ -24,25 +24,24 @@
         }
 
         /** ************************************************************************
-        * \brief Verifica a possibilidade de roque.
-        * \details Função responsável por verificar se existe uma torre disponível
-        * para fazer a jogada especial de roque.
-        * \param position Posição em que a torre se encontra.
-        * \return 'true' - se a jogada de roque for possível, 'false' se não for
-        * possível.
+        * \brief Checks the possibility of castling.
+        * \details Function responsible for checking if there is a rook available
+        * to make the special castling move.
+        * \param position Position where the rook is located.
+        * \return 'true' if castling is possible, 'false' if it is not possible.
         ***************************************************************************/
-        private bool VerificaTorreDisponivelParaRoque(Position position)
+        private bool CheckRookAvailableForCastling(Position position)
         {
             Piece piece = ChessBoard.GetPiece(position);
             return piece is Rook && piece.PieceColor == PieceColor && piece.NumberOfMoves == 0;
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis do
-        * rei.
-        * \return Matriz de booleanos indicando as possíveis posições que o rei 
-        * pode assumir após a sua movimentação.
+        * \brief List possible moves.
+        * \details Abstract function responsible for listing the possible moves of the
+        * king.
+        * \return Boolean matrix indicating the possible positions that the king 
+        * can assume after its movement.
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
@@ -50,70 +49,70 @@
 
             Position position = new Position(0, 0);
 
-            // direção norte (acima)
+            // North direction (up)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção nordeste (diagonal superior right)
+            // Northeast direction (diagonal up right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção leste (right)
+            // East direction (right)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção suldeste (diagonal inferior right)
+            // Southeast direction (diagonal down right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção sul (abaixo)
+            // South direction (down)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção suldoeste (diagonal inferior left)
+            // Southwest direction (diagonal down left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção oeste (left)
+            // West direction (left)
             position.SetPosition(CurrentPosition.Row, CurrentPosition.Column - 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // direção noroeste (diagonal superior left)
+            // Northwest direction (diagonal up left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             if (CanMove(position))
             {
                 matrix[position.Row, position.Column] = true;
             }
 
-            // #jogadaespecial roque
+            // Castling special move
             if (NumberOfMoves == 0 && !ReceivedCheck)
             {
-                // #jogadaespecial roque pequeno
+                // Kingside castling special move
                 Position positionRook1 = new Position(CurrentPosition.Row, CurrentPosition.Column + 3);
-                if (VerificaTorreDisponivelParaRoque(positionRook1))
+                if (CheckRookAvailableForCastling(positionRook1))
                 {
-                    // Verifica se as posições entre o Rei e a Torre estão vazias
+                    // Check if the positions between the King and the Rook are empty
                     Position position1 = new Position(CurrentPosition.Row, CurrentPosition.Column + 1);
                     Position position2 = new Position(CurrentPosition.Row, CurrentPosition.Column + 2);
                     if (ChessBoard.GetPiece(position1) == null &&
@@ -123,11 +122,11 @@
                     }
                 }
 
-                // #jogadaespecial roque grande
+                // Queenside castling special move
                 Position positionRook2 = new Position(CurrentPosition.Row, CurrentPosition.Column - 4);
-                if (VerificaTorreDisponivelParaRoque(positionRook2))
+                if (CheckRookAvailableForCastling(positionRook2))
                 {
-                    // Verifica se as posições entre o Rei e a Torre estão vazias
+                    // Check if the positions between the King and the Rook are empty
                     Position position1 = new Position(CurrentPosition.Row, CurrentPosition.Column - 1);
                     Position position2 = new Position(CurrentPosition.Row, CurrentPosition.Column - 2);
                     Position position3 = new Position(CurrentPosition.Row, CurrentPosition.Column - 3);

@@ -1,18 +1,18 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o cavalo.
-    * \details A classe Cavalo armazena as informações referentes ao cavalo.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the knight.
+    * \details The Knight class stores information about the knight.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 15/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class Knight : Piece
     {
         /** ************************************************************************
-        * \brief Construtor da classe Cavalo.
-        * \param board Tabuleiro do jogo.
-        * \param color Cor da peça.
+        * \brief Constructor of the Knight class.
+        * \param board Game board.
+        * \param color Color of the piece.
         ***************************************************************************/
         public Knight(Board board, Color pieceColor) : base(board, pieceColor)
         {
@@ -20,11 +20,11 @@
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis do
-        * cavalo.
-        * \return Matriz de booleanos indicando as possíveis posições que o cavalo 
-        * pode assumir após a sua movimentação.
+        * \brief List possible moves.
+        * \details Abstract function responsible for listing the possible moves of
+        * the knight.
+        * \return Boolean matrix indicating the possible positions that the knight 
+        * can assume after its movement.
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {

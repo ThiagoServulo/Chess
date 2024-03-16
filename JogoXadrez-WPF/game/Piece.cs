@@ -4,37 +4,37 @@ using System.IO;
 namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre a peça.
-    * \details A classe Peca armazena as informações referentes a peça, que será
-    * colocada no board do jogo.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the piece.
+    * \details The Piece class stores information about the piece, which will be
+    * placed on the game board.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 15/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     abstract class Piece
     {
-        /// \brief Image referente a peça.
+        /// \brief Image related to the piece.
         public Image Image;
 
-        /// \brief Posição atual da peça.
+        /// \brief Current position of the piece.
         public Position CurrentPosition { get; set; }
 
-        /// \brief Cor da peça.
+        /// \brief Piece color.
         public Color PieceColor { get; protected set; }
 
-        /// \brief Quantidade de movimentações da peça.
+        /// \brief Number of movements of the piece.
         public int NumberOfMoves { get; protected set; }
 
-        /// \brief Tabuleiro do jogo.
+        /// \brief Game board.
         public Board ChessBoard { get; protected set; }
 
-        /// \brief Caminho para a imagem da peça.
+        /// \brief Path to the piece image.
         public string FileImagesPath;
 
         /** ************************************************************************
-        * \brief Construtor da classe Peca.
-        * \param board Tabuleiro do jogo.
-        * \param color Cor da peça.
+        * \brief Constructor of the Piece class.
+        * \param board Game board.
+        * \param color Color of the piece.
         ***************************************************************************/
         public Piece(Board board, Color color)
         {
@@ -46,9 +46,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Mostra imagem.
-        * \details Função responsável por mostrar a imagem da peça.
-        * \return Image refrente a peça.
+        * \brief Display image.
+        * \details Function responsible for displaying the image of the piece.
+        * \return Image related to the piece.
         ***************************************************************************/
         public Image ShowImage()
         {
@@ -56,11 +56,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Mostra imagem.
-        * \details Função responsável por mostrar a imagem da peça.
-        * \param imagem Nome da imagem refrente a peça.
-        * \return Image refrente a peça.
-        * \exception System.Exception Lançada o path de imagens não for encontrado.
+        * \brief Display image.
+        * \details Function responsible for displaying the image of the piece.
+        * \param image Name of the image related to the piece.
+        * \return Image related to the piece.
+        * \exception System.Exception Thrown if the image path is not found.
         ***************************************************************************/
         public Image GetImage(string image)
         {
@@ -75,9 +75,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Incrementa a quantidade de movimentos.
-        * \details Função responsável por incrementar a  quantidade de movimentos da
-        * peça.
+        * \brief Increment the number of movements.
+        * \details Function responsible for incrementing the number of movements of
+        * the piece.
         ***************************************************************************/
         public void IncrementNumberOfMoves()
         {
@@ -85,11 +85,10 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Verifica posição válida.
-        * \details Função responsável por verificar se uma determinada posição é 
-        * válida.
-        * \param position Posição a ser verificada.
-        * \return 'true' se a posição for válida, 'false' se for inválida.
+        * \brief Check valid position.
+        * \details Function responsible for checking if a certain position is valid.
+        * \param position Position to be checked.
+        * \return 'true' if the position is valid, 'false' if it is invalid.
         ***************************************************************************/
         public bool ValidPosition(Position position)
         {
@@ -97,12 +96,12 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Verifica se pode mover.
-        * \details Função responsável por verificar se a peça pode ser movida para
-        * uma determinada posição.
-        * \param position Posição a ser verificada.
-        * \return 'true' se a peça puder ser movida para a posição informada, 'false' 
-        * se não.
+        * \brief Check if it can move.
+        * \details Function responsible for checking if the piece can be moved to
+        * a certain position.
+        * \param position Position to be checked.
+        * \return 'true' if the piece can be moved to the given position, 'false' 
+        * otherwise.
         ***************************************************************************/
         public bool CanMove(Position position)
         {
@@ -115,11 +114,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis de
-        * uma peça.
-        * \return Matriz de booleanos indicando as possíveis posições que a peça 
-        * pode assumir após a sua movimentação.
+        * \brief List possible moves.
+        * \details Abstract function responsible for listing the possible moves of
+        * a piece.
+        * \return Boolean matrix indicating the possible positions that the piece 
+        * can assume after its movement.
         ***************************************************************************/
         public abstract bool[,] PossibleMoves();
 

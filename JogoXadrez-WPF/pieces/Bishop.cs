@@ -1,18 +1,18 @@
 ﻿namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o bispo.
-    * \details A classe Bispo armazena as informações referentes ao bispo.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 19/07/2022
-    * \version v1.0.0
+    * \brief Information about the bishop.
+    * \details The Bishop class stores information about the bishop
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 15/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     class Bishop : Piece
     {
         /** ************************************************************************
-        * \brief Construtor da classe Bispo.
-        * \param board Tabuleiro do jogo.
-        * \param color Cor da peça.
+        * \brief Constructor of the Bishop class.
+        * \param board Game board.
+        * \param color Color of the piece.
         ***************************************************************************/
         public Bishop(Board board, Color pieceColor) : base(board, pieceColor)
         {
@@ -20,11 +20,11 @@
         }
 
         /** ************************************************************************
-        * \brief Lista movimentos possíveis.
-        * \details Função abstrata responsável por listar os movimentos posíveis do
-        * bispo.
-        * \return Matriz de booleanos indicando as possíveis posições que o bispo 
-        * pode assumir após a sua movimentação.
+        * \brief List possible moves.
+        * \details Abstract function responsible for listing the possible moves of
+        * the bishop.
+        * \return Boolean matrix indicating the possible positions that the bishop 
+        * can assume after its movement.
         ***************************************************************************/
         public override bool[,] PossibleMoves()
         {
@@ -32,7 +32,7 @@
 
             Position position = new Position(0, 0);
 
-            // direção noroeste (diagonal superior left)
+            // Northwest direction (diagonal up left)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
@@ -44,7 +44,7 @@
                 position.SetPosition(position.Row + 1, position.Column - 1);
             }
 
-            // direção nordeste (diagonal superior right)
+            // Northeast direction (diagonal up right)
             position.SetPosition(CurrentPosition.Row + 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -56,7 +56,7 @@
                 position.SetPosition(position.Row + 1, position.Column + 1);
             }
 
-            // direção suldoeste (diagonal inferior left)
+            // Southwest direction (diagonal down left)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column + 1);
             while (CanMove(position))
             {
@@ -68,7 +68,7 @@
                 position.SetPosition(position.Row - 1, position.Column + 1);
             }
 
-            // direção suldeste (diagonal inferior right)
+            // Southeast direction (diagonal down right)
             position.SetPosition(CurrentPosition.Row - 1, CurrentPosition.Column - 1);
             while (CanMove(position))
             {
