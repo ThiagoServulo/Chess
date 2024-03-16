@@ -1,59 +1,58 @@
 ﻿using System.Windows.Forms;
-using System.Drawing;
 using System.Collections.Generic;
 
 namespace Chess
 {
     /** ************************************************************************
-    * \brief Informações sobre o board.
-    * \details A classe Tabuleiro armazena as informações referentes ao board 
-    * do jogo, ou seja, onde as peças serão colocadas.
-    * \author Thiago Sérvulo Guimarães - thiago.servulo@sga.pucminas.br
-    * \date 20/09/2022
-    * \version v1.0.0
+    * \brief Information about the board.
+    * \details The Board class stores information about the game board, where the 
+    * pieces will be placed.
+    * \author Thiago Sérvulo Guimarães - thiagoservulog@gmail.com
+    * \date 16/03/2024
+    * \version v1.0.1
     ***************************************************************************/
     partial class Board : Form
     {
-        /// \brief Quantidade de linhas existentes no board.
+        /// \brief Number of rows existing on the board.
         public int Rows = 8;
 
-        /// \brief Quantidade de colunas existentes no board.
+        /// \brief Number of columns existing on the board.
         public int Columns = 8;
 
-        /// \brief Indica se a partida está em xeque.
+        /// \brief Indicates if the game is in check.
         public bool _check;
 
-        /// \brief Matriz contendo todas as peças que estão em jogo.
+        /// \brief Matrix containing all the pieces that are in play.
         private Piece[,] _piecesInPlay;
 
-        /// \brief Matriz contendo todas os campos do board.
+        /// \brief Matrix containing all the squares of the board.
         private PictureBox[,] _pictureBoxes;
 
-        /// \brief Posição de origem da jogada atual.
+        /// \brief Origin position of the current move.
         private Position _origin;
 
-        /// \brief Cor do jogador atual.
+        /// \brief Color of the current player.
         private Color _currentPlayer;
 
-        /// \brief Número do turno atual.
+        /// \brief Number of the current turn.
         private int _turn;
 
-        /// \brief Quantidade de peças brancas capturadas.
+        /// \brief Number of white pieces captured.
         private int _whiteCapturedQuantity;
 
-        /// \brief Quantidade de peças pretas capturadas.
+        /// \brief Number of black pieces captured.
         private int _blackCapturedQuantity;
 
         /** ************************************************************************
-        * \brief Construtor.
-        * \details Construtor da classe Tabuleiro.
+        * \brief Constructor.
+        * \details Constructor of the Board class.
         ***************************************************************************/
         public Board()
         {
-            // Inicializa os componentes
+            // Inicialize the components
             InitializeComponent();
 
-            // Inicializa a matrix de peças do board
+            // Initialize the matrix of pieces on the board
             _piecesInPlay = new Piece[Rows, Columns];
             _pictureBoxes = new PictureBox[8, 8] {
                 { pictureBoxA1, pictureBoxA2, pictureBoxA3, pictureBoxA4, pictureBoxA5, pictureBoxA6, pictureBoxA7, pictureBoxA8 },
@@ -66,14 +65,13 @@ namespace Chess
                 { pictureBoxH1, pictureBoxH2, pictureBoxH3, pictureBoxH4, pictureBoxH5, pictureBoxH6, pictureBoxH7, pictureBoxH8 }
             };
 
-            // Inicializa as variáveis e o layout do board
+            // Initialize variables and board layout
             InitializeNewGame();
         }
 
         /** ************************************************************************
-        * \brief Inicializa um novo jogo.
-        * \details Função responsável por inicializar as variáveis e o layout do
-        * board para um novo jogo.
+        * \brief Initialize a new game.
+        * \details Initialize variables and board layout for a new game.
         ***************************************************************************/
         private void InitializeNewGame()
         {
@@ -88,8 +86,8 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Muda jogador.
-        * \details Função responsável por mudar o jogador atual.
+        * \brief Change player.
+        * \details Function responsible for changing the current player.
         ***************************************************************************/
         private void SwitchPlayer()
         {
@@ -97,11 +95,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Busca color adversária.
-        * \details Função responsável por retornar a color adversária de um determinado
-        * jogador.
-        * \param color Cor do jogador em que se deseja descobrir o adversário.
-        * \return Cor do jogador adversário.
+        * \brief Find opponent's color.
+        * \details Function responsible for returning the opponent's color of a given
+        * player.
+        * \param color Color of the player to find the opponent for.
+        * \return Color of the opponent player.
         ***************************************************************************/
         private Color OpponentColor(Color color)
         {
@@ -109,12 +107,12 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Acessa peça.
-        * \details Função responsável por acessar uma peça que se encontra na posição
-        * informada.
-        * \param row Row em que a peça se encontra.
-        * \param column Column em que a peça se encontra.
-        * \return Peça que está na posição informada.
+        * \brief Access piece.
+        * \details Function responsible for accessing a piece that is at the given
+        * position.
+        * \param row Row where the piece is located.
+        * \param column Column where the piece is located.
+        * \return Piece at the given position.
         ***************************************************************************/
         public Piece GetPiece(int row, int column)
         {
@@ -122,11 +120,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Acessa peça.
-        * \details Função responsável por acessar uma peça que se encontra na posição
-        * informada.
-        * \param position Posição em que a queremos acessar.
-        * \return Peça que está na posição informada.
+        * \brief Access piece.
+        * \details Function responsible for accessing a piece that is at the given
+        * position.
+        * \param position Position where we want to access the piece.
+        * \return Piece at the given position.
         ***************************************************************************/
         public Piece GetPiece(Position position)
         {
@@ -134,11 +132,10 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Colocar peça.
-        * \details Função responsável por colocar uma peça em uma determinada 
-        * posição.
-        * \param piece Peça a ser colocada.
-        * \param position Posição onde a peça será colocada.
+        * \brief Place piece.
+        * \details Function responsible for placing a piece at a certain position.
+        * \param piece Piece to be placed.
+        * \param position Position where the piece will be placed.
         ***************************************************************************/
         public void PlacePiece(Piece piece, Position position)
         {
@@ -148,16 +145,16 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Inicializa board.
-        * \details Função responsável por inicializar o board, colocando as peças
-        * pretas e brancas em suas posições iniciais.
+        * \brief Initialize board.
+        * \details Function responsible for initializing the board, placing the
+        * black and white pieces in their initial positions.
         ***************************************************************************/
         private void InitializeBoard()
         {
-            // Inicializa layout board
+            // Initialize board layout
             ShowBoard();
 
-            // Resetando a imagem de todos os Picture Boxes
+            // Resetting the image of all Picture Boxes
             for (int row = 0; row < Rows; row++)
             {
                 for (int column = 0; column < Columns; column++)
@@ -167,7 +164,7 @@ namespace Chess
                 }
             }
 
-            // Coloca as peças brancas
+            // Place the white pieces
             PlacePiece(new Rook(this, Color.White), new Position(7, 0));
             PlacePiece(new Knight(this, Color.White), new Position(7, 1));
             PlacePiece(new Bishop(this, Color.White), new Position(7, 2));
@@ -185,7 +182,7 @@ namespace Chess
             PlacePiece(new Pawn(this, Color.White), new Position(6, 1));
             PlacePiece(new Pawn(this, Color.White), new Position(6, 0));
 
-            // Coloca as peças pretas
+            // Place the black pieces
             PlacePiece(new Rook(this, Color.Black), new Position(0, 0));
             PlacePiece(new Knight(this, Color.Black), new Position(0, 1));
             PlacePiece(new Bishop(this, Color.Black), new Position(0, 2));
@@ -205,9 +202,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Atualiza o label de xeque.
-        * \details Função responsável por atualizar o label de xeque, indicando se o 
-        * jogador atual está ou não em xeque.
+        * \brief Update the check label.
+        * \details Function responsible for updating the check label, indicating
+        * whether the current player is in check or not.
         ***************************************************************************/
         private void UpdateCheckLabel()
         {
@@ -215,9 +212,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Atualiza o label do jogador.
-        * \details Função responsável por atualizar o label do jogador, indicando a
-        * color do jogador atual.
+        * \brief Update the player label.
+        * \details Function responsible for updating the player label, indicating the
+        * color of the current player.
         ***************************************************************************/
         private void UpdatePlayerLabel()
         {
@@ -225,9 +222,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Atualiza o label de turno.
-        * \details Função responsável por atualizar o label de turno, indicando o 
-        * número do turno atual.
+        * \brief Update the turn label.
+        * \details Function responsible for updating the turn label, indicating the
+        * number of the current turn.
         ***************************************************************************/
         private void UpdateTurnLabel()
         {
@@ -235,9 +232,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Atualiza o label de peças capturadas.
-        * \details Função responsável por atualizar o label de peças capturadas, 
-        * indicando o número de peças capturadas por cada jogador.
+        * \brief Update the captured pieces label.
+        * \details Function responsible for updating the captured pieces label,
+        * indicating the number of pieces captured by each player.
         ***************************************************************************/
         private void UpdateCapturedPiecesLabels()
         {
@@ -246,8 +243,8 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Atualiza o labels.
-        * \details Função responsável por atualizar todos os labels do board.
+        * \brief Update the labels.
+        * \details Function responsible for updating all labels on the board.
         ***************************************************************************/
         private void UpdateLabels()
         {
@@ -258,8 +255,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Incrementa turno.
-        * \details Função responsável por incrementar o número do turno atual.
+        * \brief Increment turn.
+        * \details Function responsible for incrementing the number of the current
+        * turn.
         ***************************************************************************/
         private void IncrementTurn()
         {
@@ -268,8 +266,8 @@ namespace Chess
 
 
         /** ************************************************************************
-        * \brief Mostra board.
-        * \details Função responsável por imprimir o board de jogo.
+        * \brief Display board.
+        * \details Function responsible for printing the game board.
         ***************************************************************************/
         private void ShowBoard()
         {
@@ -288,65 +286,65 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Mostra board.
-        * \details Função responsável por imprimir o board de jogo, destacando
-        * as posíveis movimentações de uma peça.
-        * \param possiblePositions Posições possíveis que a peça pode assumir e, 
-        * portanto, serão destacadas.
+        * \brief Display board.
+        * \details Function responsible for printing the game board, highlighting
+        * the possible movements of a piece.
+        * \param possiblePositions Possible positions that the piece can assume and,
+        * therefore, will be highlighted.
         ***************************************************************************/
         private void ShowBoard(bool[,] possiblePositions)
         {
             System.Drawing.Color color;
 
-            // Imprimir o board nas cores iniciais
+            // Print the board in the initial colors
             ShowBoard();
 
-            // Imprimir board destacando as possíveis jogadas
+            // Print the board highlighting the possible moves
             for (int row = 0; row < Rows; row++)
             {
                 color = (row % 2 == 0) ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 for (int column = 0; column < Columns; column++)
                 {
                     _pictureBoxes[row, column].BackColor = possiblePositions[row, column] ?
-                        (_pictureBoxes[row, column].BackColor == System.Drawing.Color.White ? System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
+                        (_pictureBoxes[row, column].BackColor == System.Drawing.Color.White ? 
+                        System.Drawing.Color.LightCyan : System.Drawing.Color.LightBlue) : color;
                     color = color == System.Drawing.Color.White ? System.Drawing.Color.Gray : System.Drawing.Color.White;
                 }
             }
         }
 
         /** ************************************************************************
-        * \brief Retira peça.
-        * \details Função responsável por retirar uma peça de uma determinada posição.
-        * \param position Posição na qual a peça será retirada.
-        * \return Peça retirada da posição informada.
+        * \brief Remove piece.
+        * \details Function responsible for removing a piece from a certain position.
+        * \param position Position from which the piece will be removed.
+        * \return Piece removed from the given position.
         ***************************************************************************/
         public Piece RemovePiece(Position position)
         {
-            // Verifica se existe peça na posição informada
+            // Check if there is a piece at the given position
             if (!PieceExists(position))
             {
                 return null;
             }
 
-            // Retira a peça da posição informada
+            // Remove the piece from the given position
             Piece aux = GetPiece(position);
             aux.CurrentPosition = null;
 
-            // Limpa as informações referentes ao campo localizado nesta posição
+            // Clears the information related to the square located at this position
             _piecesInPlay[position.Row, position.Column] = null;
             _pictureBoxes[position.Row, position.Column].Image = null;
 
-            // Retorna a peça retirada
+            // Returns the piece that was removed
             return aux;
         }
 
         /** ************************************************************************
-        * \brief Veridica se existe peça.
-        * \details Função responsável por verificar se existe peça em uma determinada
-        * posição.
-        * \param position Posição na qual será verificado se existe uma peça.
-        * \return 'true' caso exista uma peça na posição informada ou 'false' caso 
-        * não exista.
+        * \brief Check if there is a piece.
+        * \details Function responsible for checking if there is a piece at a certain
+        * position.
+        * \param position Position to check if there is a piece.
+        * \return 'true' if there is a piece at the given position, or 'false' if not.
         ***************************************************************************/
         public bool PieceExists(Position position)
         {
@@ -354,14 +352,14 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Processa o click sobre um campo.
-        * \details Função responsável por processar um click sobre um determinado
+        * \brief Process click on a square.
+        * \details Function responsible for processing a click on a certain 
         * 'PictureBox'.
-        * \param position Posição do 'PictureBox' que foi clicado.
+        * \param position Position of the 'PictureBox' that was clicked.
         ***************************************************************************/
         private void ProcessPictureBoxClick(Position position)
         {
-            // Checa se a origem não é nula e a posição de destination é igual a de origem
+            // Check if the origin is not null and the destination position is equal to the origin position
             if (_origin != null && _origin.CompareTo(position) == 0)
             {
                 ShowBoard();
@@ -369,12 +367,12 @@ namespace Chess
                 return;
             }
 
-            // Verifica se existe peça na posição informada
+            // Check if there is a piece at the given position
             if (PieceExists(position))
             {
                 Piece piece = GetPiece(position);
 
-                // Se a peça for do jogado atual, essa será a origem da jogada
+                // If the piece belongs to the current player, it will be the origin of the move
                 if (piece.PieceColor == _currentPlayer)
                 {
                     _origin = position;
@@ -383,36 +381,36 @@ namespace Chess
                 }
             }
 
-            // Se o campo for uma posição posível de uma peça e a origem não for nula, a jogada pode ser realizada
+            // If the square is a possible position for a piece and the origin is not null, the move can be made
             if ((_pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightBlue ||
                 _pictureBoxes[position.Row, position.Column].BackColor == System.Drawing.Color.LightCyan) &&
                 _origin != null)
             {
                 ShowBoard();
-                ExecutaMovimento(_origin, position);
+                ExecuteMove(_origin, position);
                 SwitchPlayer();
                 IncrementTurn();
                 _origin = null;
-                VerificaFimDeJogo();
+                CheckEndOfGame();
                 UpdateLabels();
             }
         }
 
         /** ************************************************************************
-        * \brief Verifica fim de jogo.
-        * \details Função responsável por verificar se ocorreu algum evento de fim
-        * de jogo.
-        * \return 'true' se o jogo estiver terminado, 'false' se não.
+        * \brief Check end of game.
+        * \details Function responsible for checking if an end of game event has
+        * occurred.
+        * \return 'true' if the game is over, 'false' if not.
         ***************************************************************************/
-        public bool VerificaFimDeJogo()
+        public bool CheckEndOfGame()
         {
             bool ret;
 
-            // Verifica xeque mate
+            // Checkmatec check
             _check = CheckCheck(_currentPlayer);
             ret = _check ? CheckCheckmate(_currentPlayer) : false;
 
-            // Verifica empate
+            // Check draw
             ret = ret ? true : !ret && (!ColorHasWhereToMove() || (NumberOfPiecesInPlay() <= 2));
 
             // Chama a função de fim de jogo caso nescessário
@@ -425,22 +423,22 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Executa o movimento da peça.
-        * \details Função responsável por executar a movimentação de uma peça.
-        * \param origem Posição de origem da peça.
-        * \param destination Posição de destination da peça.
-        * \return Peça que se encontrava na posição de destination, que foi capturada
-        * pelo jogador.
+        * \brief Execute the piece movement.
+        * \details Function responsible for executing the movement of a piece.
+        * \param origin Origin position of the piece.
+        * \param destination Destination position of the piece.
+        * \return Piece that was in the destination position, which was captured
+        * by the player.
         ***************************************************************************/
-        public Piece ExecutaMovimento(Position origem, Position destination)
+        public Piece ExecuteMove(Position origin, Position destination)
         {
-            // Movimenta a peça da origem para o destination, armazenando a peça capturada
-            Piece piece = RemovePiece(origem);
+            // Move the piece from the origin to the destination, storing the captured piece.
+            Piece piece = RemovePiece(origin);
             piece.IncrementNumberOfMoves();
             Piece capturedPiece = RemovePiece(destination);
             PlacePiece(piece, destination);
 
-            // Implementação da jogada especial de Promoção
+            // Implementation of the special move Promotion
             if (piece is Pawn &&
                 ((piece.PieceColor == Color.White && destination.Row == 0) ||
                 (piece.PieceColor == Color.Black && destination.Row == 7)))
@@ -448,31 +446,31 @@ namespace Chess
                 RemovePiece(destination);
                 PlacePiece(new Queen(this, piece.PieceColor), destination);
             }
-            
-            // Implementação da jogada especial Roque Pequeno
-            if (piece is King && destination.Column == origem.Column + 2)
+
+            // Implementation of the special move Kingside Castling
+            if (piece is King && destination.Column == origin.Column + 2)
             {
-                Piece torre = RemovePiece(new Position(origem.Row, origem.Column + 3));
-                torre.IncrementNumberOfMoves();
-                PlacePiece(torre, new Position(origem.Row, origem.Column + 1));
+                Piece rook = RemovePiece(new Position(origin.Row, origin.Column + 3));
+                rook.IncrementNumberOfMoves();
+                PlacePiece(rook, new Position(origin.Row, origin.Column + 1));
             }
 
-            // Implementação da jogada especial Roque Grande
-            if (piece is King && destination.Column == origem.Column - 2)
+            // Implementation of the special move Queenside Castling
+            if (piece is King && destination.Column == origin.Column - 2)
             {
-                Piece torre = RemovePiece(new Position(origem.Row, origem.Column - 4));
-                torre.IncrementNumberOfMoves();
-                PlacePiece(torre, new Position(origem.Row, origem.Column - 1));
+                Piece rook = RemovePiece(new Position(origin.Row, origin.Column - 4));
+                rook.IncrementNumberOfMoves();
+                PlacePiece(rook, new Position(origin.Row, origin.Column - 1));
             }
 
-            // Implementação da jogada especial En Passant
-            if (piece is Pawn && origem.Column != destination.Column && capturedPiece == null)
+            // Implementation of the special move En Passant
+            if (piece is Pawn && origin.Column != destination.Column && capturedPiece == null)
             {
-                Position posicaoPeao = new Position(piece.PieceColor == Color.White ? destination.Row + 1 : destination.Row - 1, destination.Column);
-                capturedPiece = RemovePiece(posicaoPeao);
+                Position pawnPosition = new Position(piece.PieceColor == Color.White ? destination.Row + 1 : destination.Row - 1, destination.Column);
+                capturedPiece = RemovePiece(pawnPosition);
             }
 
-            // Incrementa contador de peças capturadas
+            // Increment captured pieces counter
             if (capturedPiece != null)
             {
                 _ = capturedPiece.PieceColor == Color.White ? _whiteCapturedQuantity++ : _blackCapturedQuantity++;
@@ -482,11 +480,12 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Lista as peças que estão em jogo.
-        * \details Função responsável por informar quais são as peças em jogo de um
-        * determinado jogador.
-        * \param color Cor do jogador em que se deseja saber as peças que estão em jogo.
-        * \return Um conjunto de peças do jogador informado.
+        * \brief Lists the pieces that are in play.
+        * \details Function responsible for informing which pieces are in play for a
+        * given player.
+        * \param color Color of the player for which we want to know the pieces that
+        * are in play.
+        * \return A set of pieces for the given player.
         ***************************************************************************/
         public HashSet<Piece> PiecesInPlay(Color color)
         {
@@ -502,9 +501,9 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Informa a quantidade de peças em jogo.
-        * \details Função responsável por informar a quantidade de peças em jogo.
-        * \return Quantidade de peças em jogo.
+        * \brief Inform the quantity of pieces in play.
+        * \details Function responsible for informing the quantity of pieces in play.
+        * \return Quantity of pieces in play.
         ***************************************************************************/
         public int NumberOfPiecesInPlay()
         {
@@ -512,13 +511,14 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Pega a posição do rei.
-        * \details Função responsável por informar qual a posição do rei de uma 
-        * determinada color.
-        * \param color Cor do jogador no qual se deseja saber em que posição está o rei.
-        * \return Posição do rei do jogador informado.
+        * \brief Get the king position.
+        * \details Function responsible for informing the position of the king of a
+        * given color.
+        * \param color Color of the player for which we want to know the king's
+        * position.
+        * \return Position of the king of the given player.
         ***************************************************************************/
-        private Position PegarPosicaoRei(Color color)
+        private Position GetKingPosition(Color color)
         {
             for (int column = 0; column < Columns; column++)
             {
@@ -530,20 +530,20 @@ namespace Chess
                     }
                 }
             }
-            return null; // Nunca deve acontecer
+            return null; // This should never happen
         }
 
         /** ************************************************************************
-        * \brief Verifica se o jogador está em xeque.
-        * \details Função responsável por verificar se o jogador de uma determinada 
-        * color está em xeque.
-        * \param color Cor do jogador no qual se deseja saber se está em xeque.
-        * \return 'true' se o jogador estiver em xeque, 'false' se não estiver.
-        * \exception System.Exception Lançada quando o rei não estiver no board.
+        * \brief Checks if the player is in check.
+        * \details Function responsible for checking if the player of a certain
+        * color is in check.
+        * \param color Color of the player to check for being in check.
+        * \return 'true' if the player is in check, 'false' if not.
+        * \exception System.Exception Thrown when the king is not on the board.
         ***************************************************************************/
         public bool CheckCheck(Color color)
         {
-            Position kingPosition = PegarPosicaoRei(color);
+            Position kingPosition = GetKingPosition(color);
 
             if (kingPosition == null)
             {
@@ -564,11 +564,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Checa as posíveis movimentações de uma peça.
-        * \details Função responsável por checar e listar as posíveis movimentações
-        * de uma determinada peça.
-        * \param piece Peça a ser analisada.
-        * \return Matriz de booleanos indicando quais posições uma peça pode assumir.
+        * \brief Checks the possible movements of a piece.
+        * \details Function responsible for checking and listing the possible
+        * movements of a given piece.
+        * \param piece Piece to be analyzed.
+        * \return Matrix of booleans indicating which positions a piece can assume.
         ***************************************************************************/
         public bool[,] CheckPossibleMoves(Piece piece)
         {
@@ -595,11 +595,11 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Verifica xeque mate.
-        * \details Função responsável por verificar se um determinado jogador está 
-        * em xeque mate.
-        * \param color Cor do jogador a ser verificado.
-        * \return 'true' se o jogador estiver em xeque mate, 'false' se não estiver.
+        * \brief Checks for checkmate.
+        * \details Function responsible for checking if a certain player is in
+        * checkmate.
+        * \param color Color of the player to be checked.
+        * \return 'true' if the player is in checkmate, 'false' if not.
         ***************************************************************************/
         public bool CheckCheckmate(Color color)
         {
@@ -622,14 +622,14 @@ namespace Chess
         }
 
         /** ************************************************************************
-        * \brief Fim de jogo.
-        * \details Função responsável por processar o fim de jogo, apresentando o 
-        * vencedor ou o empate, além de perguntar se o jogador deseja iniciar um
-        * novo jogo.
+        * \brief Game Over.
+        * \details Function responsible for processing the end of the game,
+        * presenting the winner or draw, and asking if the player wants to start a
+        * new game.
         ***************************************************************************/
         public void EndOfGame()
         {
-            // Mostra o vencedor
+            // Show the winner
             string message = _check ? $"Checkmate\nWinner: {OpponentColor(_currentPlayer)}" : "Draw";
             MessageBox.Show(message);
 
@@ -640,17 +640,16 @@ namespace Chess
             }
             else
             {
-                // Fechar a aplicação caso o usuário não queira dispultar uma nova partida
+                // Close the application if the user does not want to play another match.
                 Application.Exit();
             }
         }
 
         /** ************************************************************************
-        * \brief Verifica se um jogador tem onde mover.
-        * \details Função responsável por verificar se um jogador tem algum movimento
-        * possível.
-        * \return 'true' se o jogador possuir movimentos possíveis, 'false' se não
-        * possuir.
+        * \brief Checks if a player has any valid moves.
+        * \details Function responsible for verifying if a player has any possible
+        * moves.
+        * \return 'true' if the player has possible moves, 'false' if not.
         ***************************************************************************/
         public bool ColorHasWhereToMove()
         {
