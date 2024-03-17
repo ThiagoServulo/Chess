@@ -3,8 +3,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>JogoXadrez_WPF</RootNamespace>
+    <RootNamespace>Chess</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <Version>1.0.1</Version>
+    <Authors>Thiago Sérvulo Guimarães</Authors>
+    <ApplicationIcon>pieces\images\icone.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
