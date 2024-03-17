@@ -1,60 +1,56 @@
-# Jogo de xadrez
+# Chess Game
 
-### Descrição
-O jogo de xadrez é um dos jogos mais populares do mundo. Cada jogador controla dezesseis peças que podem ser brancas e pretas, sendo que as brancas devem sempre fazer o primeiro lance.
+### Description
+Chess is one of the most popular games in the world. Each player controls sixteen pieces, which can be white or black, with white always making the first move.
 
-No transcorrer da partida, quando o rei de um enxadrista é diretamente atacado por uma peça inimiga, é dito que o rei está em xeque. Nesta posição, o enxadrista tem que mover o rei para fora de perigo, capturar a peça adversária que está efetuando o xeque ou bloquear o ataque com uma de suas próprias peças, sendo que esta última opção não é possível se a peça atacante for um cavalo, pois tal peça pode saltar sobre as peças adversárias. 
+During the game, when a player's king is directly threatened by an opponent's piece, it is said to be in check. In this position, the player must move the king out of danger, capture the threatening piece, or block the attack with one of their own pieces. However, blocking is not possible if the attacking piece is a knight since it can jump over opposing pieces.
 
-O objetivo do jogo é dar xeque-mate ao adversário, o que ocorre quando o rei oponente se encontra em xeque e nenhum lance de fuga, defesa ou ataque pode ser realizado para anular o xeque.
+The objective of the game is to checkmate the opponent's king, which occurs when the opponent's king is in check, and no move can be made to escape, defend, or counter the check.
 
-### Movimentação das peças
+### Piece Movement
+#### Pawn
+Pawns move one square forward and capture by moving one square diagonally forward. On their initial move, each pawn may advance one or two squares.
 
-#### Peão
-Os Peões movem-se uma casa para frente, e capturam movendo-se uma casa na diagonal. Na jogada inicial de cada peão ele pode mover-se uma ou duas casas.
+#### Rook
+Rooks move vertically and horizontally.
 
-#### Torre
-As Torres movimentam-se nas verticais e horizontais.
+#### Knight
+Knights move one square in one direction and then one square in a perpendicular direction, forming an L-shape. Alternatively, they may move two squares in one direction and one square in a perpendicular direction. Knights are the only pieces that can jump over other pieces.
 
-#### Cavalo
-Os Cavalos movimentam-se uma casa numa direção e outra casa na diagonal, em forma de L. Ou duas casas para um lado e uma pro outro, como podem preferir. É a única peça que pode pular outra peça. Seu xeque não pode ser coberto. As únicas maneiras de se sair do xeque do cavalo é capturando-o ou movendo o Rei.
+#### Bishop
+Bishops move diagonally. A bishop on a light square moves diagonally on light squares, and a bishop on a dark square moves diagonally on dark squares.
 
-#### Bispo
-Os Bispos movimentam-se pelas diagonais. Os bispos da casa branca, pelas diagonais da casa branca, e os bispos da casa preta, pelas diagonais da casa preta.
+#### King
+The king can move only one square in any direction, except during castling, a special move described later. It is not permitted for the two kings to be adjacent to each other; there must be at least one square between them.
 
-#### Rei
-O Rei pode movimentar-se apenas uma casa em qualquer direção. Com exceção do roque, que é uma das jogadas especiais que serão abordadas adiante. Não é permitido que os dois reis fiquem colados um no outro. Tem que haver pelo menos uma casa de distância entre os dois reis.
+The king is the only piece that cannot be captured. When under attack, it is in check and must be moved out of danger.
 
-O Rei é a única peça que não pode ser capturada. Quando ele está sendo atacado, ele fica em xeque, e é forçado a sair da situação do xeque.
+#### Queen
+The queen can move in any direction for any number of squares.
 
-#### Rainha
-A Rainha pode fazer o mesmo movimento do Rei, com apenas uma diferença. Pode se mover em todas as direções, quantas casas quiser.
+It can be said that the queen combines the movements of the rook and bishop, moving vertically, horizontally (like a rook), and diagonally (like a bishop).
 
-Podemos dizer, também, que ela faz o movimento da Torre e do Bispo junto que movimenta-se nas horizontais, verticais (movimentos das torres) e nas diagonais (movimento dos bispos).
-
-### Jogadas especiais
-
+### Special Moves
 #### En passant
-Quando um peão está na quinta casa e o peão adversário avança duas casas, o peão da quinta casa pode capturá-lo, passando para a casa vazia (casa de passagem) do segundo peão, movendo-se uma casa na diagonal. Esse movimento só pode ser executado no lance seguinte ao movimento.
+When a pawn is on its fifth rank and the opponent's pawn moves two squares forward, the first pawn can capture it as if it had only moved one square forward, landing on the square behind the opponent's pawn.
 
-#### Roque grande
-O Rei move-se duas casas em direção à Torre do lado da Dama, e a Torre junta-se ao Rei.
+#### Castling (Kingside)
+The king moves two squares toward the rook on its original square, and the rook moves to the square next to the king.
 
-#### Roque pequeno
-O Rei move-se duas casas em direção à Torre do seu lado, e a Torre junta-se ao Rei.
+#### Castling (Queenside)
+The king moves two squares toward the rook on its original square, and the rook moves to the square next to the king on the opposite side.
 
-#### Promoção
-Quando um peão alcança a oitava casa, ele é promovido a uma Rainha.
+#### Promotion
+When a pawn reaches the eighth rank, it is promoted to a queen.
 
-### Fim do jogo
+### End of the Game
+#### Checkmate
+When the king is unable to escape check, it is checkmated, and the game ends with the opponent's victory.
 
-#### Xeque mate
-Quando o Rei está impossibilitado de sair do Xeque, ele está em Xeque-Mate e a partida é encerrada, com a vitória do jogador adversário.
+#### Draw
+There are two conditions for a draw. The first occurs when it is a player's turn, but they cannot move any of their pieces, particularly the king, as any move would result in check. The second condition is when only the two kings remain on the board.
 
-#### Empate
-Existem duas condições que levam a partidade ao empate. A primeira ocorre quando é a vez de um jogador mas ele não pode movimentar nenhuma de suas peças, principalmente o Rei, porque esse, para qualquer casa que for se mover, fica em posição de Xeque. A segunda condição é quando sobram apenas os dois Reis no tabuleiro.
+### Technical Details
+The game was developed in C# with the assistance of Windows Forms for creating the visual interfaces. In its source code, several important technical concepts were handled, including: interfaces, class inheritance, polymorphism, method overriding, exception handling, abstract classes and functions, delegates, structs, among others.
 
-### Detalhes técnicos
-O jogo foi desenvolvido em C# com auxílio do Windows Form para criar as interfaces visuais. No seu código fonte, foram tratados vários conceitos técnicos importantes como: interfaces, herança de classes, polimorfismo, sopreposição de métodos, tratativa de excessões, interfaces, classes  e funções abstratas, delegates, structs, entre outros.
-
-Para poder documentar o código fonte deixando-o mais compreensível e explicativo, foi usado o Doxygen. O Doxygen é uma ferramenta capaz de gerar documentações softwares personalizadas, tornando o código auto explicativo.
-
+To document the source code to make it more understandable and explanatory, Doxygen was used. Doxygen is a tool capable of generating customized software documentation, making the code self-explanatory.
